@@ -1,0 +1,112 @@
+{
+  "builders": [
+    {
+     "type": "vsphere-iso",
+      "vcenter_server":      "{{user `vcenter_server`}}",
+      "username":            "{{user `vcenter_user`}}",
+      "password":            "{{user `vcenter_password`}}",
+      "datacenter":	    "{{user `vcenter_datacenter`}}",
+      "insecure_connection": "true",
+      "vm_name": "{{user `vcenter_template_name`}}",
+      "folder" : "{{user `vcenter_folder`}}",
+      "cluster":     "{{user `vcenter_cluster`}}",
+      "host": "{{user `vcenter_host`}}",
+      "datastore": "{{user `vcenter_datastore`}}",
+      "network": "{{user `vcenter_network`}}",
+
+      "guest_os_type": "windows9_64Guest",
+
+      "communicator": "ssh",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+
+      "CPUs":             2,
+      "RAM":              8192,
+      "RAM_reserve_all": true,
+
+      "disk_controller_type":  "lsilogic-sas",
+      "disk_size":        40960,
+      "disk_thin_provisioned": true,
+
+      "network_card": "e1000",
+      "convert_to_template": "true",
+
+      "iso_paths": [
+        "[F] Windows//14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO",
+	      "[] /usr/lib/vmware/isoimages/windows.iso"
+      ],
+
+      "floppy_files": [
+        "floppy/eval-win2016-standard/Autounattend.xml",
+        "floppy/00-run-all-scripts.cmd",
+        "floppy/install-winrm.cmd",
+        "floppy/powerconfig.bat",
+        "floppy/01-install-wget.cmd",
+        "floppy/_download.cmd",
+        "floppy/_packer_config.cmd",
+        "floppy/passwordchange.bat",
+        "floppy/openssh.bat",
+	      "floppy/sevenzip.cmd",
+        "floppy/disablewinupdate.bat",
+        "floppy/zz-start-transports.cmd",
+	      "floppy/zzz-vmtool.bat"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type" : "manifest"
+    }
+  ],
+  "provisioners": [
+    {
+      "environment_vars": [
+        "CM={{user `cm`}}",
+        "CM_VERSION={{user `cm_version`}}",
+        "UPDATE={{user `update`}}"
+      ],
+      "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
+      "remote_path": "/tmp/script.bat",
+      "scripts": [
+        "script/vagrant.bat",
+        "script/cmtool.bat",
+    	  "script/gugent.bat",
+	      "script/boxstarter.bat",
+        "script/clean.bat",
+	      "script/add-nuget.bat",
+        "script/ultradefrag.bat",
+        "script/sdelete.bat"
+      ],
+      "type": "shell"
+    },
+    {
+      "inline": [
+        "rm -f /tmp/script.bat"
+      ],
+      "type": "shell"
+    }
+  ],
+  "variables": {
+    "cm": "nocm",
+    "cm_version": "",
+    "disk_size": "40960",
+    "headless": "false",
+    "iso_checksum": "772700802951b36c8cb26a61c040b9a8dc3816a3",
+    "iso_url": "http://care.dlservice.microsoft.com/dl/download/1/4/9/149D5452-9B29-4274-B6B3-5361DBDA30BC/14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO",
+    "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c 'Packer Shutdown'",
+    "update": "true",
+    "version": "0.1.0",
+    "vcenter_user" : "TBD",
+    "vcenter_password": "N0tMyR3@lP@ssw0rd",
+    "vcenter_template_name": "eval-win2016-standard-ssh",
+    "vcenter": "vcenter.example.com",
+    "vcenter_server" : "vcenter.example.com",
+    "vcenter_datastore":"esx-ddatastore-01",
+    "vcenter_cluster":"esx-cluster-01",
+    "vcenter_network":"VM Network",
+    "vcenter_folder":"VMs",
+    "vcenter_datacenter":"Datacenter",
+    "vcenter_host":"esx-01.example.com"
+  }
+}
+

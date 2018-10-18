@@ -1,0 +1,464 @@
+# if Makefile.local exists, include it
+ifneq ("$(wildcard Makefile.local)", "")
+        include Makefile.local
+endif
+
+EVAL_WIN2008R2_X64 ?= http://download.microsoft.com/download/7/5/E/75EC4E54-5B02-42D6-8879-D8D3A25FBEF7/7601.17514.101119-1850_x64fre_server_eval_en-us-GRMSXEVAL_EN_DVD.iso
+EVAL_WIN2008R2_X64_CHECKSUM ?= beed231a34e90e1dd9a04b3afabec31d62ce3889
+#EVAL_WIN2012R2_X64 ?= http://care.dlservice.microsoft.com/dl/download/6/2/A/62A76ABB-9990-4EFC-A4FE-C7D698DAEB96/9600.17050.WINBLUE_REFRESH.140317-1640_X64FRE_SERVER_EVAL_EN-US-IR3_SSS_X64FREE_EN-US_DV9.ISO
+EVAL_WIN2012R2_X64_CHECKSUM ?= 849734f37346385dac2c101e4aacba4626bb141c
+#EVAL_WIN2012R2_X64_CHECKSUM ?= 5b5e08c490ad16b59b1d9fab0def883a
+EVAL_WIN2012R2_X64 ?=http://10.0.0.48/ISO/Windows/9600.17050.WINBLUE_REFRESH.140317-1640_X64FRE_SERVER_EVAL_EN-US-IR3_SSS_X64FREE_EN-US_DV9.ISO
+EVAL_WIN2012R2_X64_CHECKSUM_TYPE ?= md5
+
+
+EVAL_WIN10_X64 ?= http://care.dlservice.microsoft.com/dl/download/B/8/B/B8B452EC-DD2D-4A8F-A88C-D2180C177624/15063.0.170317-1834.RS2_RELEASE_CLIENTENTERPRISEEVAL_OEMRET_X64FRE_EN-US.ISO
+EVAL_WIN10_X64_CHECKSUM ?= 6c60f91bf0ad7b20f469ab8f80863035c517f34f
+EVAL_WIN10_X86 ?= http://care.dlservice.microsoft.com/dl/download/B/8/B/B8B452EC-DD2D-4A8F-A88C-D2180C177624/15063.0.170317-1834.RS2_RELEASE_CLIENTENTERPRISEEVAL_OEMRET_X86FRE_EN-US.ISO
+EVAL_WIN10_X86_CHECKSUM ?= 1aa6d3c4451e79e69e84118ec629ad99e2ad36e7
+
+#EVAL_WIN2016_X64 ?= http://care.dlservice.microsoft.com/dl/download/1/4/9/149D5452-9B29-4274-B6B3-5361DBDA30BC/14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO
+EVAL_WIN2016_X64 ?= http://10.0.0.48/ISO/Windows/14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO
+EVAL_WIN2016_X64_CHECKSUM ?= 772700802951b36c8cb26a61c040b9a8dc3816a3
+
+# @todo:
+EVAL_WIN2012_X64 ?= http://download.microsoft.com/download/6/D/A/6DAB58BA-F939-451D-9101-7DE07DC09C03/9200.16384.WIN8_RTM.120725-1247_X64FRE_SERVER_EVAL_EN-US-HRM_SSS_X64FREE_EN-US_DV5.ISO
+EVAL_WIN2012_X64_CHECKSUM ?= 922b365c3360ce630f6a4b4f2f3c79e66165c0fb
+
+WIN2008R2_X64 ?= iso/en_windows_server_2008_r2_with_sp1_vl_build_x64_dvd_617403.iso
+WIN2008R2_X64_CHECKSUM ?= 7e7e9425041b3328ccf723a0855c2bc4f462ec57
+WIN2012_X64 ?= iso/en_windows_server_2012_x64_dvd_915478.iso
+WIN2012_X64_CHECKSUM ?= d09e752b1ee480bc7e93dfa7d5c3a9b8aac477ba
+WIN2012R2_X64 ?= iso/en_windows_server_2012_r2_with_update_x64_dvd_6052708.iso
+WIN2012R2_X64_CHECKSUM ?= 865494e969704be1c4496d8614314361d025775e
+WIN2016_X64 ?= iso/en_windows_server_2016_x64_dvd_9718492.iso
+WIN2016_X64_CHECKSUM ?= f185197af68fae4f0e06510a4579fc511ba27616
+
+# Possible values for CM: (nocm | chef | chefdk | salt | puppet)
+CM ?= nocm
+# Possible values for CM_VERSION: (latest | x.y.z | x.y)
+CM_VERSION ?=
+ifndef CM_VERSION
+	ifneq ($(CM),nocm)
+		CM_VERSION = latest
+	endif
+endif
+BOX_VERSION ?= $(shell cat VERSION)
+UPDATE ?= false
+GENERALIZE ?= false
+#HEADLESS ?= true
+HEADLESS ?= true
+ifndef SHUTDOWN_COMMAND
+ifeq ($(GENERALIZE),true)
+	SHUTDOWN_COMMAND ?= C:/Windows/System32/Sysprep/sysprep.exe /generalize /shutdown /oobe /unattend:A:/Autounattend.xml
+else
+	SHUTDOWN_COMMAND ?= shutdown /s /t 10 /f /d p:4:1 /c Packer_Shutdown
+endif
+endif
+ifeq ($(CM),nocm)
+	BOX_SUFFIX := -$(CM)-$(BOX_VERSION).box
+else
+	BOX_SUFFIX := -$(CM)$(CM_VERSION)-$(BOX_VERSION).box
+endif
+# Packer does not allow empty variables, so only pass variables that are defined
+PACKER_VARS := -var 'cm=$(CM)' -var 'version=$(BOX_VERSION)' -var 'update=$(UPDATE)' -var 'headless=$(HEADLESS)' -var "shutdown_command=$(SHUTDOWN_COMMAND)"
+ifdef CM_VERSION
+	PACKER_VARS += -var 'cm_version=$(CM_VERSION)'
+endif
+PACKER ?= packer
+ifdef PACKER_DEBUG
+	PACKER := PACKER_LOG=1 $(PACKER)
+else
+endif
+BUILDER_TYPES ?= vmware virtualbox parallels
+ifeq ($(OS),Windows_NT)
+	VAGRANT_PROVIDER ?= vmware_workstation
+else
+	VAGRANT_PROVIDER ?= vmware_fusion
+endif
+TEMPLATE_FILENAMES := $(wildcard *.json)
+BOX_FILENAMES := $(TEMPLATE_FILENAMES:.json=$(BOX_SUFFIX))
+TEST_BOX_FILES := $(foreach builder, $(BUILDER_TYPES), $(foreach box_filename, $(BOX_FILENAMES), test-box/$(builder)/$(box_filename)))
+VMWARE_BOX_DIR := box/vmware
+VIRTUALBOX_BOX_DIR := box/virtualbox
+PARALLELS_BOX_DIR := box/parallels
+VMWARE_BOX_FILES := $(foreach box_filename, $(BOX_FILENAMES), $(VMWARE_BOX_DIR)/$(box_filename))
+VIRTUALBOX_BOX_FILES := $(foreach box_filename, $(BOX_FILENAMES), $(VIRTUALBOX_BOX_DIR)/$(box_filename))
+PARALLELS_BOX_FILES := $(foreach box_filename, $(BOX_FILENAMES), $(PARALLELS_BOX_DIR)/$(box_filename))
+BOX_FILES := $(foreach builder, $(BUILDER_TYPES), $(foreach box_filename, $(BOX_FILENAMES), box/$(builder)/$(box_filename)))
+VMWARE_OUTPUT := output-vmware-iso
+VIRTUALBOX_OUTPUT := output-virtualbox-iso
+PARALLELS_OUTPUT := output-parallels-iso
+VMWARE_BUILDER := vsphere-iso
+VIRTUALBOX_BUILDER := virtualbox-iso
+PARALLELS_BUILDER := parallels-iso
+CURRENT_DIR := $(shell pwd)
+UNAME_O := $(shell uname -o 2> /dev/null)
+UNAME_P := $(shell uname -p 2> /dev/null)
+UNAME_S := $(shell uname -s 2> /dev/null)
+ifeq ($(UNAME_O),Cygwin)
+	CURRENT_DIR := $(shell cygpath -m $(CURRENT_DIR))
+endif
+
+SOURCES := $(wildcard script/*.*) $(wildcard floppy/*.*)
+
+.PHONY: list
+
+all: $(BOX_FILES)
+
+test: $(TEST_BOX_FILES)
+
+###############################################################################
+# Target shortcuts
+define SHORTCUT
+
+ifeq ($(UNAME_S),Darwin)
+
+$(1): $(VMWARE_BOX_DIR)/$(1)$(BOX_SUFFIX) $(VIRTUALBOX_BOX_DIR)/$(1)$(BOX_SUFFIX) $(PARALLELS_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+$(1)-cygwin: $(VMWARE_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX) $(VIRTUALBOX_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX) $(PARALLELS_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX)
+
+$(1)-ssh: $(VMWARE_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX) $(VIRTUALBOX_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX) $(PARALLELS_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX)
+
+test-$(1): test-$(VMWARE_BOX_DIR)/$(1)$(BOX_SUFFIX) test-$(VIRTUALBOX_BOX_DIR)/$(1)$(BOX_SUFFIX) test-$(PARALLELS_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+test-$(1)-cygwin: test-$(VMWARE_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX) test-$(VIRTUALBOX_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX) test-$(PARALLELS_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX)
+
+test-$(1)-ssh: test-$(VMWARE_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX) test-$(VIRTUALBOX_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX) test-$(PARALLELS_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX)
+
+s3cp-$(1): s3cp-$(VMWARE_BOX_DIR)/$(1)$(BOX_SUFFIX) s3cp-$(VIRTUALBOX_BOX_DIR)/$(1)$(BOX_SUFFIX) s3cp-$(PARALLELS_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+else
+
+$(1): $(VMWARE_BOX_DIR)/$(1)$(BOX_SUFFIX) $(VIRTUALBOX_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+$(1)-cygwin: $(VMWARE_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX) $(VIRTUALBOX_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX)
+
+$(1)-ssh: $(VMWARE_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX) $(VIRTUALBOX_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX)
+
+test-$(1): test-$(VMWARE_BOX_DIR)/$(1)$(BOX_SUFFIX) test-$(VIRTUALBOX_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+test-$(1)-cygwin: test-$(VMWARE_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX) test-$(VIRTUALBOX_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX)
+
+test-$(1)-ssh: test-$(VMWARE_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX) test-$(VIRTUALBOX_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX)
+
+s3cp-$(1): s3cp-$(VMWARE_BOX_DIR)/$(1)$(BOX_SUFFIX) s3cp-$(VIRTUALBOX_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+endif
+
+vmware/$(1): $(VMWARE_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+vmware/$(1)-cygwin: $(VMWARE_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX)
+
+vmware/$(1)-ssh: $(VMWARE_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX)
+
+virtualbox/$(1): $(VIRTUALBOX_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+virtualbox/$(1)-cygwin: $(VIRTUALBOX_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX)
+
+virtualbox/$(1)-ssh: $(VIRTUALBOX_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX)
+
+parallels/$(1): $(PARALLELS_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+parallels/$(1)-cygwin: $(PARALLELS_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX)
+
+parallels/$(1)-ssh: $(PARALLELS_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX)
+
+test-vmware/$(1): test-$(VMWARE_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+test-vmware/$(1)-cygwin: test-$(VMWARE_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX)
+
+test-vmware/$(1)-ssh: test-$(VMWARE_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX)
+
+test-virtualbox/$(1): test-$(VIRTUALBOX_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+test-virtualbox/$(1)-cygwin: test-$(VIRTUALBOX_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX)
+
+test-virtualbox/$(1)-ssh: test-$(VIRTUALBOX_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX)
+
+test-parallels/$(1): test-$(PARALLELS_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+test-parallels/$(1)-cygwin: test-$(PARALLELS_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX)
+
+test-parallels/$(1)-ssh: test-$(PARALLELS_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX)
+
+ssh-vmware/$(1): ssh-$(VMWARE_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+ssh-vmware/$(1)-cygwin: ssh-$(VMWARE_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX)
+
+ssh-vmware/$(1)-ssh: ssh-$(VMWARE_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX)
+
+ssh-virtualbox/$(1): ssh-$(VIRTUALBOX_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+ssh-virtualbox/$(1)-cygwin: ssh-$(VIRTUALBOX_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX)
+
+ssh-virtualbox/$(1)-ssh: ssh-$(VIRTUALBOX_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX)
+
+ssh-parallels/$(1): ssh-$(PARALLELS_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+ssh-parallels/$(1)-cygwin: ssh-$(PARALLELS_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX)
+
+ssh-parallels/$(1)-ssh: ssh-$(PARALLELS_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX)
+
+s3cp-vmware/$(1): s3cp-$(VMWARE_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+s3cp-virtualbox/$(1): s3cp-$(VIRTUALBOX_BOX_DIR)/$(1)$(BOX_SUFFIX)
+
+s3cp-parallels/$(1): s3cp-$(PARALLELS_BOX_DIR)/$(1)$(BOX_SUFFIX)
+endef
+
+SHORTCUT_TARGETS := $(basename $(TEMPLATE_FILENAMES))
+$(foreach i,$(SHORTCUT_TARGETS),$(eval $(call SHORTCUT,$(i))))
+
+###############################################################################
+
+
+
+win2008r2: win2008r2-winrm win2008r2-openssh win2008r2-cygwin
+
+win2008r2-winrm: win2008r2-datacenter win2008r2-enterprise win2008r2-standard win2008r2-web
+
+win2008r2-openssh: win2008r2-datacenter-ssh win2008r2-enterprise-ssh win2008r2-standard-ssh win2008r2-web-ssh
+
+win2008r2-cygwin: win2008r2-datacenter-cygwin win2008r2-enterprise-cygwin win2008r2-standard-cygwin win2008r2-web-cygwin
+
+
+test-win2008r2: test-win2008r2-winrm test-win2008r2-openssh test-win2008r2-cygwin
+
+test-win2008r2-winrm: test-win2008r2-datacenter test-win2008r2-enterprise test-win2008r2-standard test-win2008r2-web
+
+test-win2008r2-openssh: test-win2008r2-datacenter-ssh test-win2008r2-enterprise-ssh test-win2008r2-standard-ssh test-win2008r2-web-ssh
+
+test-win2008r2-cygwin: test-win2008r2-datacenter-cygwin test-win2008r2-enterprise-cygwin test-win2008r2-standard-cygwin test-win2008r2-web-cygwin
+
+
+win2012: win2012-winrm win2012-openssh win2012-cygwin
+
+win2012-winrm: win2012-datacenter win2012-standard
+
+win2012-openssh: win2012-datacenter-ssh win2012-standard-ssh
+
+win2012-cygwin: win2012-datacenter-cygwin win2012-standard-cygwin
+
+
+test-win2012: test-win2012-winrm test-win2012-openssh test-win2012-cygwin
+
+test-win2012-winrm: test-win2012-datacenter test-win2012-standard
+
+test-win2012-openssh: test-win2012-datacenter-ssh test-win2012-standard-ssh
+
+test-win2012-cygwin: test-win2012-datacenter-cygwin test-win2012-standard-cygwin
+
+
+win2012r2: win2012r2-winrm win2012r2-openssh win2012r2-cygwin
+
+win2012r2-winrm: win2012r2-datacenter win2012r2-standard
+
+win2012r2-openssh: win2012r2-datacenter-ssh win2012r2-standard-ssh
+
+win2012r2-cygwin: win2012r2-datacenter-cygwin win2012r2-standard-cygwin
+
+
+test-win2012r2: test-win2012r2-winrm test-win2012r2-openssh test-win2012r2-cygwin
+
+test-win2012r2-winrm: test-win2012r2-datacenter test-win2012r2-standard
+
+test-win2012r2-openssh: test-win2012r2-datacenter-ssh test-win2012r2-standard-ssh
+
+test-win2012r2-cygwin: test-win2012r2-datacenter-cygwin test-win2012r2-standard-cygwin
+
+
+win2016: win2016-winrm win2016-openssh win2016-cygwin
+
+win2016-winrm: win2016-standard
+
+win2016-openssh: win2016-standard-ssh
+
+win2016-cygwin: win2016-standard-cygwin
+
+
+test-win2016: test-win2016-winrm test-win2016-openssh test-win2016-cygwin
+
+test-win2016-winrm: test-win2016-standard
+
+test-win2016-openssh: test-win2016-standard-ssh
+
+test-win2016-cygwin: test-win2016-standard-cygwin
+
+
+eval: eval-winrm eval-openssh
+
+eval-winrm: eval-win2012r2-datacenter eval-win2008r2-datacenter eval-win81x64-enterprise eval-win7x64-enterprise eval-win10x64-enterprise
+
+eval-openssh: eval-win2012r2-datacenter-ssh eval-win2008r2-datacenter-ssh eval-win81x64-enterprise-ssh eval-win7x64-enterprise-ssh eval-win10x64-enterprise-ssh
+
+test-eval-openssh: test-eval-win2012r2-datacenter test-eval-win2008r2-datacenter test-eval-win81x64-enterprise test-eval-win7x64-enterprise test-eval-win10x64-enterprise
+
+define BUILDBOX
+
+$(VIRTUALBOX_BOX_DIR)/$(1)$(BOX_SUFFIX): $(1).json
+	rm -rf $(VIRTUALBOX_OUTPUT)
+	mkdir -p $(VIRTUALBOX_BOX_DIR)
+	$(PACKER) build -only=$(VIRTUALBOX_BUILDER) $(PACKER_VARS) -var "iso_url=$(2)" -var "iso_checksum=$(3)" $(1).json
+
+$(VMWARE_BOX_DIR)/$(1)$(BOX_SUFFIX): $(1).json
+	rm -rf $(VMWARE_OUTPUT)
+	mkdir -p $(VMWARE_BOX_DIR)
+	$(PACKER) build -only=$(VMWARE_BUILDER) $(PACKER_VARS) -var "iso_url=$(2)" -var "iso_checksum=$(3)" $(1).json
+
+$(PARALLELS_BOX_DIR)/$(1)$(BOX_SUFFIX): $(1).json
+	rm -rf $(PARALLELS_OUTPUT)
+	mkdir -p $(PARALLELS_BOX_DIR)
+	$(PACKER) build -only=$(PARALLELS_BUILDER) $(PACKER_VARS) -var "iso_url=$(2)" -var "iso_checksum=$(3)" $(1).json
+
+$(VIRTUALBOX_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX): $(1)-ssh.json
+	rm -rf $(VIRTUALBOX_OUTPUT)
+	mkdir -p $(VIRTUALBOX_BOX_DIR)
+	$(PACKER) build -only=$(VIRTUALBOX_BUILDER) $(PACKER_VARS) -var "iso_url=$(2)" -var "iso_checksum=$(3)" $(1)-ssh.json
+
+$(VMWARE_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX): $(1)-ssh.json
+	rm -rf $(VMWARE_OUTPUT)
+	mkdir -p $(VMWARE_BOX_DIR)
+	$(PACKER) build -only=$(VMWARE_BUILDER) $(PACKER_VARS) -var "iso_url=$(2)" -var "iso_checksum=$(3)" -var "iso_checksum_type=$(4)" $(1)-ssh.json
+
+$(PARALLELS_BOX_DIR)/$(1)-ssh$(BOX_SUFFIX): $(1)-ssh.json
+	rm -rf $(PARALLELS_OUTPUT)
+	mkdir -p $(PARALLELS_BOX_DIR)
+	$(PACKER) build -only=$(PARALLELS_BUILDER) $(PACKER_VARS) -var "iso_url=$(2)" -var "iso_checksum=$(3)" $(1)-ssh.json
+
+$(VIRTUALBOX_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX): $(1)-cygwin.json
+	rm -rf $(VIRTUALBOX_OUTPUT)
+	mkdir -p $(VIRTUALBOX_BOX_DIR)
+	$(PACKER) build -only=$(VIRTUALBOX_BUILDER) $(PACKER_VARS) -var "iso_url=$(2)" -var "iso_checksum=$(3)" $(1)-cygwin.json
+
+$(VMWARE_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX): $(1)-cygwin.json
+	rm -rf $(VMWARE_OUTPUT)
+	mkdir -p $(VMWARE_BOX_DIR)
+	$(PACKER) build -only=$(VMWARE_BUILDER) $(PACKER_VARS) -var "iso_url=$(2)" -var "iso_checksum=$(3)" $(1)-cygwin.json
+
+$(PARALLELS_BOX_DIR)/$(1)-cygwin$(BOX_SUFFIX): $(1)-cygwin.json
+	rm -rf $(PARALLELS_OUTPUT)
+	mkdir -p $(PARALLELS_BOX_DIR)
+	$(PACKER) build -only=$(PARALLELS_BUILDER) $(PACKER_VARS) -var "iso_url=$(2)" -var "iso_checksum=$(3)" $(1)-cygwin.json
+
+endef
+
+
+$(eval $(call BUILDBOX,eval-win2008r2-datacenter,$(EVAL_WIN2008R2_X64),$(EVAL_WIN2008R2_X64_CHECKSUM)))
+
+$(eval $(call BUILDBOX,eval-win2008r2-standard,$(EVAL_WIN2008R2_X64),$(EVAL_WIN2008R2_X64_CHECKSUM)))
+
+$(eval $(call BUILDBOX,eval-win2012r2-datacenter,$(EVAL_WIN2012R2_X64),$(EVAL_WIN2012R2_X64_CHECKSUM)))
+
+$(eval $(call BUILDBOX,eval-win2012r2-standard,$(EVAL_WIN2012R2_X64),$(EVAL_WIN2012R2_X64_CHECKSUM),$(EVAL_WIN2012R2_X64_CHECKSUM_TYPE)))
+
+$(eval $(call BUILDBOX,eval-win2016-standard,$(EVAL_WIN2016_X64),$(EVAL_WIN2016_X64_CHECKSUM)))
+
+$(eval $(call BUILDBOX,eval-win10x64-enterprise,$(EVAL_WIN10_X64),$(EVAL_WIN10_X64_CHECKSUM)))
+
+$(eval $(call BUILDBOX,eval-win10x86-enterprise,$(EVAL_WIN10_X86),$(EVAL_WIN10_X86_CHECKSUM)))
+
+# @todo:
+#$(eval $(call BUILDBOX,eval-win2012-standard,$(EVAL_WIN2012_X64),$(EVAL_WIN2012_X64_CHECKSUM)))
+
+# can't find powershell:
+#$(eval $(call BUILDBOX,win2008r2-standardcore,$(WIN2008R2_X64),$(WIN2008R2_X64_CHECKSUM)))
+#$(eval $(call BUILDBOX,win2008r2-standardcore-cygwin,$(WIN2008R2_X64),$(WIN2008R2_X64_CHECKSUM)))
+
+# Generic rule - not used currently
+#$(VMWARE_BOX_DIR)/%$(BOX_SUFFIX): %.json
+#       cd $(dir $<)
+#       rm -rf output-vmware-iso
+#       mkdir -p $(VMWARE_BOX_DIR)
+#       $(PACKER) build -only=vmware-iso $(PACKER_VARS) $<
+
+# Generic rule - not used currently
+#$(VIRTUALBOX_BOX_DIR)/%$(BOX_SUFFIX): %.json
+#       cd $(dir $<)
+#       rm -rf output-virtualbox-iso
+#       mkdir -p $(VIRTUALBOX_BOX_DIR)
+#       $(PACKER) build -only=virtualbox-iso $(PACKER_VARS) $<
+
+list:
+	@echo "To build for all target platforms:"
+	@echo "  make win7x64-pro"
+	@echo ""
+	@echo "Prepend 'vmware/' or 'virtualbox/' or 'parallels/' to build only one target platform:"
+	@echo "  make vmware/win7x64-pro"
+	@echo ""
+	@echo "Append '-cygwin' to use Cygwin's SSH instead of OpenSSH:"
+	@echo "  make win7x64-pro-cygwin"
+	@echo ""
+	@echo "Or to build for vmware only:"
+	@echo "  make vmware/win7x64-pro-cygwin"
+	@echo ""
+	@echo "Targets:"
+	@for shortcut_target in $(SHORTCUT_TARGETS) ; do \
+		echo $$shortcut_target ; \
+	done | sort
+
+validate:
+	@for template_filename in $(TEMPLATE_FILENAMES) ; do \
+		echo Checking $$template_filename ; \
+		$(PACKER) validate $$template_filename ; \
+	done
+
+clean: clean-builders clean-output clean-packer-cache
+
+clean-builders:
+	@for builder in $(BUILDER_TYPES) ; do \
+		if test -d box/$$builder ; then \
+			echo Deleting box/$$builder/*.box ; \
+			find box/$$builder -maxdepth 1 -type f -name "*.box" ! -name .gitignore -exec rm '{}' \; ; \
+		fi ; \
+	done
+
+clean-output:
+	@for builder in $(BUILDER_TYPES) ; do \
+		echo Deleting output-$$builder-iso ; \
+		echo rm -rf output-$$builder-iso ; \
+	done
+
+clean-packer-cache:
+	echo Deleting packer_cache
+	rm -rf packer_cache
+
+test-$(VMWARE_BOX_DIR)/%$(BOX_SUFFIX): $(VMWARE_BOX_DIR)/%$(BOX_SUFFIX)
+	-test -f .keep_known_hosts || rm -f ~/.ssh/known_hosts
+	bin/test-box.sh $< vmware_desktop $(VAGRANT_PROVIDER) $(CURRENT_DIR)/test/*_spec.rb
+
+test-$(VIRTUALBOX_BOX_DIR)/%$(BOX_SUFFIX): $(VIRTUALBOX_BOX_DIR)/%$(BOX_SUFFIX)
+	-test -f .keep_known_hosts || rm -f ~/.ssh/known_hosts
+	bin/test-box.sh $< virtualbox virtualbox $(CURRENT_DIR)/test/*_spec.rb
+
+test-$(PARALLELS_BOX_DIR)/%$(BOX_SUFFIX): $(PARALLELS_BOX_DIR)/%$(BOX_SUFFIX)
+	-test -f .keep_known_hosts || rm -f ~/.ssh/known_hosts
+	bin/test-box.sh $< parallels parallels $(CURRENT_DIR)/test/*_spec.rb
+
+ssh-$(VMWARE_BOX_DIR)/%$(BOX_SUFFIX): $(VMWARE_BOX_DIR)/%$(BOX_SUFFIX)
+	-test -f .keep_known_hosts || rm -f ~/.ssh/known_hosts
+	bin/ssh-box.sh $< vmware_desktop $(VAGRANT_PROVIDER) $(CURRENT_DIR)/test/*_spec.rb
+
+ssh-$(VIRTUALBOX_BOX_DIR)/%$(BOX_SUFFIX): $(VIRTUALBOX_BOX_DIR)/%$(BOX_SUFFIX)
+	-test -f .keep_known_hosts || rm -f ~/.ssh/known_hosts
+	bin/ssh-box.sh $< virtualbox virtualbox $(CURRENT_DIR)/test/*_spec.rb
+
+ssh-$(PARALLELS_BOX_DIR)/%$(BOX_SUFFIX): $(PARALLELS_BOX_DIR)/%$(BOX_SUFFIX)
+	-test -f .keep_known_hosts || rm -f ~/.ssh/known_hosts
+	bin/ssh-box.sh $< parallels parallels $(CURRENT_DIR)/test/*_spec.rb
+
+S3_STORAGE_CLASS ?= REDUCED_REDUNDANCY
+S3_ALLUSERS_ID ?= uri=http://acs.amazonaws.com/groups/global/AllUsers
+
+s3cp-$(VMWARE_BOX_DIR)/%$(BOX_SUFFIX): $(VMWARE_BOX_DIR)/%$(BOX_SUFFIX)
+	aws s3 cp $< $(VMWARE_S3_BUCKET) --storage-class $(S3_STORAGE_CLASS) --grants full=$(S3_GRANT_ID) read=$(S3_ALLUSERS_ID)
+
+s3cp-$(VIRTUALBOX_BOX_DIR)/%$(BOX_SUFFIX): $(VIRTUALBOX_BOX_DIR)/%$(BOX_SUFFIX)
+	aws s3 cp $< $(VIRTUALBOX_S3_BUCKET) --storage-class $(S3_STORAGE_CLASS) --grants full=$(S3_GRANT_ID) read=$(S3_ALLUSERS_ID)
+
+s3cp-$(PARALLELS_BOX_DIR)/%$(BOX_SUFFIX): $(PARALLELS_BOX_DIR)/%$(BOX_SUFFIX)
+	aws s3 cp $< $(PARALLELS_S3_BUCKET) --storage-class $(S3_STORAGE_CLASS) --grants full=$(S3_GRANT_ID) read=$(S3_ALLUSERS_ID)
+
+s3cp-vmware: $(addprefix s3cp-,$(VMWARE_BOX_FILES))
+s3cp-virtualbox: $(addprefix s3cp-,$(VIRTUALBOX_BOX_FILES))
+s3cp-parallels: $(addprefix s3cp-,$(PARALLELS_BOX_FILES))
