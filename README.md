@@ -1,4 +1,3 @@
-12345678901234567890123456789012345678901234567890123456789012345678901234567890
 This project is one I use to regularly build Windows VM Template in my vCenter 
 lab. 
 
