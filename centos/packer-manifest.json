@@ -1,0 +1,1749 @@
+{
+  "builds": [
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562535337,
+      "files": null,
+      "artifact_id": "centos7",
+      "packer_run_uuid": "d1b8c403-63f1-57f2-888a-8a5e0c0fa358"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562535481,
+      "files": null,
+      "artifact_id": "centos7",
+      "packer_run_uuid": "49eb2af3-8a0b-ea16-927d-c997b61d6829"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562535697,
+      "files": null,
+      "artifact_id": "centos7",
+      "packer_run_uuid": "50d703fb-abb9-60c5-cea9-9cc3c3309a12"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562539026,
+      "files": null,
+      "artifact_id": "centos7",
+      "packer_run_uuid": "01928770-9a05-15b2-cd40-ab57a7b6a9ce"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562553418,
+      "files": null,
+      "artifact_id": "centos7",
+      "packer_run_uuid": "c0c80d3a-c426-710a-f041-45b53b58fcf1"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562554158,
+      "files": null,
+      "artifact_id": "centos7",
+      "packer_run_uuid": "abeaeafa-b7dd-e7c4-6732-c5954109124b"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562606346,
+      "files": null,
+      "artifact_id": "centos7",
+      "packer_run_uuid": "dfadc339-bea5-fa2f-e713-13fa37a363f9"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562628364,
+      "files": null,
+      "artifact_id": "centos7",
+      "packer_run_uuid": "efe23869-3594-b4cf-c9f4-e867926a6ae8"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562654423,
+      "files": null,
+      "artifact_id": "centos7",
+      "packer_run_uuid": "82c3a311-db9a-2f61-5609-b7ccafbeaed0"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562717774,
+      "files": null,
+      "artifact_id": "centos7",
+      "packer_run_uuid": "e7ebffc5-a7f2-228b-97bf-86d27c285dab"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562719076,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b85986ef-906d-564c-2262-086d24664573"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562745181,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "4052298d-57c0-32a9-5818-8a9a6789ae50"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562789502,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "8aaa2549-2444-9cf1-6aa6-62dcbf3a6fee"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562835077,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "ff12ab9d-943a-9f76-b68e-419817d4f6a8"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562875916,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "e22d75e9-6432-0231-0310-4b38330996a3"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562921470,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "120a46a5-9d0c-f891-4948-9356157011d3"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1562962311,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "bcfb1b64-8e3c-b06b-0712-a9f9b53b1d16"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1563007883,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "5acd6705-a8d6-04fa-4130-59a254243485"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1563048712,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "65aceb23-cab9-b2f1-e9cc-705aa1f2d77a"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1563094236,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "83c383ee-6881-d198-11a0-771708b6c2d7"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1563135095,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "4d369ede-187e-1acc-1684-d4eb07c366c0"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1563180649,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "46cd314e-4224-4250-9502-ac8049f7fd76"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1563221578,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "d257d3d9-70bd-9171-e53b-62b434a05d6a"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1563267050,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b20fdab3-f5fd-5be7-dcc1-0405916402b5"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1563871748,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "937621f2-cd49-ae5d-a940-3c02ed5d1340"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1563912620,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "fe65faed-98d2-2681-9383-c03011418c8f"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1563958165,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "67a5bdea-bcab-b1cb-24a1-d6e5c22a9b06"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1563999075,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "55b6b8a7-892c-a79c-904d-9f603957b3ae"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564044627,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "3b75c3c7-6961-a0c0-95d9-4278c595a3d0"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564085465,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "40b00f8c-3338-6bda-3c2c-013ddd3dd137"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564131007,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "0e96ace0-d4da-97c7-081e-8daecbdbab6c"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564171845,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "546af49e-3c1d-13df-b532-7144051109e7"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564217398,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "acf00617-083e-af71-8d50-7349a852edf1"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564258236,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "e6bb6264-f14a-c64f-fd20-ce3216a21737"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564303818,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "9a088733-e87a-24b5-366d-3534c7fb8b30"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564344666,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "7d87ef63-7fab-7e12-1fcf-8998ef99f13f"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564390189,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b5ccfa09-9e89-6bf2-7c5b-649a005dc1dd"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564431050,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "3670df8e-868b-499a-7cdc-af47d6cea53f"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564476585,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "7f887beb-07bb-4b39-a1ab-56a8ac7a1465"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564517445,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "749160f1-38c0-bf17-ad97-b705eb978026"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564562991,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "cb4a7aaf-2b69-22ca-71f4-74a6c8f1513b"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564603841,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b74ed869-9993-b66b-2baa-b9376cecc4b8"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564649387,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "d1e3b2c5-f97a-37ba-646c-67ecb6f051ad"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564690247,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "d3b1b1d9-c724-385b-6741-a10775201306"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564735802,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "7c3970cc-993e-11d0-e9ed-e20c4634e727"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564776675,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "a668e492-72ad-8799-2db3-3c7a8704ad06"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564822191,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "65f3092b-2b1a-124e-9add-c226922d8abf"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564863079,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "3e333854-c3f5-f97f-3121-7bcf79412778"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564908666,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "22f81e75-0672-14a8-b1cf-62279b4fd731"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564949475,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "3361bcb1-7535-049e-7f02-3e35f689c285"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1564995010,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "c05c3972-38c9-331c-ff59-30b217f45c77"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1565035852,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "d8538b91-3cd7-5e36-9801-3f8dd753797d"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1565081385,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "ea467635-4ae4-0098-4e86-3f2be8bd7b50"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1565122257,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "943757b9-579b-2ba4-cb66-66d1d624b7bb"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1565167800,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "0f0bec30-d552-8c42-2237-12a6e2377449"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1565208641,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "0867eb4e-284b-7d99-57a5-53e1a51df3fd"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1565254155,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "7ff5f27e-dba7-e7ab-627f-250028641ea3"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1565295076,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b20d68f9-d251-152c-8c68-9427055acd72"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1565340965,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "8005d535-414c-133d-3767-554b364b919f"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1565381744,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "d1551f0e-1f79-d05a-9903-d88e8636550f"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1565426992,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "844074a5-88b3-fab7-a647-ebe812cc6382"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1565467843,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "fb545582-d401-9121-b348-aee3d8b7fd8a"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1566006974,
+      "files": null,
+      "artifact_id": "centos7k8",
+      "packer_run_uuid": "837f0f33-8771-1aaf-efe6-326ce66e39c3"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1566025573,
+      "files": null,
+      "artifact_id": "centos7k8v2",
+      "packer_run_uuid": "3c40d60c-f30a-6f8b-e011-da27e9c0da38"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1566031824,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b2974a4b-ee4a-e4a1-e6d2-177fcd99afe3"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1566072695,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "7902a644-0896-0713-6065-e0e09ee9d353"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1566118292,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "6f1d0878-d69f-8275-c189-5791caf17e5f"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1566159089,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "6d01bd77-081b-e1bf-ad7b-8f7da2649cf2"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1566204633,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "66b61017-23e4-b98c-af7f-bdc0e351b66c"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1566290962,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "4a120170-7ee5-773e-abd6-3f150f1a752a"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1566331883,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "486c29e8-729c-f942-6b84-ed6c59ee9d80"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1566377409,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "e0b62c05-38b7-b8ce-8c66-ad413ae65f5e"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1566418338,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "18baf730-a704-4ded-935d-79b1fb5fbe60"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1566463851,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "67b0ec6c-827f-8a7b-2c69-58ac62a79081"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1566504690,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "64f9d7bb-09d4-b5f8-1a18-045dac1d3ba6"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1567023054,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "c6136129-471d-f72d-b6f7-ae08c5ead126"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1567068551,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "6e35c3e5-6bd5-73ce-3603-6d09b0ee39dc"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1567109420,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "e543857e-2de4-843c-8802-4684bff6d60d"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1567154974,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "433d4d38-b224-5ba3-591a-20cf0bd42ffe"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1567195863,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "f79255d9-8f02-12f5-fe9e-9930bf441add"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1567241399,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "9e04454f-fa41-d893-4560-a1658b55b323"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1567282259,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "44714cfe-81a6-bc29-8dba-a9bac205822b"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1567327803,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "5a905340-be92-c699-bc78-c5ea41d98291"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568146342,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "a170558e-fd04-387d-30d2-7822f457f2eb"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568191796,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "4b04b9bd-0f1f-977c-8dde-b9857caf6317"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568232675,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "5dd15b49-9c1b-5bf2-67c4-0253dc60534e"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568278189,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "e6d2ef8b-7068-d682-fe15-d04e9794bd1d"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568319036,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "2aa69430-174b-992a-74bf-b9eabae5bed2"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568364553,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "8d7d7df3-25f7-29cb-f050-ee84d032831b"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568405462,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "7e5f0b26-087a-852a-c6f7-0a07b5d80eae"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568450995,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "c75e3698-463c-cd56-f3ef-5c798cd7e7df"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568491856,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "f5f886a3-01e2-14a6-e2c3-af738d75054d"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568537379,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "393963c1-cfa9-5320-23cf-6c2f6404b2c1"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568578253,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "54a899b1-db3a-7918-92de-dadcb7b887ad"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568623809,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "31530e56-2ead-dc56-2702-024708a8c905"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568664628,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "e647575f-b021-d462-0770-87dad0c14d53"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568710162,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "3ada398b-802c-119f-cd8b-a2b60384a631"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568751014,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b7b19b86-a81b-263c-c0a0-603f36460e18"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568796561,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b928575d-3d1c-bedc-9f0f-c6bcaa28bdb2"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568837403,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "08cda8b2-910e-a5dd-0e72-a9b73f3945d7"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568882939,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "ebfc725f-1447-7821-f071-bb6be337d480"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568923821,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "44e65170-3008-e819-c3db-0b78efb4d3ab"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1568969347,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "ecb830cf-3cb5-fb54-2b13-6241552f1259"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569010229,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "2013ea6d-82f1-cc89-9d98-e97f10cbc981"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569055773,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b86b831c-145d-bfce-775a-8fa0f9ace731"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569096616,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "bdc195fc-643e-7b80-fe18-35f9700358a9"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569142152,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "2c6a627e-b8d0-da2d-a589-2f7ab91d32af"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569183005,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "ba20824d-bdd6-0887-b5fb-c38bdc024a0f"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569228560,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "e76ab62f-6f2d-30c1-a446-7eaecbffe640"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569314950,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "d5a058b3-6f2b-2eb9-8beb-3c9f671121c2"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569401358,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "f5c8bd13-ecfe-69b6-3c68-c0362bdbaf4d"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569487746,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "ca034f54-1b6b-ca09-966c-9cdeacc27428"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569528619,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "9cb608bf-ceff-bb5e-9786-0b63facb7876"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569574153,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "3dc2ea03-eea5-04f5-50fc-5f89e7fa9dce"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569615019,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "a5c8ac27-e4d1-b33c-12ce-2becba40751a"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569660541,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "e3845ce9-95af-5018-6a64-50e2a0b8aec5"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569746969,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "bad17b1c-ce32-51ac-3a13-9f0411cb7ab0"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569787812,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "6cab68f0-98f8-b475-9b81-34a03e79c1b9"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569833344,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "40c70751-03c2-2665-0764-5d7e6cf98c11"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569874215,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "0886dc69-b3a7-a788-5314-593a0b029be7"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569919770,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "5534beee-4278-09f6-ae47-feba35b4a8a0"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1569960610,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "236e5b50-00ee-4504-eb8c-edc31871eb86"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570006155,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "570d1d32-f3b4-7540-fa38-f667dd944d23"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570047007,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "995597ab-79ec-06af-2253-4656bb594b43"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570092552,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "37006b07-87a9-6711-1ce4-d0a4203eda1a"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570133431,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "bc741b76-6c9a-6255-bf73-18ac683a993b"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570178979,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "9d298b04-98a2-b60a-bcbc-fc35045365cb"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570219807,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "082ec715-9cf9-b0c3-50a0-56b6cfec7bd3"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570265351,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "47ae9574-fc2c-d6c7-fc4f-201ba336be3c"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570306224,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "9937581a-302c-46ac-74eb-4d03bc54698e"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570351746,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "8694869d-015a-1cda-ce0a-28e7371fbebe"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570438142,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "6640e396-72f1-7c99-53dd-0ed66d3eac76"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570479015,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "7bc9f501-a829-0054-26d5-2330d6d4db70"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570524548,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "54d5d9ba-d7d9-e921-ea85-77732e17f12c"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570565419,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "6de0e41a-79dd-11b0-a12f-94349a0d5f59"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570610953,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "88974406-07ec-ffc2-0a44-6ff70860f25f"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570651835,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "de8e5c0c-1c7e-f5be-d2ef-96a18ed14d60"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570697360,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "c06e3910-b06a-744d-b009-8c5cc5fbbb5e"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570738271,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "815f79e4-c452-e881-e791-9f7193cee43c"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570783816,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "e5ba7dd6-f228-8a78-ba07-6d0b8284a62c"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570824615,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b7006848-9603-ba73-c66e-bf60371dc944"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570870180,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "f50174fb-3fb7-6a4a-2c2d-42dba32010e5"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570911033,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "8f095131-fe93-2632-f685-739d7900b8c8"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570956567,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "07920cd4-2600-ad57-7377-2faa363e3201"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1570997407,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "c8b0f0df-eafc-2c95-80f4-2e10048d66c7"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571042966,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "2691c470-652b-4ea8-e66e-fa4164f28179"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571083843,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "4a7f8c0e-4cbe-aa86-2dc4-8476863ab234"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571129360,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "e657c1ec-3bd1-74fa-ab44-b23397b14ac5"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571170224,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "073cb83c-16fe-8827-67b1-29b3243ccd22"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571215764,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "8a47e8bb-d266-2b49-3add-615ae5ca7ae6"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571256615,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "eadb097f-02cd-bf4d-4b51-ad7bf37dbcd9"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571302168,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "be3a7d34-649a-caba-38e4-b3c91f8ae04b"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571343018,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "1fedc833-dc9e-3b3c-7688-1718da1e93f9"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571388572,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "1c1b95f1-98b1-9c4f-c3b4-cfe1d22f2470"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571429473,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "5b454792-9452-89cc-1728-871d2b448902"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571474947,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "a43156ae-44d2-f71e-18d2-9dd38d9bbe15"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571515856,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "badddcaf-88c1-d388-75d7-3d01e1dce5be"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571561368,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "1461b9af-5eef-3e6c-975b-5eba3374f02c"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571602227,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "f42a44c1-53d8-9a4e-b5cf-6b34731c655d"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571647781,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "1df5c39e-aa3d-ac55-8d04-5d8085ff7be6"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571688671,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "eda53b98-e3f0-8bc5-0c60-80c3a55964bf"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571734222,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "3f11a62a-71b2-8067-53c1-a4e22efb6a5f"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571775074,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "9ea1f629-c67b-f144-24ab-170bc48e1e53"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571820627,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "c4912ad5-6a78-d457-f1e1-aa044a4bc799"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571861508,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "56262a5f-f71a-0d39-ea34-41582e387409"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571907030,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "ae0f3637-4c24-af57-40dc-6070021dc0b4"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571947889,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "6c328665-54d9-656f-d363-c29f9a603bb7"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1571993565,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "5b5cd8fe-2ce8-0ac8-5df0-e2783d4b60db"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572034405,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "42d7c70f-cb71-4805-051e-26b2783d2975"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572079918,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "2afe990a-866c-ffa3-7764-017b2ca490a1"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572120766,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "0d762887-ebae-f76a-f4a2-9a47cb8076f9"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572166301,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "ed16199a-942d-4fec-73b8-707550c6df8a"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572207161,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "7e0f78ce-cdca-dad1-ec7c-59fab3841268"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572252695,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "11d52884-2911-d8fc-eff3-ffb68cd0912a"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572293575,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "9a867918-8090-22dd-8e95-055e8e66923a"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572339100,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "7b880b26-4277-a770-6cb4-0997afe4e293"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572379950,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b6ca2107-8519-04da-7f7b-1606e72b8d2a"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572425484,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "3302a82a-27d5-4951-9523-47ff7b918323"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572466364,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "793563ef-ef34-35cc-4650-7ef09ba9cb00"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572511910,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "31c37391-a29b-9cc5-75e0-8ea4aafa5aed"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572552800,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "a0e9acd6-d212-a187-8129-745987cbba98"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572598287,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "c9b94df2-1d12-c63c-6526-59f08119fd47"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572639179,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b1a95afc-d3d9-a5f4-a7a8-c1ebb7fa59df"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572684725,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "cb0092f8-5bf2-0e4a-dbf6-581303d3f95f"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572725555,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "5b4ec986-0c1b-df08-76ca-9511522ba7cd"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572771111,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "ea791a41-1397-5cf6-29d2-5dae95c6d102"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572774725,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "3564f8d8-5d8f-6b77-ba6b-18967dabd281"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572815566,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "e83fac87-3682-0bfe-c522-82ee5b00859a"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572861132,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "c7fb9510-f466-d057-6432-d61dcedc01e4"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572901994,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "bae51402-a760-35ee-8356-70531a5d7168"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572947530,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "58684ad6-0168-353b-9977-2801d976a89b"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1572988360,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "37c0caea-9263-d71e-29d0-310ff36154ae"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1573033917,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "6b575257-6120-5e1c-b175-1fed173df152"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1573074837,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "6b2e90e5-7c12-1a79-1d97-6bd705c2e6d6"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1573120293,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "6d40b4d4-6f16-6440-c978-778e3cab05d1"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1575429913,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "8e1844d9-01db-5e49-aba8-6f320a598f22"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1575452972,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "756458bf-1766-78b0-be3f-2f096459c902"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1575493839,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "9ba791ff-229e-b11c-050e-63cc42fcfb24"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1575539340,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "e4f5f305-054e-9dd0-80c7-5302c3d74817"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1575580238,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "94e87040-48dd-fea9-2521-cc6fbf3d8d42"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1575666626,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "bdb78e3a-9a7a-6c5f-7e40-38e692047a2c"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1575712177,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "fe280a54-fd66-ae50-492a-c8622d574438"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1575753016,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "47c0f81e-ce5a-1e8e-9191-7639ac6e6609"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1575839443,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "e14f6eb3-b4b7-5320-5d7b-65bb1234e387"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1575925925,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "d4832652-8040-e5e9-3520-417b90ed7e1b"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1575971504,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "3d263ed9-50d8-6bff-a390-507f4469aa77"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1576012361,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "67a6af00-f5d3-475e-9cc0-a9217471caed"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1576617043,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "fe059e11-6df2-8f9a-1dde-ad6c593c3731"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1576662584,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "8e32fa0e-80ef-f4aa-694b-dba2c0728efc"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1576703453,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "82e4f490-1e35-7a6c-a1e2-f27973905c5f"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1576748947,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "d7bfc34c-025c-baa4-e327-881111fbb516"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1576789867,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "8305bad5-5f8f-74ce-7963-9693baa4a2fb"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1576803853,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "c8737749-3c59-f349-6a74-9fde590bc3a0"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1576835440,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "27f210a2-af57-e2cd-d252-2f01ab856d51"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1576876366,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b7a09f19-b45d-537e-9b86-0aaa5be22f46"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1576921788,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "4ded69d6-67cb-8485-f664-aba560236303"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1576962645,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "d46a509b-4a60-1a96-e36f-082fc2214835"
+    },
+    {
+      "name": "vsphere-iso",
+      "builder_type": "vsphere-iso",
+      "build_time": 1577008247,
+      "files": null,
+      "artifact_id": "centos7test",
+      "packer_run_uuid": "b74f14e4-e6de-2066-0761-7b2cbd0a33c6"
+    }
+  ],
+  "last_run_uuid": "b74f14e4-e6de-2066-0761-7b2cbd0a33c6"
+}

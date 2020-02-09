@@ -1,0 +1,26 @@
+{
+  "_comment": "Build with `packer build -var-file=centos7.json centos.json`",
+  "vm_name": "centos7",
+  "cpus": "2",
+  "disk_size": "65536",
+  "http_directory": "kickstart/centos7",
+  "iso_checksum": "506e4e06abf778c3435b4e5745df13e79ebfc86565d7ea1e128067ef6b5a6345",
+  "iso_checksum_type": "sha256",
+  "iso_name": "CentOS-7-x86_64-DVD-1810.iso",
+  "iso_url": "http://10.0.0.48/ISO/Linuxes/Centos/CentOS-7-x86_64-DVD-1810.iso",
+  "memory": "2048",
+  "parallels_guest_os_type": "centos7",
+  "vcenter_user" : "svcpacker@ad.lab.lostroncos.net",
+  "vcenter_password": "!QAZ2wsx",
+  "vcenter_template_name": "centos7",
+  "vcenter": "lab-vcsa-01.lab.lostroncos.net",
+  "vcenter_server" : "lab-vcsa-01.lab.lostroncos.net",
+  "vcenter_datastore":"esx-01-ds-01",
+  "vcenter_cluster":"lab",
+  "vcenter_network":"Public 2",
+  "vcenter_folder":"Templates",
+  "vcenter_datacenter":"Datacenter",
+  "vcenter_host":"10.0.0.11"
+
+
+}
