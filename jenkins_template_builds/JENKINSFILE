@@ -17,7 +17,7 @@ pipeline {
          stage('Build Win 2016') {
              steps {
                  //Build 2016 with cloudbase 
-                 build job: 'vSphere_Template_Build_Windows2016', 
+                 build job: 'vSphere_Windows2016', 
                      parameters: [
                          string(name: 'vcenter_datacenter', value : "${env.VCENTER_DATACENTER}"), 
                          string(name: 'vcenter_folder', value : "${env.VCENTER_FOLDER}"), 
@@ -30,7 +30,7 @@ pipeline {
                          string(name: 'init_type', value: 'cloudbase')
                      ]
                  //build 2016 with vRA7 Gugent
-                 build job: 'vSphere_Template_Build_Windows2016', 
+                 build job: 'vSphere_Windows2016', 
                      parameters: [
                          string(name: 'vcenter_datacenter', value : "${env.VCENTER_DATACENTER}"), 
                          string(name: 'vcenter_folder', value : "${env.VCENTER_FOLDER}"), 
@@ -67,7 +67,7 @@ pipeline {
          stage('Build CentOS 7') {
              steps {
                  //Build 2016 with cloudbase 
-                 build job: 'vSphere_Template_Build_CentOS7', 
+                 build job: 'vSphere_CentOS7', 
                      parameters: [
                          string(name: 'vcenter_datacenter', value : "${env.VCENTER_DATACENTER}"), 
                          string(name: 'vcenter_folder', value : "${env.VCENTER_FOLDER}"), 
@@ -80,7 +80,7 @@ pipeline {
                          string(name: 'init_type', value: 'cloudbase')
                      ]
                  //build 2016 with vRA7 Gugent
-                 build job: 'vSphere_Template_Build_CentOS7', 
+                 build job: 'vSphere_CentOS7', 
                      parameters: [
                          string(name: 'vcenter_datacenter', value : "${env.VCENTER_DATACENTER}"), 
                          string(name: 'vcenter_folder', value : "${env.VCENTER_FOLDER}"), 
