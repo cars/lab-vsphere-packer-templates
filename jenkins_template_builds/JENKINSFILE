@@ -1,0 +1,118 @@
+pipeline {
+    agent any
+ 
+ //   tools {
+     // Install the Maven version configured as "M3" and add it to the path.
+     //    }
+     environment { 
+         VCENTER_DATACENTER = 'Datacenter'
+         VCENTER_FOLDER='Templates'
+         VCENTER_CLUSTER= 'lab'
+         VCENTER_HOST= '10.0.0.11'
+         VCENTER_DATASTORE='esx-01-ds-01'
+         VCENTER_NETWORK='Public 2'
+         VCENTER_SERVER= 'vcenter.lab.lostroncos.net'
+     }
+     stages {
+         stage('Build Win 2016') {
+             steps {
+                 //Build 2016 with cloudbase 
+                 build job: 'vSphere_Template_Build_Windows2016', 
+                     parameters: [
+                         string(name: 'vcenter_datacenter', value : "${env.VCENTER_DATACENTER}"), 
+                         string(name: 'vcenter_folder', value : "${env.VCENTER_FOLDER}"), 
+                         string(name: 'vcenter_cluster', value : "${env.VCENTER_CLUSTER}"), 
+                         string(name: 'vcenter_host', value : "${env.VCENTER_HOST}"), 
+                         string(name: 'vcenter_datastore', value : "${env.VCENTER_DATASTORE}"), 
+                         string(name: 'vcenter_network', value : "${env.VCENTER_NETWORK}"), 
+                         string(name: 'vcenter_server', value : "${env.VCENTER_SERVER}"), 
+                         string(name: 'vcenter_template_name', value: 'eval-win2016-standard-ssh-cb'),
+                         string(name: 'init_type', value: 'cloudbase')
+                     ]
+                 //build 2016 with vRA7 Gugent
+                 build job: 'vSphere_Template_Build_Windows2016', 
+                     parameters: [
+                         string(name: 'vcenter_datacenter', value : "${env.VCENTER_DATACENTER}"), 
+                         string(name: 'vcenter_folder', value : "${env.VCENTER_FOLDER}"), 
+                         string(name: 'vcenter_cluster', value : "${env.VCENTER_CLUSTER}"), 
+                         string(name: 'vcenter_host', value : "${env.VCENTER_HOST}"), 
+                         string(name: 'vcenter_datastore', value : "${env.VCENTER_DATASTORE}"), 
+                         string(name: 'vcenter_network', value : "${env.VCENTER_NETWORK}"), 
+                         string(name: 'vcenter_server', value : "${env.VCENTER_SERVER}"), 
+                         string(name: 'vcenter_template_name', value: 'eval-win2016-standard-ssh-vra'),
+                         string(name: 'init_type', value: 'gugent')
+                     ]
+             }
+                 
+                 
+             post {
+                 // Need to fix tokenCredentialId to be less fixed...
+                 always {
+                     slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'All Template Builds - Win 2016 finished', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
+                 }
+                 success {
+                     slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'All Template Builds Windows 2016 finished successfully', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
+                 }
+                 unstable {
+                     echo 'I am unstable :/'
+                 }
+                 failure {
+                     slackSend botUser: true, channel: 'jenkins_notifications', color: 'RED', iconEmoji: '', message: 'All Template Builds Windows 2016 Failed', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
+                 }
+                 changed {
+                     echo 'Things were different before...'
+                 }
+             }
+         }
+         stage('Build CentOS 7') {
+             steps {
+                 //Build 2016 with cloudbase 
+                 build job: 'vSphere_Template_Build_CentOS7', 
+                     parameters: [
+                         string(name: 'vcenter_datacenter', value : "${env.VCENTER_DATACENTER}"), 
+                         string(name: 'vcenter_folder', value : "${env.VCENTER_FOLDER}"), 
+                         string(name: 'vcenter_cluster', value : "${env.VCENTER_CLUSTER}"), 
+                         string(name: 'vcenter_host', value : "${env.VCENTER_HOST}"), 
+                         string(name: 'vcenter_datastore', value : "${env.VCENTER_DATASTORE}"), 
+                         string(name: 'vcenter_network', value : "${env.VCENTER_NETWORK}"), 
+                         string(name: 'vcenter_server', value : "${env.VCENTER_SERVER}"), 
+                         string(name: 'vcenter_template_name', value: 'centos7-cloudinit'),
+                         string(name: 'init_type', value: 'cloudbase')
+                     ]
+                 //build 2016 with vRA7 Gugent
+                 build job: 'vSphere_Template_Build_CentOS7', 
+                     parameters: [
+                         string(name: 'vcenter_datacenter', value : "${env.VCENTER_DATACENTER}"), 
+                         string(name: 'vcenter_folder', value : "${env.VCENTER_FOLDER}"), 
+                         string(name: 'vcenter_cluster', value : "${env.VCENTER_CLUSTER}"), 
+                         string(name: 'vcenter_host', value : "${env.VCENTER_HOST}"), 
+                         string(name: 'vcenter_datastore', value : "${env.VCENTER_DATASTORE}"), 
+                         string(name: 'vcenter_network', value : "${env.VCENTER_NETWORK}"), 
+                         string(name: 'vcenter_server', value : "${env.VCENTER_SERVER}"), 
+                         string(name: 'vcenter_template_name', value: 'centos7-vra'),
+                         string(name: 'init_type', value: 'gugent')
+                     ]
+                 }
+                 
+                 
+                 post {
+                     always {
+                         slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'All Template Builds CentOS finished', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
+                     }
+                     success {
+                         slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'All Template Builds CentOS finished successfully', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
+                     }
+                     unstable {
+                         echo 'I am unstable :/'
+                     }
+                     failure {
+                         slackSend botUser: true, channel: 'jenkins_notifications', color: 'RED', iconEmoji: '', message: 'All Template Builds CentOS Failed', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
+                     }
+                     changed {
+                         echo 'Things were different before...'
+                     }
+                 }
+             }
+     }
+ }
+ 
