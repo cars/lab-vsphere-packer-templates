@@ -2,6 +2,7 @@
   "builders": [
     {
      "type": "vsphere-iso",
+
       "vcenter_server":      "{{user `vcenter_server`}}",
       "username":            "{{user `vcenter_user`}}",
       "password":            "{{user `vcenter_password`}}",
@@ -30,6 +31,7 @@
 
       "network_card": "e1000",
       "convert_to_template": "true",
+      "notes" : "{{user `vm_notes`}}",
 
       "iso_paths": [
         "[F] Windows//14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO",
@@ -70,7 +72,7 @@
       "scripts": [
         "script/vagrant.bat",
         "script/cmtool.bat",
-    	  "script/gugent.bat",
+    	  "script/{{ user `init_type`}}.bat",
 	      "script/boxstarter.bat",
         "script/clean.bat",
 	      "script/add-nuget.bat",
@@ -106,7 +108,9 @@
     "vcenter_network":"VM Network",
     "vcenter_folder":"VMs",
     "vcenter_datacenter":"Datacenter",
-    "vcenter_host":"esx-01.example.com"
+    "vcenter_host":"esx-01.example.com",
+    "init_type":"cloudbase",
+    "vm_notes":"The notes field"
   }
 }
 
