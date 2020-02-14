@@ -11,7 +11,7 @@ pipeline {
          VCENTER_HOST= '10.0.0.11'
          VCENTER_DATASTORE='esx-01-ds-01'
          VCENTER_NETWORK='Public 2'
-         VCENTER_SERVER= 'vcenter.lab.lostroncos.net'
+        // VCENTER_SERVER= 'vcenter.lab.lostroncos.net'
      }
      stages {
          stage('Build Win 2016') {

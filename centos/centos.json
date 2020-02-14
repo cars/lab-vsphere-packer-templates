@@ -27,7 +27,6 @@
       "disk_controller_type": "pvscsi",
       "disk_size": 65536,
       "disk_thin_provisioned": true,
-      "shutdown_add_cdrom": true,
       "network_card": "vmxnet3",
       "notes" : "{{user `vm_notes`}}",
       "convert_to_template": "true",
