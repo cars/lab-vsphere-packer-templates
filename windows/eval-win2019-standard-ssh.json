@@ -39,7 +39,7 @@
       ],
 
       "floppy_files": [
-        "floppy/eval-win2019-standard/Autounattend.xml",
+        "floppy/eval-win2019-standard/autounattend.xml",
         "floppy/00-run-all-scripts.cmd",
         "floppy/install-winrm.cmd",
         "floppy/powerconfig.bat",
