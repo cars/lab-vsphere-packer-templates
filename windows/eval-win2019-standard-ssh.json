@@ -58,17 +58,10 @@
         "UPDATE={{user `update`}}"
       ],
       "execute_command": "C:/Windows/Temp/script.ps1",
-      "remote_path": "/tmp/script.ps1",
       "scripts": [
         "script/vmware.ps1"
       ],
       "type": "powershell"
-    },
-    {
-      "inline": [
-        "rm -f /tmp/script.ps1"
-      ],
-      "type": "shell"
     },
     {
       "type":"windows-restart"
