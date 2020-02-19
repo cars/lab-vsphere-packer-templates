@@ -16,7 +16,7 @@ if (-not $ENV:CB_URL) {
 
 
 $cb_setup = "$($env:TEMP)\cb_setup.msi"
-Write-Host "==> Preparing to download Cloudbase.."
+Write-Host "==> Preparing to download Cloudbase..."
 $wc = New-Object System.Net.WebClient
 Write-Host "==> Created WebClient"
 $wc.DownloadFile($ENV:CB_URL, $cb_setup)
