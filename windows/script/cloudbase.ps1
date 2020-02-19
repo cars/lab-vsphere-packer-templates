@@ -1,29 +1,27 @@
-$host.ui.RawUI.WindowTitle = "Installing OpenSSH.  Please wait..."
+$host.ui.RawUI.WindowTitle = "Installing CloudBase.  Please wait..."
 
 
 Write-Output "==> Installing Cloudbase"
 
 
-@setlocal EnableDelayedExpansion EnableExtensions
-@for %%i in (a:\_packer_config*.cmd) do @call "%%~i"
-@if defined PACKER_DEBUG (@echo on) else (@echo off)
-
-#if not defined PACKER_SEARCH_PATHS set PACKER_SEARCH_PATHS="%USERPROFILE%" a: b: c: d: e: f: g: h: i: j: k: l: m: n: o: p: q: r: s: t: u: v: w: x: y: z:
-
 if (-not $ENV:CB_URL) {
+    Write-host "==> Cloudbase URL not set.....setting"
     $ENV:CB_URL="https://cloudbase.it/downloads/CloudbaseInitSetup_Stable_x64.msi"
+    Write-host "==> done setting Cloudbase URL to ${ENV:CB_URL}"
 } else {
-    Write-Host "CB URL Set previously"
+    Write-Host "CB URL Set previously to ${ENV:CB_URL}"
 }
 
 
 
 
 $cb_setup = "$($env:TEMP)\cb_setup.exe"
-Write-Host "Downloading Cloudbase..."
+Write-Host "==> Preparing to download Cloudbase..."
 $wc = New-Object System.Net.WebClient
 $wc.DownloadFile($url, $cb_setup)
+Write-Host "==> Done Downloading Cloudbase..."
 
+Write-Host "==> Starting Cloudbase install..."
 $p = Start-Process  -Wait -PassThru -FilePath $cb_setup -ArgumentList "/qn /l*v c:\temp\CB_setup.txt"
 
 if ($p.ExitCode -eq 0) {

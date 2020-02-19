@@ -67,15 +67,24 @@
       "type":"powershell",
       "elevated_user": "{{user `defaultuser`}}",
       "elevated_password": "{{user `defaultuserpassword`}}",
-      "inline": ["shutdown.exe /r"]
+      "execute_command": "C:/Windows/Temp/script.ps1",
+      "scripts": ["script/reboot.ps1"]
     },
     {
       "type": "powershell",
       "inline": ["sleep 120"]
     },
     {
+      "type":"powershell",
+      "elevated_user": "{{user `defaultuser`}}",
+      "elevated_password": "{{user `defaultuserpassword`}}",
+      "execute_command": "C:/Windows/Temp/script.ps1",
+      "scripts": ["script/cloudbase.ps1"]
+    },
+    {
       "elevated_user": "{{ user `defaultuser` }}",
       "elevated_password": "{{ user `defaultuserpassword` }}",
+      "execute_command": "C:/Windows/Temp/script.ps1",
       "scripts": [
         "script/windows_update.ps1"
       ],
