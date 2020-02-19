@@ -15,14 +15,16 @@ if (-not $ENV:CB_URL) {
 
 
 
-$cb_setup = "$($env:TEMP)\cb_setup.exe"
+$cb_setup = "$($env:TEMP)\cb_setup.msi"
 Write-Host "==> Preparing to download Cloudbase..."
 $wc = New-Object System.Net.WebClient
-$wc.DownloadFile($url, $cb_setup)
+Write-Host "==> Created WebClient"
+$wc.DownloadFile($ENV:CB_URL, $cb_setup)
 Write-Host "==> Done Downloading Cloudbase..."
 
 Write-Host "==> Starting Cloudbase install..."
-$p = Start-Process  -Wait -PassThru -FilePath $cb_setup -ArgumentList "/qn /l*v c:\temp\CB_setup.txt"
+#C:\windows\system32\msiexec /i %CB_PATH% /qn /l*v c:\temp\CB_setup.txt
+$p = Start-Process  -Wait -PassThru -FilePath msiexec -ArgumentList "/i $cb_setup /qn /l*v c:\temp\CB_setup.txt"
 
 if ($p.ExitCode -eq 0) {
     Write-Host "Done."
