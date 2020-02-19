@@ -78,7 +78,7 @@
       "scripts": [
         "script/sleep.ps1"
       ],
-      "execute_command": "C:/Windows/Temp/script.ps1",
+      "execute_command": "C:/Windows/Temp/script.ps1"
 
     },
     {
