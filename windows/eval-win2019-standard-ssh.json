@@ -72,7 +72,14 @@
     },
     {
       "type": "powershell",
-      "inline": ["sleep 120"]
+      "environment_vars": [
+        "SLEEPTIME=120"
+      ], 
+      "scripts": [
+        "script/sleep.ps1"
+      ],
+      "execute_command": "C:/Windows/Temp/script.ps1",
+
     },
     {
       "type":"powershell",

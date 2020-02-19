@@ -1,4 +1,4 @@
-$host.ui.RawUI.WindowTitle = "Installing CloudBase.  Please wait..."
+#$host.ui.RawUI.WindowTitle = "Installing CloudBase.  Please wait..."
 
 
 Write-Output "==> Installing Cloudbase"
