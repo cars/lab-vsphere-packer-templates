@@ -71,17 +71,6 @@
       "scripts": ["script/reboot.ps1"]
     },
     {
-      "type": "powershell",
-      "environment_vars": [
-        "SLEEPTIME=120"
-      ], 
-      "scripts": [
-        "script/sleep.ps1"
-      ],
-      "execute_command": "C:/Windows/Temp/script.ps1"
-
-    },
-    {
       "type":"powershell",
       "elevated_user": "{{user `defaultuser`}}",
       "elevated_password": "{{user `defaultuserpassword`}}",
