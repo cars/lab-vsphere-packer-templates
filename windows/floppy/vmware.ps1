@@ -1,7 +1,10 @@
 $host.ui.RawUI.WindowTitle = "Installing VMware Tools.  Please wait..."
 If (("$Env:PACKER_BUILDER_TYPE" -ne "vmware-iso") -and ("$Env:PACKER_BUILDER_TYPE" -ne "vsphere-iso")) {
   Write-Host "==> VMware not found, aborting tools install.."
-  Write-Host "--> Found " $ENV:PACKER_BUILDER_TYPE 
+  Write-Host "==> Found Env: ${ENV:PACKER_BUILDER_TYPE}"
+  Write-Host "==> Found $Packer_Builder_Type"
+  Set-Location ENV:
+  gci | select name,value | Set-Content C:\temp\envvars_floppy_vmware.txt
   #return
 }
 

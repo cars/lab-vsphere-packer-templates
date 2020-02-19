@@ -65,11 +65,13 @@
     },
     {
       "type":"powershell",
+      "elevated_user": "{{user `defaultuser`}}",
+      "elevated_password": "{{user `defaultuserpassword`}}",
       "inline": ["shutdown.exe /r"]
     },
     {
       "type": "powershell",
-      "inline": ["sleep 60"]
+      "inline": ["sleep 120"]
     },
     {
       "elevated_user": "{{ user `defaultuser` }}",
