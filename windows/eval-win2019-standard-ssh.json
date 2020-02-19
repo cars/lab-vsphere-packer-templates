@@ -64,7 +64,8 @@
       "type": "powershell"
     },
     {
-      "type":"windows-restart"
+      "type":"powershell",
+      "inline": ["shutdown.exe /r"]
     },
     {
       "type": "powershell",
