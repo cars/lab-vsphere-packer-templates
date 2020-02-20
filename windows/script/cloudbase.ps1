@@ -39,5 +39,5 @@ if ($p.ExitCode -eq 0) {
     Start-Sleep 15; 
     #exit $p.ExitCode
   }
-  
+  exit 0
   
