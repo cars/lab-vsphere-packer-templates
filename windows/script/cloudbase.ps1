@@ -13,7 +13,11 @@ if (-not $ENV:CB_URL) {
 }
 
 
-
+if (Test-PAth C:\temp) {
+  #nop
+} else {
+  mdkir c:\temp
+}
 
 $cb_setup = "$($env:TEMP)\cb_setup.msi"
 Write-Host "==> Preparing to download Cloudbase....."
@@ -24,7 +28,7 @@ Write-Host "==> Done Downloading Cloudbase..."
 
 Write-Host "==> Starting Cloudbase install..."
 #C:\windows\system32\msiexec /i %CB_PATH% /qn /l*v c:\temp\CB_setup.txt
-$p = Start-Process  -Wait -PassThru -FilePath msiexec -ArgumentList "/i $cb_setup /qn /l*v c:\temp\CB_setup.txt"
+$p = Start-Process  -Wait -PassThru -FilePath msiexec -ArgumentList "/i $cb_setup /qn /l*v C:\temp\CB_SETUP.Txt"
 
 if ($p.ExitCode -eq 0) {
     Write-Host "Done."
