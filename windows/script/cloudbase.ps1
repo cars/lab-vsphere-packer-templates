@@ -31,8 +31,9 @@ if ($p.ExitCode -eq 0) {
   } elseif ($p.ExitCode -eq 3010) {
     Write-Host "Done, but a reboot is necessary."
   } else {
-    Write-Host "VMWare Tools install failed: ExitCode=$($p.ExitCode), Log=C:\Windows\Temp\vmware_tools.log"
-    Start-Sleep 2; exit $p.ExitCode
+    Write-Host "CLoud Base install exited with ExitCode=$($p.ExitCode), Log=C:\temp\cb_setup.txt"
+    Start-Sleep 15; 
+    #exit $p.ExitCode
   }
   
   
