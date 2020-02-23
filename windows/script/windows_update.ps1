@@ -114,4 +114,4 @@ try {
 	}
 }
 Write-Output "Ended Windows Update Installation"
-exit 0
+# exit 0
