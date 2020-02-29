@@ -1,40 +1,36 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <flow-definition plugin="workflow-job@2.36">
-  <actions>
-    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.5.1"/>
-    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.5.1">
-      <jobProperties/>
-      <triggers/>
-      <parameters/>
-      <options/>
-    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
-  </actions>
-  <description></description>
-  <keepDependencies>false</keepDependencies>
-  <properties>
-    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
-      <triggers>
-        <hudson.triggers.TimerTrigger>
-          <spec>H 6 * * *</spec>
-        </hudson.triggers.TimerTrigger>
-      </triggers>
-    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
-  </properties>
-  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.78">
-    <script>pipeline {
+    <actions>
+        <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.5.1"/>
+        <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.5.1">
+            <jobProperties/>
+            <triggers/>
+            <parameters/>
+            <options/>
+        </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+    </actions>
+    <description></description>
+    <keepDependencies>false</keepDependencies>
+    <properties>
+        <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+            <triggers>
+                <hudson.triggers.TimerTrigger>
+                    <spec>H 6 * * *</spec>
+                </hudson.triggers.TimerTrigger>
+            </triggers>
+        </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+    </properties>
+    <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.78">
+        <script>pipeline {
     agent any
- 
+   triggers {
+        cron('H 3 * * *')
+    }
  //   tools {
      // Install the Maven version configured as &quot;M3&quot; and add it to the path.
      //    }
      environment { 
-         VCENTER_DATACENTER = &apos;Datacenter&apos;
-         VCENTER_FOLDER=&apos;Templates&apos;
-         VCENTER_CLUSTER= &apos;lab&apos;
-         VCENTER_HOST= &apos;10.0.0.11&apos;
-         VCENTER_DATASTORE=&apos;esx-01-ds-01&apos;
-         VCENTER_NETWORK=&apos;Public 2&apos;
-         VCENTER_SERVER= &apos;vcenter.lab.lostroncos.net&apos;
+         VCENTER_DATACENTER = &apos;Datacenter&apos; VCENTER_FOLDER=&apos;Templates&apos; VCENTER_CLUSTER= &apos;lab&apos; VCENTER_HOST= &apos;10.0.0.11&apos; VCENTER_DATASTORE=&apos;esx-01-ds-01&apos; VCENTER_NETWORK=&apos;Public 2&apos; VCENTER_SERVER= &apos;vcenter.lab.lostroncos.net&apos;
      }
      stages {
          stage(&apos;Build Win 2016&apos;) {
@@ -138,9 +134,9 @@
              }
      }
  }
- </script>
-    <sandbox>true</sandbox>
-  </definition>
-  <triggers/>
-  <disabled>false</disabled>
+        </script>
+        <sandbox>true</sandbox>
+    </definition>
+    <triggers/>
+    <disabled>false</disabled>
 </flow-definition>
