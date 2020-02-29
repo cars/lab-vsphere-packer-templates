@@ -33,7 +33,7 @@ pipeline {
                          string(name: 'init_type', value: 'cloudbase')
                      ]
                  //build 2016 with vRA7 Gugent
-                 build job: 'vxphere_windows2016', 
+                 build job: 'vsphere_windows2016', 
                      parameters: [
                          string(name: 'vcenter_datacenter', value : "${env.VCENTER_DATACENTER}"), 
                          string(name: 'vcenter_folder', value : "${env.VCENTER_FOLDER}"), 
