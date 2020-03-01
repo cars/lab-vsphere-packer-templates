@@ -51,7 +51,13 @@
         <hudson.model.StringParameterDefinition>
           <name>vcenter_template_name</name>
           <description></description>
-          <defaultValue>eval-win2016-standard-ssh</defaultValue>
+          <defaultValue>centos7test</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>init_type</name>
+          <description></description>
+          <defaultValue>gugent</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -62,12 +68,7 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <hudson.triggers.TimerTrigger>
-      <spec>0 12 * * *
-H 0 * * *</spec>
-    </hudson.triggers.TimerTrigger>
-  </triggers>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -88,40 +89,49 @@ fi</command>
   <publishers>
     <biz.neustar.jenkins.plugins.packer.PackerPublisher plugin="packer@1.5">
       <name>Default_Local_Install_VM_Template</name>
-      <jsonTemplate>/home/ansible/src/github.com/boxcutter/windows/eval-win2016-standard-ssh.json</jsonTemplate>
+      <jsonTemplate>/home/ansible/src/github.com/cars/lab-vsphere-packer-templates/centos/centos.json</jsonTemplate>
       <jsonTemplateText></jsonTemplateText>
-      <params>-var vcenter_server=${vcenter_server} -var vcenter_user=${GOVC_USERNAME} -var  vcenter_password=${GOVC_PASSWORD} -var vcenter_datacenter=${vcenter_datacenter} -var vcenter_folder=${vcenter_folder} -var vcenter_cluster=${vcenter_cluster} -var vcenter_host=${vcenter_host} -var vcenter_datastore=${vcenter_datastore} -var vcenter_network=${vcenter_network} -var vcenter_template_name=${vcenter_template_name}
+      <params>-only=vsphere-iso -var vcenter_server=${vcenter_server} -var vcenter_user=${GOVC_USERNAME} -var  vcenter_password=${GOVC_PASSWORD} -var vcenter_datacenter=${vcenter_datacenter} -var vcenter_folder=${vcenter_folder} -var vcenter_cluster=${vcenter_cluster} -var vcenter_host=${vcenter_host} -var vcenter_datastore=${vcenter_datastore} -var vcenter_network=${vcenter_network} -var vcenter_template_name=${vcenter_template_name}
 
 </params>
       <useDebug>true</useDebug>
-      <changeDir>/home/ansible/src/github.com/boxcutter/windows</changeDir>
+      <changeDir>/home/ansible/src/github.com/cars/lab-vsphere-packer-templates/centos</changeDir>
       <templateMode>file</templateMode>
     </biz.neustar.jenkins.plugins.packer.PackerPublisher>
-    <jenkins.plugins.slack.SlackNotifier plugin="slack@2.3">
+    <jenkins.plugins.slack.SlackNotifier plugin="slack@2.29">
       <baseUrl></baseUrl>
       <teamDomain></teamDomain>
       <authToken></authToken>
-      <authTokenCredentialId></authTokenCredentialId>
+      <tokenCredentialId></tokenCredentialId>
       <botUser>false</botUser>
       <room></room>
+      <sendAsText>false</sendAsText>
+      <iconEmoji></iconEmoji>
+      <username></username>
       <startNotification>true</startNotification>
       <notifySuccess>true</notifySuccess>
-      <notifyAborted>false</notifyAborted>
-      <notifyNotBuilt>false</notifyNotBuilt>
+      <notifyAborted>true</notifyAborted>
+      <notifyNotBuilt>true</notifyNotBuilt>
       <notifyUnstable>false</notifyUnstable>
       <notifyRegression>false</notifyRegression>
       <notifyFailure>true</notifyFailure>
-      <notifyBackToNormal>false</notifyBackToNormal>
+      <notifyEveryFailure>true</notifyEveryFailure>
+      <notifyBackToNormal>true</notifyBackToNormal>
       <notifyRepeatedFailure>false</notifyRepeatedFailure>
       <includeTestSummary>false</includeTestSummary>
       <includeFailedTests>false</includeFailedTests>
       <commitInfoChoice>NONE</commitInfoChoice>
       <includeCustomMessage>false</includeCustomMessage>
       <customMessage></customMessage>
+      <customMessageSuccess></customMessageSuccess>
+      <customMessageAborted></customMessageAborted>
+      <customMessageNotBuilt></customMessageNotBuilt>
+      <customMessageUnstable></customMessageUnstable>
+      <customMessageFailure></customMessageFailure>
     </jenkins.plugins.slack.SlackNotifier>
   </publishers>
   <buildWrappers>
-    <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper plugin="credentials-binding@1.16">
+    <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper plugin="credentials-binding@1.20">
       <bindings>
         <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
           <credentialsId>51aa0343-9b61-421e-8a34-3b9d082b7dd8</credentialsId>

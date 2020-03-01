@@ -1,0 +1,158 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Bullds a fresh Windows 2016 Standard VCenter template with boxstarter, chocolatey and either the vRA Gugent or CloudBase Init installed. </description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>vcenter_datacenter</name>
+          <description>Datacenter in vcenter that VM will be deployed to</description>
+          <defaultValue>Datacenter</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>vcenter_folder</name>
+          <description>Which folder in vCenter the VM will be put in</description>
+          <defaultValue>Templates</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>vcenter_cluster</name>
+          <description>Which vSphere cluster the build will occur on </description>
+          <defaultValue>lab</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>vcenter_host</name>
+          <description>Name/IP of the ESXi Host</description>
+          <defaultValue>10.0.0.11</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>vcenter_datastore</name>
+          <description>What datastore to build the vm on</description>
+          <defaultValue>esx-01-ds-01</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>vcenter_network</name>
+          <description>which network to attach the VM to while building</description>
+          <defaultValue>Public 2</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>vcenter_server</name>
+          <description>Name/ip of the vCenter Server</description>
+          <defaultValue>vcenter.lab.lostroncos.net</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>vcenter_template_name</name>
+          <description>Nane to assign to the template</description>
+          <defaultValue>eval-win2016-standard-ssh</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>init_type</name>
+          <description>Which type of initialization will be used 
+&apos;gugent&apos; - vRA Guest Agent
+&apos;cloudbase&apos; - CloudBase on Windows, cloud-init on Linux</description>
+          <defaultValue>gugent</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command># This looks for an existing VM/Template with the name of the one we&apos;re about to build
+# and deletes it so we don&apos;t have failure because of name collisions
+export GOVC_INSECURE=true
+#export GOVC_PASSWORD=set by binding
+export GOVC_URL=${vcenter_server}
+#export GOVC_USERNAME=set by binding
+export GOVC_DEBUG=true
+export GOVC_DEBUG_PATH=/tmp/govc.log
+export GOVC_DATACENTER=${vcenter_datacenter}
+echo &quot;Checking for pre-existing vm: ${vcenter_template_name}&quot;
+if [ `govc ls /Datacenter/vm/${vcenter_folder}/${vcenter_template_name} | wc -l` -eq 1 ]
+then 
+	echo &quot;Deleting vm ${vcenter_template_name}&quot;
+    export VMUUID=`govc vm.info -json /Datacenter/vm/${vcenter_folder}/${vcenter_template_name} |jq -r .VirtualMachines[0].Config.InstanceUuid`
+	govc vm.destroy -vm.uuid=$VMUUID
+fi</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <biz.neustar.jenkins.plugins.packer.PackerPublisher plugin="packer@1.5">
+      <name>Default_Local_Install_VM_Template</name>
+      <jsonTemplate>/home/ansible/src/github.com/boxcutter/windows/eval-win2016-standard-ssh.json</jsonTemplate>
+      <jsonTemplateText></jsonTemplateText>
+      <params>-var vcenter_server=${vcenter_server} -var vcenter_user=${GOVC_USERNAME} -var  vcenter_password=${GOVC_PASSWORD} -var vcenter_datacenter=${vcenter_datacenter} -var vcenter_folder=${vcenter_folder} -var vcenter_cluster=${vcenter_cluster} -var vcenter_host=${vcenter_host} -var vcenter_datastore=${vcenter_datastore} -var vcenter_network=${vcenter_network} -var vcenter_template_name=${vcenter_template_name} -var init_type=${init_type} -var vm_notes=${BUILD_TAG}
+
+</params>
+      <useDebug>true</useDebug>
+      <changeDir>/home/ansible/src/github.com/boxcutter/windows</changeDir>
+      <templateMode>file</templateMode>
+    </biz.neustar.jenkins.plugins.packer.PackerPublisher>
+    <jenkins.plugins.slack.SlackNotifier plugin="slack@2.29">
+      <baseUrl></baseUrl>
+      <teamDomain></teamDomain>
+      <authToken></authToken>
+      <tokenCredentialId></tokenCredentialId>
+      <botUser>false</botUser>
+      <room></room>
+      <sendAsText>false</sendAsText>
+      <iconEmoji></iconEmoji>
+      <username></username>
+      <startNotification>true</startNotification>
+      <notifySuccess>true</notifySuccess>
+      <notifyAborted>true</notifyAborted>
+      <notifyNotBuilt>true</notifyNotBuilt>
+      <notifyUnstable>false</notifyUnstable>
+      <notifyRegression>false</notifyRegression>
+      <notifyFailure>true</notifyFailure>
+      <notifyEveryFailure>true</notifyEveryFailure>
+      <notifyBackToNormal>true</notifyBackToNormal>
+      <notifyRepeatedFailure>false</notifyRepeatedFailure>
+      <includeTestSummary>false</includeTestSummary>
+      <includeFailedTests>false</includeFailedTests>
+      <commitInfoChoice>NONE</commitInfoChoice>
+      <includeCustomMessage>false</includeCustomMessage>
+      <customMessage></customMessage>
+      <customMessageSuccess></customMessageSuccess>
+      <customMessageAborted></customMessageAborted>
+      <customMessageNotBuilt></customMessageNotBuilt>
+      <customMessageUnstable></customMessageUnstable>
+      <customMessageFailure></customMessageFailure>
+    </jenkins.plugins.slack.SlackNotifier>
+  </publishers>
+  <buildWrappers>
+    <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper plugin="credentials-binding@1.20">
+      <bindings>
+        <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+          <credentialsId>51aa0343-9b61-421e-8a34-3b9d082b7dd8</credentialsId>
+          <usernameVariable>GOVC_USERNAME</usernameVariable>
+          <passwordVariable>GOVC_PASSWORD</passwordVariable>
+        </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+      </bindings>
+    </org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.19">
+      <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+        <timeoutMinutes>120</timeoutMinutes>
+      </strategy>
+      <operationList>
+        <hudson.plugins.build__timeout.operations.AbortOperation/>
+      </operationList>
+    </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+  </buildWrappers>
+</project>

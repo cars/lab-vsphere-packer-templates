@@ -15,9 +15,10 @@
       "network": "{{user `vcenter_network`}}",
       "guest_os_type": "windows9_64Guest",
       "communicator": "ssh",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
+      "ssh_username": "{{user `defaultuser`}}",
+      "ssh_password": "{{user `defaultuserpassword`}}",
       "ip_wait_timeout": "60m",
+      "shutdown_timeout": "20m",
       "CPUs": 2,
       "RAM": 8192,
       "RAM_reserve_all": true,
@@ -28,23 +29,18 @@
       "convert_to_template": "true",
       "notes": "{{user `vm_notes`}}",
       "iso_paths": [
-        "[F] Windows//14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO",
+        "[F] Windows//17763.737.190906-2324.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us_1.iso",
         "[] /usr/lib/vmware/isoimages/windows.iso"
       ],
       "floppy_files": [
-        "floppy/eval-win2016-standard/Autounattend.xml",
-        "floppy/00-run-all-scripts.cmd",
-        "floppy/install-winrm.cmd",
-        "floppy/powerconfig.bat",
-        "floppy/01-install-wget.cmd",
-        "floppy/_download.cmd",
-        "floppy/_packer_config.cmd",
-        "floppy/passwordchange.bat",
-        "floppy/openssh.bat",
-        "floppy/sevenzip.cmd",
-        "floppy/disablewinupdate.bat",
-        "floppy/zz-start-transports.cmd",
-        "floppy/zzz-vmtool.bat"
+        "floppy/eval-win2019-standard/autounattend.xml",
+        "floppy/00-run-all-scripts.ps1",
+        "floppy/disable-windows-update.ps1",
+        "floppy/install-winrm.ps1",
+        "floppy/power-settings.ps1",
+        "floppy/zz-start-transports.ps1",
+        "floppy/vmware.ps1",
+        "floppy/install-openssh.ps1"
       ]
     }
   ],
@@ -55,30 +51,34 @@
   ],
   "provisioners": [
     {
+      "elevated_user": "{{user `defaultuser`}}",
+      "elevated_password": "{{user `defaultuserpassword`}}",
       "environment_vars": [
         "CM={{user `cm`}}",
         "CM_VERSION={{user `cm_version`}}",
         "UPDATE={{user `update`}}"
       ],
-      "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
-      "remote_path": "/tmp/script.bat",
+      "execute_command": "C:/Windows/Temp/script.ps1",
       "scripts": [
-        "script/vagrant.bat",
-        "script/cmtool.bat",
-        "script/{{ user `init_type`}}.bat",
-        "script/boxstarter.bat",
-        "script/clean.bat",
-        "script/add-nuget.bat",
-        "script/ultradefrag.bat",
-        "script/sdelete.bat"
+        "script/vmware.ps1"
       ],
-      "type": "shell"
+      "type": "powershell"
     },
     {
-      "inline": [
-        "rm -f /tmp/script.bat"
+      "type":"powershell",
+      "elevated_user": "{{user `defaultuser`}}",
+      "elevated_password": "{{user `defaultuserpassword`}}",
+      "execute_command": "C:/Windows/Temp/script.ps1",
+      "scripts": ["script/cloudbase.ps1"]
+    },
+    {
+      "elevated_user": "{{ user `defaultuser` }}",
+      "elevated_password": "{{ user `defaultuserpassword` }}",
+      "execute_command": "C:/Windows/Temp/script.ps1",
+      "scripts": [
+        "script/windows_update.ps1"
       ],
-      "type": "shell"
+      "type": "powershell"
     }
   ],
   "variables": {
@@ -103,6 +103,8 @@
     "vcenter_datacenter": "Datacenter",
     "vcenter_host": "esx-01.example.com",
     "init_type": "cloudbase",
-    "vm_notes": "The notes field"
+    "vm_notes": "The notes field",
+    "defaultuser": "vagrant",
+    "defaultuserpassword": "vagrant"
   }
 }
