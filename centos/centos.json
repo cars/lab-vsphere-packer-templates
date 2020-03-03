@@ -99,7 +99,7 @@
         "script/parallels.sh",
         "script/motd.sh",
         "custom-script.sh",
-        "script/{{user `INIT_TYPE`}}.sh",
+        "script/{{user `init_type2`}}.sh",
         "script/cleanup.sh"
       ],
       "type": "shell",
