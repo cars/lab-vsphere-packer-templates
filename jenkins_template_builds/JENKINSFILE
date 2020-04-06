@@ -77,7 +77,7 @@ pipeline {
                          string(name: 'vcenter_datastore', value : "${env.VCENTER_DATASTORE}"), 
                          string(name: 'vcenter_network', value : "${env.VCENTER_NETWORK}"), 
                          string(name: 'vcenter_server', value : "${env.VCENTER_SERVER}"), 
-                         string(name: 'vcenter_template_name', value: 'eval-win2016-standard-ssh-cb'),
+                         string(name: 'vcenter_template_name', value: 'eval-win2019-standard-ssh-cb'),
                          string(name: 'init_type', value: 'cloudbase')
                      ]
              }
