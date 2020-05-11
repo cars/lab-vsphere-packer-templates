@@ -8,7 +8,7 @@ pipeline {
      // Install the Maven version configured as "M3" and add it to the path.
      //    }
      environment { 
-         VCENTER_DATACENTER = 'Datacenter'
+         VCENTER_DATACENTER = 'Garage'
          VCENTER_FOLDER     = 'Templates'
          VCENTER_CLUSTER    = 'lab'
          VCENTER_HOST       = '10.0.0.11'
