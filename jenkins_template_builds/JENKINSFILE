@@ -12,7 +12,7 @@ pipeline {
          VCENTER_FOLDER     = 'Templates'
          VCENTER_CLUSTER    = 'lab'
          VCENTER_HOST       = '10.0.0.11'
-         VCENTER_DATASTORE  = 'esx-01-ds-01'
+         VCENTER_DATASTORE  = 'esx-01-ds-r0'
          VCENTER_NETWORK    = 'Public 2'
          VCENTER_SERVER     = 'vcenter.lab.lostroncos.net'
      }
