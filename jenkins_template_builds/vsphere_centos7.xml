@@ -80,9 +80,9 @@ export GOVC_DEBUG=true
 export GOVC_DEBUG_PATH=/tmp/govc.log
 export GOVC_DATACENTER=${vcenter_datacenter}
 
-if [ `govc ls /Datacenter/vm/${vcenter_folder}/${vcenter_template_name} | wc -l` -eq 1 ]
+if [ `govc ls /${vcenter_datacenter}/vm/${vcenter_folder}/${vcenter_template_name} | wc -l` -eq 1 ]
 then 
-	govc vm.destroy -vm.ipath=/Datacenter/vm/${vcenter_folder}/${vcenter_template_name}
+	govc vm.destroy -vm.ipath=/${vcenter_datacenter}/vm/${vcenter_folder}/${vcenter_template_name}
 fi</command>
     </hudson.tasks.Shell>
   </builders>
