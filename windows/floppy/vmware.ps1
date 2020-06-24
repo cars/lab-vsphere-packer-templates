@@ -8,10 +8,15 @@ If (("$Env:PACKER_BUILDER_TYPE" -ne "vmware-iso") -and ("$Env:PACKER_BUILDER_TYP
   #return
 }
 
+
+Write-Host "==> Trying to find name of latest vmware tools package"
+$toolsSrcPath = "https://packages.vmware.com/tools/releases/latest/windows/x64/"
+$dirList = wget $toolsSrcPath
+$exeName = ($dirlist.content.split(">")| ? {$_ -match "exe"}).split("`"")[1]
+Write-Host "==> "Got $exeName for latest tools exe"
+
 Write-Host "==> Installing VMware tools"
-$url = "https://packages.vmware.com/tools/releases/latest/windows/x64/VMware-tools-11.1.0-16036546-x86_64.exe"
-# $url = "https://packages.vmware.com/tools/releases/latest/windows/x64/VMware-tools-11.0.5-15389592-x86_64.exe"
-# $url = "https://packages.vmware.com/tools/releases/10.2.5/windows/x64/VMware-tools-10.2.5-8068406-x86_64.exe"
+$url = "https://packages.vmware.com/tools/releases/latest/windows/x64/$exeName"
 $vmware_setup = "$($env:TEMP)\vmware_setup.exe"
 Write-Host "Downloading VMware Tools..."
 $wc = New-Object System.Net.WebClient
