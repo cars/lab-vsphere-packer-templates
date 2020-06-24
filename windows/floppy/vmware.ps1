@@ -11,9 +11,9 @@ If (("$Env:PACKER_BUILDER_TYPE" -ne "vmware-iso") -and ("$Env:PACKER_BUILDER_TYP
 
 Write-Host "==> Trying to find name of latest vmware tools package"
 $toolsSrcPath = "https://packages.vmware.com/tools/releases/latest/windows/x64/"
-$dirList = wget $toolsSrcPath
+$dirList = wget $toolsSrcPath -UseBasicParsing
 $exeName = ($dirlist.content.split(">")| ? {$_ -match "exe"}).split("`"")[1]
-Write-Host "==> "Got $exeName for latest tools exe"
+Write-Host "==> Got $exeName for latest tools exe"
 
 Write-Host "==> Installing VMware tools"
 $url = "https://packages.vmware.com/tools/releases/latest/windows/x64/$exeName"
