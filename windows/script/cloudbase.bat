@@ -16,9 +16,13 @@ if not defined VRACA_URL set VRACA_URL=http://10.0.0.48/packer/VRA-LCM.cer
 ::::::::::::
 
 echo ==^> Getting CloudbaseInitSetup_Stable_x64
+echo ==^> Using "%CB_URL%" for source path
+
 echo ==^> Making C:\TEMP
 set CB_PATH=C:\TEMP\CloudBase.MSI
 echo ==^> CB_PATH = "%CB_PATH%"
+
+
 
 echo ==^> Checking IPConfig Info
     IPConfig /all > C:\temp\IPConfig.INFO
