@@ -43,11 +43,13 @@ if ($SSH_SERVICE.Status -ne "Running"){
     Stop-Service -name OpenSSHd
     Write-Host "==> OpenSSHD stopped..."
 }
+
 #function ssh_not_running{
     Write-Host "==> UnBlocking SSH port 22 on the firewall"
     netsh advfirewall firewall delete rule name="SSHD"
     netsh advfirewall firewall delete rule name="ssh"
 
+    Write-Host "==> starting SSH Config"
     rmdir -Recurse -Force  "${ENV:PROGRAMFILES}\OpenSSH\Tmp"
 
     New-Item -ItemType SymbolicLink -Path "${ENV:PROGRAMFILES}\OpenSSH\tmp" -Target "${ENV:SYSTEMROOT}\Temp"
