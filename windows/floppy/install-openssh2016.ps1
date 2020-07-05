@@ -78,7 +78,7 @@ if ($SSH_SERVICE.Status -ne "Running"){
     }
     $ENV_LINES | Set-Content $ENV:SSHENV
     Write-Host "==> Finished updating OpenSSHd environment info"
-    Write-Host "==> Fixing opensshd configuration to be less strict"
+    Write-Host "==> Fixing OpenSSHd configuration to be less strict"
     (Get-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config") | Foreach-Object { $_ -replace 'StrictModes yes', 'StrictModes no' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config"
     (Get-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config") | Foreach-Object { $_ -replace '#PubkeyAuthentication yes', 'PubkeyAuthentication yes' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config"
     (Get-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config") | Foreach-Object { $_ -replace '#PermitUserEnvironment no', 'PermitUserEnvironment yes' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config"
