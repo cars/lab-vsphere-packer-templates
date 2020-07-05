@@ -87,10 +87,11 @@
                 </Password>
             </AutoLogon>
             <FirstLogonCommands>
+            <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c a:\00-run-all-scripts.cmd</CommandLine>
-                    <Description>Run all *.bat and *.cmd scripts on drive A:</Description>
-                    <Order>1</Order>
+                    <CommandLine>powershell -NoLogo -ExecutionPolicy RemoteSigned -File a:\00-run-all-scripts.ps1</CommandLine>
+                    <Description>Run all scripts on drive A:</Description>
+                    <Order>10</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
             </FirstLogonCommands>
