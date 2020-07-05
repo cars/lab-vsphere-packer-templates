@@ -33,18 +33,13 @@
       ],
       "floppy_files": [
         "floppy/eval-win2016-standard/Autounattend.xml",
-        "floppy/00-run-all-scripts.cmd",
-        "floppy/install-winrm.cmd",
-        "floppy/powerconfig.bat",
-        "floppy/01-install-wget.cmd",
-        "floppy/_download.cmd",
-        "floppy/_packer_config.cmd",
-        "floppy/passwordchange.bat",
-        "floppy/openssh.bat",
-        "floppy/sevenzip.cmd",
-        "floppy/disablewinupdate.bat",
-        "floppy/zz-start-transports.cmd",
-        "floppy/zzz-vmtool.bat"
+        "floppy/00-run-all-scripts.ps1",
+        "floppy/disable-windows-update.ps1",
+        "floppy/install-winrm.ps1",
+        "floppy/power-settings.ps1",
+        "floppy/zz-start-transports.ps1",
+        "floppy/vmware.ps1",
+        "floppy/install-openssh.ps1"
       ]
     }
   ],
@@ -55,30 +50,34 @@
   ],
   "provisioners": [
     {
+      "elevated_user": "{{user `defaultuser`}}",
+      "elevated_password": "{{user `defaultuserpassword`}}",
       "environment_vars": [
         "CM={{user `cm`}}",
         "CM_VERSION={{user `cm_version`}}",
         "UPDATE={{user `update`}}"
       ],
-      "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
-      "remote_path": "/tmp/script.bat",
+      "execute_command": "C:/Windows/Temp/script.ps1",
       "scripts": [
-        "script/vagrant.bat",
-        "script/cmtool.bat",
-        "script/{{ user `init_type`}}.bat",
-        "script/boxstarter.bat",
-        "script/clean.bat",
-        "script/add-nuget.bat",
-        "script/ultradefrag.bat",
-        "script/sdelete.bat"
+        "script/vmware.ps1"
       ],
-      "type": "shell"
+      "type": "powershell"
     },
     {
-      "inline": [
-        "rm -f /tmp/script.bat"
+      "type":"powershell",
+      "elevated_user": "{{user `defaultuser`}}",
+      "elevated_password": "{{user `defaultuserpassword`}}",
+      "execute_command": "C:/Windows/Temp/script.ps1",
+      "scripts": ["script/cloudbase.ps1"]
+    },
+    {
+      "elevated_user": "{{ user `defaultuser` }}",
+      "elevated_password": "{{ user `defaultuserpassword` }}",
+      "execute_command": "C:/Windows/Temp/script.ps1",
+      "scripts": [
+        "script/windows_update.ps1"
       ],
-      "type": "shell"
+      "type": "powershell"
     }
   ],
   "variables": {
@@ -96,7 +95,7 @@
     "vcenter_template_name": "eval-win2016-standard-ssh",
     "vcenter": "vcenter.example.com",
     "vcenter_server": "vcenter.example.com",
-    "vcenter_datastore": "esx-ddatastore-01",
+    "vcenter_datastore": "esx-datastore-01",
     "vcenter_cluster": "esx-cluster-01",
     "vcenter_network": "VM Network",
     "vcenter_folder": "VMs",
