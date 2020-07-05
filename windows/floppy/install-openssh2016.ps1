@@ -8,24 +8,25 @@ If (("$Env:PACKER_BUILDER_TYPE" -ne "vmware-iso") -and ("$Env:PACKER_BUILDER_TYP
   #return
 }
 
-if (-not Test-PAth ENV:OPENSSH_URL) {
+if (-not (Test-PAth ENV:OPENSSH_URL)) {
     $ENV:OPENSSH_URL="http://www.mls-software.com/files/setupssh-7.2p2-1-v1.exe"
 }
 
-if (-not Test-PAth ENV:SSHD_PASSWORD) {
+if (-not (Test-PAth ENV:SSHD_PASSWORD)) {
     $ENV:SSHD_PASSWORD="D@rj33l1ng"
 }
 
 Write-Host "==> Downloading openSSH"
 $ssh_setup = "$($env:TEMP)\ssh_setup.exe"
 $wc = New-Object System.Net.WebClient
-$wc.DownloadFile($OPENSSH_URL, $ssh_setup)
+$wc.DownloadFile($ENV:OPENSSH_URL, $ssh_setup)
 
 Write-Host "==> Blocking SSH port 22 on the firewall"
 netsh advfirewall firewall add rule name="SSHD" dir=in action=block program="${ENV:ProgramFiles}\OpenSSH\usr\sbin\sshd.exe" enable=yes
 netsh advfirewall firewall add rule name="ssh"  dir=in action=block protocol=TCP localport=22
 
-$ssh_setup /s /port=22 /privsep=1 /password=$ENV:SSHD_PASSWORD
+# &$ssh_setup /s /port=22 /privsep=1 /password=$ENV:SSHD_PASSWORD
+Start-process -FilePath $ssh_setup -ArgumentList @('/S','/port=22','/privsep=1',"/passsword=${ENV:SSH_PASSWORD}") -Verb Open
 
 Start-Sleep -Seconds 5
 
@@ -46,7 +47,7 @@ if ($SSH_SERVICE.Status -ne "Running"){
     New-Item -ItemType SymbolicLink -Path "${ENV:PROGRAMFILES}\OpenSSH\tmp" -Target "${ENV:SYSTEMROOT}\Temp"
     icacls ($ENV:SYSTEMROOT+"\Temp") /grant ${ENV:USERNAME}:(OI)(CI)F
 
-    if (-not Test-Path ($ENV:USERPROFILE+"\.ssh")) {
+    if (-not (Test-Path ($ENV:USERPROFILE+"\.ssh"))) {
         mkdir ($ENV:USERPROFILE+"\.ssh")
     }
     Write-Host "==> Adding missing environment variables to %USERPROFILE%\.ssh\environment"
