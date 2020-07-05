@@ -90,7 +90,8 @@ if ($SSH_SERVICE.Status -ne "Running"){
     netsh advfirewall firewall add rule name="SSHD" dir=in action=allow program="${ENV:ProgramFiles}\OpenSSH\usr\sbin\sshd.exe" enable=yes
     netsh advfirewall firewall add rule name="ssh" dir=in action=allow protocol=TCP localport=22
     Write-Host "==> Done Opening SSH port 22 on the firewall "
-    Write-host "==> Ensuring user ${ENV:USERNAME} can login"
+
+    Write-host "==> Ensuring user ${ENV:USERNAME} can login by modifying file attrs"
 
     icacls "${ENV:USERPROFILE}" "/grant" "${ENV:USERNAME}:(OI)(CI)F"
     icacls "${ENV:ProgramFiles}\OpenSSH\bin" "/grant" "${ENV:USERNAME}:(OI)RX"
