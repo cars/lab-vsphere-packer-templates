@@ -26,9 +26,9 @@ netsh advfirewall firewall add rule name="SSHD" dir=in action=block program="${E
 netsh advfirewall firewall add rule name="ssh"  dir=in action=block protocol=TCP localport=22
 
 # &$ssh_setup /s /port=22 /privsep=1 /password=$ENV:SSHD_PASSWORD
-Start-process -FilePath $ssh_setup -ArgumentList @('/S','/port=22','/privsep=1',"/passsword=${ENV:SSH_PASSWORD}") -Verb Open
+$install = Start-process -FilePath $ssh_setup -ArgumentList @('/S','/port=22','/privsep=1',"/passsword=${ENV:SSH_PASSWORD}") -Verb Open
 
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 45
 
 $SSH_SERVICE=Get-Service OpenSSHd
 if ($SSH_SERVICE.Status -ne "Running"){
@@ -80,10 +80,15 @@ if ($SSH_SERVICE.Status -ne "Running"){
     netsh advfirewall firewall add rule name="SSHD" dir=in action=allow program="${ENV:ProgramFiles}\OpenSSH\usr\sbin\sshd.exe" enable=yes
     netsh advfirewall firewall add rule name="ssh" dir=in action=allow protocol=TCP localport=22
     
-    Write-host "==> Ensuring user %USERNAME% can login"
-    icacls "${ENV:USERPROFILE}" /grant ${ENV:USERNAME}:(OI)(CI)F
-    icacls "${ENV:ProgramFiles}\OpenSSH\bin" /grant ${ENV:USERNAME}:(OI)RX
-    icacls "${ENV:ProgramFiles}\OpenSSH\usr\sbin" /grant ${ENV:USERNAME}:(OI)RX
+    Write-host "==> Ensuring user ${ENV:USERNAME} can login"
+
+    icacls "${ENV:USERPROFILE}" "/grant" "${ENV:USERNAME}:(OI)(CI)F"
+    icacls "${ENV:ProgramFiles}\OpenSSH\bin" "/grant" "${ENV:USERNAME}:(OI)RX"
+    icacls "${ENV:ProgramFiles}\OpenSSH\usr\sbin" "/grant"  "${ENV:USERNAME}:(OI)RX"
+
+    #Start-Process icacls -ArgumentList @("${ENV:USERPROFILE}","/grant","${ENV:USERNAME}:(OI)(CI)F")
+    #Start-Process icacls -ArgumentList @("${ENV:ProgramFiles}\OpenSSH\bin","/grant","${ENV:USERNAME}:(OI)RX")
+    #Start-Process icacls -ArgumentList @("${ENV:ProgramFiles}\OpenSSH\usr\sbin","/grant", "${ENV:USERNAME}:(OI)RX")
 
     Write-Host "==> Setting user's home directories to their windows profile directory"
     (Get-Content "${ENV:%ProgramFiles}\OpenSSH\etc\passwd") | Foreach-Object { $_ -replace '/home/(\w+)', '/cygdrive/c/Users/$1' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\passwd"
