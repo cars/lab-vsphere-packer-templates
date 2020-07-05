@@ -77,7 +77,7 @@ if ($SSH_SERVICE.Status -ne "Running"){
         $ENV_LINES +="PROGRAMW6432=${ENV:SystemDrive}\Program Files"
     }
     $ENV_LINES | Set-Content $ENV:SSHENV
-    Write-Host "==> Finished updating SSHd environment info"
+    Write-Host "==> Finished updating OpenSSHd environment info"
     Write-Host "==> Fixing opensshd configuration to be less strict"
     (Get-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config") | Foreach-Object { $_ -replace 'StrictModes yes', 'StrictModes no' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config"
     (Get-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config") | Foreach-Object { $_ -replace '#PubkeyAuthentication yes', 'PubkeyAuthentication yes' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config"
