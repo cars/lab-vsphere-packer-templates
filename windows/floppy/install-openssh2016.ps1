@@ -84,6 +84,7 @@ if ($SSH_SERVICE.Status -ne "Running"){
     (Get-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config") | Foreach-Object { $_ -replace '#PermitUserEnvironment no', 'PermitUserEnvironment yes' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config"
     (Get-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config") | Foreach-Object { $_ -replace '#UseDNS yes', 'UseDNS no' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config"
     (Get-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config") | Foreach-Object { $_ -replace 'Banner /etc/banner.txt', '#Banner /etc/banner.txt' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config"
+    Write-host "==> Done modifying ssh config to be less strict"
     
     Write-Host "==> Opening SSH port 22 on the firewall "
     netsh advfirewall firewall add rule name="SSHD" dir=in action=allow program="${ENV:ProgramFiles}\OpenSSH\usr\sbin\sshd.exe" enable=yes
