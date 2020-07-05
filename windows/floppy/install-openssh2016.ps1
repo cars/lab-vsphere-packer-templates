@@ -25,17 +25,23 @@ Write-Host "==> Blocking SSH port 22 on the firewall"
 netsh advfirewall firewall add rule name="SSHD" dir=in action=block program="${ENV:ProgramFiles}\OpenSSH\usr\sbin\sshd.exe" enable=yes
 netsh advfirewall firewall add rule name="ssh"  dir=in action=block protocol=TCP localport=22
 
+Write-Host "==> Starting Executable Install"
 # &$ssh_setup /s /port=22 /privsep=1 /password=$ENV:SSHD_PASSWORD
 $install = Start-process -FilePath $ssh_setup -ArgumentList @('/S','/port=22','/privsep=1',"/passsword=${ENV:SSH_PASSWORD}") -Verb Open
 
+
+Write-Host "==> Pausing to let install finish"
 Start-Sleep -Seconds 45
 
 $SSH_SERVICE=Get-Service OpenSSHd
 if ($SSH_SERVICE.Status -ne "Running"){
+    Write-Host "==> openSSHD not running continuing"
     # nop
     #ssh_not_running();
 } else {
+    Write-Host "==> OpenSSHD running need to stop it before proceeding... "
     Stop-Service -name OpenSSHd
+    Write-Host "==> OpenSSHD stopped..."
 }
 #function ssh_not_running{
     Write-Host "==> UnBlocking SSH port 22 on the firewall"
