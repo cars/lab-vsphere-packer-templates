@@ -53,7 +53,7 @@ if ($SSH_SERVICE.Status -ne "Running"){
     rmdir -Recurse -Force  "${ENV:PROGRAMFILES}\OpenSSH\Tmp"
 
     New-Item -ItemType SymbolicLink -Path "${ENV:PROGRAMFILES}\OpenSSH\tmp" -Target "${ENV:SYSTEMROOT}\Temp"
-    icacls ($ENV:SYSTEMROOT+"\Temp") /grant ${ENV:USERNAME}:(OI)(CI)F
+    icacls "${ENV:SYSTEMROOT}\Temp" "/grant" "${ENV:USERNAME}:(OI)(CI)F"
 
     if (-not (Test-Path ($ENV:USERPROFILE+"\.ssh"))) {
         mkdir ($ENV:USERPROFILE+"\.ssh")
