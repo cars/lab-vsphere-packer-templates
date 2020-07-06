@@ -1,13 +1,15 @@
 #$host.ui.RawUI.WindowTitle = "Installing CloudBase.  Please wait..."
 
-
+Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "Starting Cloudbase Install"
 Write-Output "==> Installing Cloudbase"
 
 
 if (-not $ENV:CB_URL) {
     Write-host "==> Cloudbase URL not set.....setting"
+    Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "Cloudbase URL not set"
     $ENV:CB_URL="https://cloudbase.it/downloads/CloudbaseInitSetup_Stable_x64.msi"
     Write-host "==> done setting Cloudbase URL to ${ENV:CB_URL}"
+    Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "done setting Cloudbase URL to ${ENV:CB_URL}"
 } else {
     Write-Host "CB URL Set previously to ${ENV:CB_URL}"
 }
@@ -21,12 +23,14 @@ if (Test-PAth C:\temp) {
 
 $cb_setup = "$($env:TEMP)\cb_setup.msi"
 Write-Host "==> Preparing to download Cloudbase....."
+Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "Preparing to d/l cloudbase source"
 $wc = New-Object System.Net.WebClient
 Write-Host "==> Created WebClient"
 $wc.DownloadFile($ENV:CB_URL, $cb_setup)
 Write-Host "==> Done Downloading Cloudbase..."
-
+Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "done d/ling cloudbase source"
 Write-Host "==> Starting Cloudbase install..."
+Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "Starting Cloudbase install"
 #C:\windows\system32\msiexec /i %CB_PATH% /qn /l*v c:\temp\CB_setup.txt
 $p = Start-Process  -Wait -PassThru -FilePath msiexec -ArgumentList "/i $cb_setup /qn /l*v C:\temp\CB_SETUP.Txt"
 

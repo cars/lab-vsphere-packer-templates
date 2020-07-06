@@ -93,6 +93,8 @@
     "vcenter_datacenter": "Datacenter",
     "vcenter_host": "esx-01.example.com",
     "init_type": "cloudbase",
-    "vm_notes": "The notes field"
+    "vm_notes": "The notes field",
+    "defaultuser": "vagrant",
+    "defaultuserpassword": "vagrant"
   }
 }

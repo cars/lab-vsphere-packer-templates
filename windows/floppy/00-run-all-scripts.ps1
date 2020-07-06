@@ -7,6 +7,7 @@ if (Test-PAth C:\temp) {
 }
 
 $ScriptPath = Split-Path $MyInvocation.InvocationName
+& "$ScriptPath\create-evtlog.ps1"
 & "$ScriptPath\disable-windows-update.ps1"
 & "$ScriptPath\install-winrm.ps1"
 & "$ScriptPath\power-settings.ps1"
