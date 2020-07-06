@@ -106,6 +106,7 @@
     "defaultuserpassword": "vagrant",
     "syslog_server":"10.0.0.16",
     "syslog_self_hostname": "packer_bld",
+    "syslog_log_prefix": "PACKER_BLD",
     "cloudbase_source_url": "http://10.0.0.48/packer/cloudbaseinit.msi"
   }
 }

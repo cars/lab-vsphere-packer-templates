@@ -26,7 +26,6 @@ netsh advfirewall firewall add rule name="SSHD" dir=in action=block program="${E
 netsh advfirewall firewall add rule name="ssh"  dir=in action=block protocol=TCP localport=22
 
 Write-Host "==> Starting SSH Executable Install"
-# &$ssh_setup /s /port=22 /privsep=1 /password=$ENV:SSHD_PASSWORD
 $install = Start-process -FilePath $ssh_setup -ArgumentList @('/S','/port=22','/privsep=1',"/passsword=${ENV:SSH_PASSWORD}") -Verb Open
 
 
@@ -36,15 +35,12 @@ Start-Sleep -Seconds 45
 $SSH_SERVICE=Get-Service OpenSSHd
 if ($SSH_SERVICE.Status -ne "Running"){
     Write-Host "==> openSSHD not running continuing"
-    # nop
-    #ssh_not_running();
 } else {
     Write-Host "==> OpenSSHD running need to stop it before proceeding... "
     Stop-Service -name OpenSSHd
     Write-Host "==> OpenSSHD stopped..."
 }
 
-#function ssh_not_running{
     Write-Host "==> UnBlocking SSH port 22 on the firewall"
     netsh advfirewall firewall delete rule name="SSHD"
     netsh advfirewall firewall delete rule name="ssh"
@@ -62,14 +58,14 @@ if ($SSH_SERVICE.Status -ne "Running"){
     $ENV:SSHENV=($ENV:USERPROFILE+ "\.ssh\environment")
     $ENV_LINES ="APPDATA=${ENV:SYSTEMDRIVE}\Users\${ENV:USERNAME}\AppData\Roaming"
     $ENV_LINES +="COMMONPROGRAMFILES=${ENV:SYSTEMDRIVE}\Program Files\Common Files"
-    $ENV_LINES +="LOCALAPPDATA=${ENV:SYSTEMDRIVE}\Users\%USERNAME%\AppData\Local"
+    $ENV_LINES +="LOCALAPPDATA=${ENV:SYSTEMDRIVE}\Users\${ENV:USERNAME}\AppData\Local"
     $ENV_LINES +="PROGRAMDATA=${ENV:SYSTEMDRIVE}\ProgramData"
     $ENV_LINES +="PROGRAMFILES=${ENV:SYSTEMDRIVE}\Program Files"
     $ENV_LINES +="PSMODULEPATH=${ENV:SYSTEMDRIVE}\Windows\system32\WindowsPowerShell\v1.0\Modules\"
     $ENV_LINES +="PUBLIC=${ENV:SYSTEMDRIVE}\Users\Public"
     $ENV_LINES +="SESSIONNAME=Console"
-    $ENV_LINES +="TEMP=${ENV:SYSTEMDRIVE}\Users\%USERNAME%\AppData\Local\Temp"
-    $ENV_LINES +="TMP=${ENV:SYSTEMDRIVE}\Users\%USERNAME%\AppData\Local\Temp"
+    $ENV_LINES +="TEMP=${ENV:SYSTEMDRIVE}\Users\${ENV:USERNAME}\AppData\Local\Temp"
+    $ENV_LINES +="TMP=${ENV:SYSTEMDRIVE}\Users\${ENV:USERNAME}\AppData\Local\Temp"
     if (Test-PAth "${ENV:%SystemDrive}\Program Files (x86)" ){
         $ENV_LINES +="COMMONPROGRAMFILES^(X86^)={${ENV:SystemDrive}\Program Files ^(x86^)\Common Files"
         $ENV_LINES +="COMMONPROGRAMW6432=${ENV:SystemDrive}\Program Files\Common Files"
@@ -105,6 +101,6 @@ if ($SSH_SERVICE.Status -ne "Running"){
     
     Write-Host "==> Done Installing OpenSSH on Windows 2016"
 
-#}
+
 
 
