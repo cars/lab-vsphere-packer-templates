@@ -98,7 +98,7 @@ if ($SSH_SERVICE.Status -ne "Running"){
     icacls "${ENV:ProgramFiles}\OpenSSH\usr\sbin" "/grant"  "${ENV:USERNAME}:(OI)RX"
 
     Write-Host "==> Setting user ${ENV:USERNAME}`s home directories to their windows profile directory"
-    (Get-Content "${ENV:%ProgramFiles}\OpenSSH\etc\passwd") | Foreach-Object { $_ -replace '/home/(\w+)', '/cygdrive/c/Users/$1' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\passwd"
+    (Get-Content "${ENV:ProgramFiles}\OpenSSH\etc\passwd") | Foreach-Object { $_ -replace '/home/(\w+)', '/cygdrive/c/Users/$1' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\passwd"
 
 
     Write-Host "==> Done Installing OpenSSH om Windows 2016"
