@@ -97,10 +97,6 @@ if ($SSH_SERVICE.Status -ne "Running"){
     icacls "${ENV:ProgramFiles}\OpenSSH\bin" "/grant" "${ENV:USERNAME}:(OI)RX"
     icacls "${ENV:ProgramFiles}\OpenSSH\usr\sbin" "/grant"  "${ENV:USERNAME}:(OI)RX"
 
-    #Start-Process icacls -ArgumentList @("${ENV:USERPROFILE}","/grant","${ENV:USERNAME}:(OI)(CI)F")
-    #Start-Process icacls -ArgumentList @("${ENV:ProgramFiles}\OpenSSH\bin","/grant","${ENV:USERNAME}:(OI)RX")
-    #Start-Process icacls -ArgumentList @("${ENV:ProgramFiles}\OpenSSH\usr\sbin","/grant", "${ENV:USERNAME}:(OI)RX")
-
     Write-Host "==> Setting user's home directories to their windows profile directory"
     (Get-Content "${ENV:%ProgramFiles}\OpenSSH\etc\passwd") | Foreach-Object { $_ -replace '/home/(\w+)', '/cygdrive/c/Users/$1' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\passwd"
 
