@@ -53,13 +53,12 @@
   "provisioners": [
     {
       "type":"powershell",
-      "elevated_user": "{{user `defaultuser`}}",
-      "elevated_password": "{{user `defaultuserpassword`}}",
       "environment_vars" :[
         "CM={{user `cm`}}",
         "CM_VERSION={{user `cm_version`}}",
         "SYSLOG_SERVER={{user `syslog_server`}}",
-        "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}"
+        "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}",
+        "CB_URL={{user `cloudbase_source_url`}}"
       ],
       "execute_command": "C:/Windows/Temp/script.ps1",
       "scripts": ["script/cloudbase.ps1"]
@@ -106,6 +105,7 @@
     "defaultuser": "vagrant",
     "defaultuserpassword": "vagrant",
     "syslog_server":"10.0.0.16",
-    "syslog_self_hostname": "packer_bld"
+    "syslog_self_hostname": "packer_bld",
+    "cloudbase_source_url": "http://10.0.0.48/packer/cloudbaseinit.msi"
   }
 }
