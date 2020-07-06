@@ -99,9 +99,11 @@ if ($SSH_SERVICE.Status -ne "Running"){
 
     Write-Host "==> Setting user ${ENV:USERNAME}`s home directories to their windows profile directory"
     (Get-Content "${ENV:ProgramFiles}\OpenSSH\etc\passwd") | Foreach-Object { $_ -replace '/home/(\w+)', '/cygdrive/c/Users/$1' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\passwd"
-
-
-    Write-Host "==> Done Installing OpenSSH om Windows 2016"
+    
+    Write-Host "==> Re-Starting OpenSSHd Windows 2016"
+    Start-service openSSHD
+    
+    Write-Host "==> Done Installing OpenSSH on Windows 2016"
 
 #}
 
