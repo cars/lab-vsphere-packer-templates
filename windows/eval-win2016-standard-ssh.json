@@ -67,6 +67,12 @@
     {
       "elevated_user": "{{ user `defaultuser` }}",
       "elevated_password": "{{ user `defaultuserpassword` }}",
+      "environment_vars" :[
+        "CM={{user `cm`}}",
+        "CM_VERSION={{user `cm_version`}}",
+        "SYSLOG_SERVER={{user `syslog_server`}}",
+        "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}"
+      ],
       "execute_command": "C:/Windows/Temp/script.ps1",
       "scripts": [
         "script/windows_update.ps1"
