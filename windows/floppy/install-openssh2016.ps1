@@ -86,10 +86,10 @@ if ($SSH_SERVICE.Status -ne "Running"){
     (Get-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config") | Foreach-Object { $_ -replace 'Banner /etc/banner.txt', '#Banner /etc/banner.txt' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\sshd_config"
     Write-host "==> Done modifying ssh config to be less strict"
     
-    Write-Host "==> Opening SSH port 22 on the firewall "
+    Write-Host "==> Opening SSH port 22 on the firewall"
     netsh advfirewall firewall add rule name="SSHD" dir=in action=allow program="${ENV:ProgramFiles}\OpenSSH\usr\sbin\sshd.exe" enable=yes
     netsh advfirewall firewall add rule name="ssh" dir=in action=allow protocol=TCP localport=22
-    Write-Host "==> Done Opening SSH port 22 on the firewall "
+    Write-Host "==> Done Opening SSH port 22 on the firewall"
 
     Write-host "==> Ensuring user ${ENV:USERNAME} can login by modifying file attrs"
 
@@ -105,7 +105,7 @@ if ($SSH_SERVICE.Status -ne "Running"){
     (Get-Content "${ENV:%ProgramFiles}\OpenSSH\etc\passwd") | Foreach-Object { $_ -replace '/home/(\w+)', '/cygdrive/c/Users/$1' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\passwd"
 
 
-    Write-Host "==> Done Install OpenSSH om Windows 2016"
+    Write-Host "==> Done Installing OpenSSH om Windows 2016"
 
 #}
 
