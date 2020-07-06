@@ -58,6 +58,8 @@
       "environment_vars" :[
         "CM={{user `cm`}}",
         "CM_VERSION={{user `cm_version`}}"
+        "PACKER_SYSLOG={{user `syslog_server`}}"
+        "PACKER_SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}"
       ],
       "execute_command": "C:/Windows/Temp/script.ps1",
       "scripts": ["script/cloudbase.ps1"]
@@ -96,6 +98,8 @@
     "init_type": "cloudbase",
     "vm_notes": "The notes field",
     "defaultuser": "vagrant",
-    "defaultuserpassword": "vagrant"
+    "defaultuserpassword": "vagrant",
+    "syslog_server":"10.0.0.16",
+    "syslog_self_hostname": "packer_bld"
   }
 }
