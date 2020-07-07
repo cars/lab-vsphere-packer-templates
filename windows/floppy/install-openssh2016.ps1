@@ -23,11 +23,12 @@ $wc = New-Object System.Net.WebClient
 $wc.DownloadFile($ENV:OPENSSH_URL, $ssh_setup)
 
 Write-Host "==> Blocking SSH port 22 on the firewall"
-netsh advfirewall firewall add rule name="SSHD" dir=in action=block program="${ENV:ProgramFiles}\OpenSSH\usr\sbin\sshd.exe" enable=yes
+#netsh advfirewall firewall add rule name="SSHD" dir=in action=block program="${ENV:ProgramFiles}\OpenSSH\usr\sbin\sshd.exe" enable=yes
+netsh advfirewall firewall add rule name="SSHD" dir=in action=block program="${ENV:ProgramFiles}\OpenSSH\bin\cygunsrv.exe.exe" enable=yes
 netsh advfirewall firewall add rule name="ssh"  dir=in action=block protocol=TCP localport=22
 
 Write-Host "==> Starting SSH Executable Install"
-$install = Start-process -FilePath $ssh_setup -ArgumentList @('/S','/port=22','/privsep=1',"/passsword=${ENV:SSH_PASSWORD}") -Verb Open
+$install = Start-process -FilePath $ssh_setup -ArgumentList @('/S','/port=22',"/passsword=${ENV:SSH_PASSWORD}") -Verb Open
 
 
 Write-Host "==> Pausing to let install finish"
