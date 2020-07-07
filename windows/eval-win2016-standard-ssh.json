@@ -60,7 +60,7 @@
         "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}",
         "CB_URL={{user `cloudbase_source_url`}}"
       ],
-      "execute_command": "Temp/script.ps1",
+      "execute_command": "temp/script.ps1",
       "scripts": ["script/cloudbase.ps1"]
     },
     {
