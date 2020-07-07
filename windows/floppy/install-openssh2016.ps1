@@ -17,7 +17,7 @@ if (-not (Test-PAth ENV:SSHD_PASSWORD)) {
 }
 
 Write-Host "==> Downloading openSSH"
-$ssh_setup = "$($env:TEMP)\ssh_setup.exe"
+$ssh_setup = "${env:TEMP}\ssh_setup.exe"
 $wc = New-Object System.Net.WebClient
 $wc.DownloadFile($ENV:OPENSSH_URL, $ssh_setup)
 
@@ -97,7 +97,8 @@ if ($SSH_SERVICE.Status -ne "Running"){
     (Get-Content "${ENV:ProgramFiles}\OpenSSH\etc\passwd") | Foreach-Object { $_ -replace '/home/(\w+)', '/cygdrive/c/Users/$1' } | Set-Content "${ENV:ProgramFiles}\OpenSSH\etc\passwd"
     
     Write-Host "==> Re-Starting OpenSSHd Windows 2016"
-    Start-service openSSHD
+    #Start-service openSSHD
+    
     
     Write-Host "==> Done Installing OpenSSH on Windows 2016"
 

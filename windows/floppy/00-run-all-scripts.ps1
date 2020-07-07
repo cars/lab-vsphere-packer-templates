@@ -18,6 +18,9 @@ if ($OSVersion -match "2019") {
     & "$ScriptPath\install-openssh2016.ps1"
 }
 & "$ScriptPath\vmware.ps1"
+if ($OSVersion -match "2016") {
+    Start-Service OpenSSHD
+}
 
 
 
