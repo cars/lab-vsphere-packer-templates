@@ -9,7 +9,7 @@ If (("$Env:PACKER_BUILDER_TYPE" -ne "vmware-iso") -and ("$Env:PACKER_BUILDER_TYP
 }
 
 if (-not (Test-PAth ENV:OPENSSH_URL)) {
-    $ENV:OPENSSH_URL="https://www.mls-software.com/files/setupssh-8.3p1-1.exe"
+    $ENV:OPENSSH_URL="http://10.0.0.48/packer/setupssh-8.3p1-1.exe"
     #$ENV:OPENSSH_URL="http://www.mls-software.com/files/setupssh-7.2p2-1-v1.exe"
 }
 
