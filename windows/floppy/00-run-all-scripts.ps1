@@ -19,7 +19,7 @@ if ($OSVersion -match "2019") {
 }
 & "$ScriptPath\vmware.ps1"
 if ($OSVersion -match "2016") {
-    Start-Service OpenSSHD
+    Restart-Computer
 }
 
 
