@@ -1,73 +1,7 @@
 #$host.ui.RawUI.WindowTitle = "Installing CloudBase.  Please wait..."
 
-Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "Starting Cloudbase Install"
-Write-Output "==> Installing Cloudbase"
-
-if (Test-Path ENV:SYSLOG_SERVER) {
-  $SendSyslog = $true
-} else {
-  $SendSyslog = $false
-}
-
-if (-not $ENV:CB_URL) {
-    Write-host "==> Cloudbase URL not set.....setting"
-    Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "Cloudbase URL not set"
-    if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|Cloudbase URL Not Set"}
-    $ENV:CB_URL="https://cloudbase.it/downloads/CloudbaseInitSetup_Stable_x64.msi"
-    Write-host "==> done setting Cloudbase URL to ${ENV:CB_URL}"
-    Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "done setting Cloudbase URL to ${ENV:CB_URL}"
-    if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|done setting Cloudbase URL to ${ENV:CB_URL}"}
-} else {
-    Write-Host "CB URL Set previously to ${ENV:CB_URL}"
-    if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|CB URL previously set to  ${ENV:CB_URL}"}
-}
-
-
-if (Test-PAth C:\temp) {
-  #nop
-} else {
-  mdkir c:\temp
-}
-
-$cb_setup = "$($env:TEMP)\cb_setup.msi"
-Write-Host "==> Preparing to download Cloudbase....."
-Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "Preparing to d/l cloudbase source"
-if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|Preparing to DL Cloudbase source"}
-$wc = New-Object System.Net.WebClient
-Write-Host "==> Created WebClient"
-$wc.DownloadFile($ENV:CB_URL, $cb_setup)
-Write-Host "==> Done Downloading Cloudbase..."
-Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "done d/ling cloudbase source"
-if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|done downloading source"}
-Write-Host "==> Starting Cloudbase install..."
-Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "Starting Cloudbase install"
-if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|starting cloudbase install"}
-
-$p = Start-Process  -Wait -PassThru -FilePath msiexec -ArgumentList "/i $cb_setup /qn /l*v C:\temp\CB_SETUP.Txt"
-
-if ($p.ExitCode -eq 0) {
-    Write-Host "Done."
-   if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|Install Done"}
-
-  } elseif ($p.ExitCode -eq 3010) {
-    Write-Host "Done, but a reboot is necessary."
-    if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|Install done reboot necessary"}
-
-  } else {
-    Write-Host "CLoud Base install exited with ExitCode=$($p.ExitCode), Log=C:\temp\cb_setup.txt"
-    if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|Cloudbase install exited with Exitcode${p.exitcode}"}
-
-    Start-Sleep 15; 
-    #exit $p.ExitCode
-  }
-  exit 0
-  
   function Send-SyslogMessage {
-    <#
-    .LINK
-    https://github.com/kjacobsen/PowershellSyslog
-    
-    #>
+
         [CMDLetBinding()]
         Param(
           [Parameter(mandatory=$true)] [String] $Server,
@@ -117,3 +51,65 @@ if ($p.ExitCode -eq 0) {
         $UDPCLient.Send($ByteSyslogMessage, $ByteSyslogMessage.Length)
     
     }
+Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "Starting Cloudbase Install"
+Write-Output "==> Installing Cloudbase"
+
+if (Test-Path ENV:SYSLOG_SERVER) {
+  $SendSyslog = $true
+} else {
+  $SendSyslog = $false
+}
+
+if (-not $ENV:CB_URL) {
+    Write-host "==> Cloudbase URL not set.....setting"
+    Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "Cloudbase URL not set"
+    if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|Cloudbase URL Not Set"}
+    $ENV:CB_URL="https://cloudbase.it/downloads/CloudbaseInitSetup_Stable_x64.msi"
+    Write-host "==> done setting Cloudbase URL to ${ENV:CB_URL}"
+    Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "done setting Cloudbase URL to ${ENV:CB_URL}"
+    if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|done setting Cloudbase URL to ${ENV:CB_URL}"}
+} else {
+    Write-Host "CB URL Set previously to ${ENV:CB_URL}"
+    if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|CB URL previously set to  ${ENV:CB_URL}"}
+}
+
+
+if (Test-PAth C:\temp) {
+  #nop
+} else {
+  mdkir c:\temp
+}
+
+$cb_setup = "C:\temp\cb_setup.msi"
+Write-Host "==> Preparing to download Cloudbase....."
+Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "Preparing to d/l cloudbase source"
+if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|Preparing to DL Cloudbase source"}
+$wc = New-Object System.Net.WebClient
+Write-Host "==> Created WebClient"
+$wc.DownloadFile($ENV:CB_URL, $cb_setup)
+Write-Host "==> Done Downloading Cloudbase..."
+Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "done d/ling cloudbase source"
+if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|done downloading source"}
+Write-Host "==> Starting Cloudbase install..."
+Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "Starting Cloudbase install"
+if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|starting cloudbase install"}
+
+$p = Start-Process  -Wait -PassThru -FilePath msiexec -ArgumentList "/i $cb_setup /qn /l*v C:\temp\CB_SETUP.Txt"
+
+if ($p.ExitCode -eq 0) {
+    Write-Host "Done."
+   if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|Install Done"}
+
+  } elseif ($p.ExitCode -eq 3010) {
+    Write-Host "Done, but a reboot is necessary."
+    if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|Install done reboot necessary"}
+
+  } else {
+    Write-Host "CLoud Base install exited with ExitCode=${p.ExitCode}, Log=C:\temp\cb_setup.txt"
+    if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|Cloudbase install exited with Exitcode${p.exitcode}"}
+
+    Start-Sleep 15; 
+    #exit $p.ExitCode
+  }
+  exit 0
+  
