@@ -28,7 +28,7 @@ netsh advfirewall firewall add rule name="SSHD" dir=in action=block program="${E
 netsh advfirewall firewall add rule name="ssh"  dir=in action=block protocol=TCP localport=22
 
 Write-Host "==> Starting SSH Executable Install"
-$install = Start-process -FilePath $ssh_setup -ArgumentList @('/S','/port=22',"/passsword=${ENV:SSH_PASSWORD}") -Verb Open
+$install = Start-process -FilePath $ssh_setup -ArgumentList @('/S','/port=22',"/passsword=${ENV:SSH_PASSWORD}") -Verb RunAs
 
 
 Write-Host "==> Pausing to let install finish"
