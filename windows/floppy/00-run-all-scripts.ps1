@@ -1,5 +1,12 @@
 $OSVersion = (get-itemproperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name ProductName).ProductName
 
+# Set Syslog env variable if we want other scripts here 
+$ENV:SYSLOG_SERVER="10.0.0.16"
+
+if (TEST-PATH ENV:SYSLOG_SERVER){
+    . ".\$ScriptPath\Send-SyslogMessage.ps1"
+}
+
 if (Test-PAth C:\temp) {
     Write-Host "C:\temp exists already"
 } else {
