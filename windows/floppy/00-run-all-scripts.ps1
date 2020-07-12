@@ -6,7 +6,7 @@ $ENV:SYSLOG_SERVER="10.0.0.16"
 if (TEST-PATH ENV:SYSLOG_SERVER){
     Write-Host "sourcing syslog function"
     . .\$ScriptPath\Send-SyslogMessage.ps1
-    Start-Sleep -Seconds 45
+    Start-Sleep -Seconds 46
 }
 
 if (Test-PAth C:\temp) {
