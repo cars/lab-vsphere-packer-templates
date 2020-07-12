@@ -37,7 +37,7 @@ netsh advfirewall firewall add rule name="ssh"  dir=in action=block protocol=TCP
 
 Write-Host "==> Starting SSH Executable Install"
 if ($DoSysLog) { Send-SyslogMessage -Message "Starting SSH Executable install"}
-$install = Start-process -FilePath $ssh_setup -ArgumentList @('/S','/port=22',"/passsword=${ENV:SSH_PASSWORD}") -Verb RunAs
+$install = Start-process -FilePath $ssh_setup -ArgumentList @("/S","/passsword=${ENV:SSH_PASSWORD}") 
 
 
 Write-Host "==> Pausing to let install finish"
