@@ -17,6 +17,7 @@
       "communicator": "ssh",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
+      "ssh_timeout": "20m",
       "ip_wait_timeout": "60m",
       "CPUs": 2,
       "RAM": 8192,
