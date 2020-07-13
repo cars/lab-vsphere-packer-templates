@@ -54,6 +54,8 @@
   ],
   "provisioners": [
     {
+      "elevated_user": "{{ user `defaultuser` }}",
+      "elevated_password": "{{ user `defaultuserpassword` }}",      
       "type":"powershell",
       "environment_vars" :[
         "CM={{user `cm`}}",
