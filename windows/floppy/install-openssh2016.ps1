@@ -38,7 +38,7 @@ netsh advfirewall firewall add rule name="ssh"  dir=in action=block protocol=TCP
 Write-Host "==> Starting SSH Executable Install"
 if ($DoSysLog) { Send-SyslogMessage -Message "Starting SSH Executable install"}
 #Start-process -FilePath $ssh_setup -ArgumentList @("/S","/passsword=${ENV:SSH_PASSWORD}") 
-& $ssh_setup "/S" "PASSWORD=${ENV:SSH_PASSWORD}"
+& $ssh_setup "/S" "/password=${ENV:SSH_PASSWORD}"
 
 Write-Host "==> Pausing to let install finish"
 if ($DoSysLog) { Send-SyslogMessage -Message "Pausing to let install finish"}
@@ -108,7 +108,7 @@ if ($DoSysLog) { Send-SyslogMessage -Message "unblocking port 22 on the firewall
     Write-Host "==> Done Opening SSH port 22 on the firewall"
 
     Write-host "==> Ensuring user ${ENV:USERNAME} can login by modifying file attributes"
-    if ($DoSysLog) { Send-SyslogMessage -Message "ensuring ${ENV:USERNAME} can login by modifying file attrobutes"}
+    if ($DoSysLog) { Send-SyslogMessage -Message "ensuring ${ENV:USERNAME} can login by modifying file attributes"}
     icacls "${ENV:USERPROFILE}" "/grant" "${ENV:USERNAME}:(OI)(CI)F"
     icacls "${ENV:ProgramFiles}\OpenSSH\bin" "/grant" "${ENV:USERNAME}:(OI)RX"
     icacls "${ENV:ProgramFiles}\OpenSSH\usr\sbin" "/grant"  "${ENV:USERNAME}:(OI)RX"
