@@ -37,8 +37,8 @@ netsh advfirewall firewall add rule name="ssh"  dir=in action=block protocol=TCP
 
 Write-Host "==> Starting SSH Executable Install"
 if ($DoSysLog) { Send-SyslogMessage -Message "Starting SSH Executable install"}
-Start-process -FilePath $ssh_setup -ArgumentList @("/S","/passsword=${ENV:SSH_PASSWORD}") 
-
+#Start-process -FilePath $ssh_setup -ArgumentList @("/S","/passsword=${ENV:SSH_PASSWORD}") 
+& $ssh_setup "/S" "PASSWORD=${ENV:SSH_PASSWORD}"
 
 Write-Host "==> Pausing to let install finish"
 if ($DoSysLog) { Send-SyslogMessage -Message "Pausing to let install finish"}
@@ -103,7 +103,7 @@ if ($DoSysLog) { Send-SyslogMessage -Message "unblocking port 22 on the firewall
     
     if ($DoSysLog) { Send-SyslogMessage -Message "opening ssh port 22"}
     Write-Host "==> Opening SSH port 22 on the firewall"
-    netsh advfirewall firewall add rule name="SSHD" dir=in action=allow program="${ENV:ProgramFiles}\OpenSSH\usr\sbin\sshd.exe" enable=yes
+    netsh advfirewall firewall add rule name="SSHD" dir=in action=allow program="${ENV:ProgramFiles}\OpenSSH\cygrunsrv.exe" enable=yes
     netsh advfirewall firewall add rule name="ssh" dir=in action=allow protocol=TCP localport=22
     Write-Host "==> Done Opening SSH port 22 on the firewall"
 
