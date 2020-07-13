@@ -15,7 +15,7 @@ function Send-SyslogMessage {
          $SyslogServer= $ENV:SYSLOG_SERVER
     }
 
-    # Create a UDP Client Object
+    # Create a UDP Client Object to send messages
     $UDPCLient = New-Object System.Net.Sockets.UdpClient
     $UDPCLient.Connect($SyslogServer, $UDPPort)
 
