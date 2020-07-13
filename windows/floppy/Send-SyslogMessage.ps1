@@ -29,7 +29,7 @@ function Send-SyslogMessage {
 
     # If no hostname parameter specified, then set it
     if (($Hostname -eq "") -or ($Hostname -eq $null)){
-      $Hostname = Hostname
+      $Hostname = "PACKERBLD"
     }
 
     # I the hostname hasn't been specified, then we will use the current date and time
