@@ -7,7 +7,7 @@ $ScriptPath = Split-Path $MyInvocation.InvocationName
 
 if (TEST-PATH ENV:SYSLOG_SERVER){
     Write-Host "sourcing syslog function"
-    . .\$ScriptPath\Send-SyslogMessage.ps1
+    . $ScriptPath\Send-SyslogMessage.ps1
     Start-Sleep -Seconds 45
 }
 
