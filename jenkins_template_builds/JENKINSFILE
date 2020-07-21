@@ -20,6 +20,7 @@ pipeline {
     stages {
                 stage('Preparation') {
             steps {
+                   echo "Prep work done here"
             }
             post {
                 always {
@@ -161,6 +162,7 @@ pipeline {
         }
                 stage('Post & Clean Up') {
             steps {
+                   echo "Cleaning up..."
             }
             post {
                 always {
