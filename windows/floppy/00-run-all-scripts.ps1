@@ -1,12 +1,23 @@
 $OSVersion = (get-itemproperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name ProductName).ProductName
 
+# Set Syslog env variable if we want other scripts here 
+$ENV:SYSLOG_SERVER="10.0.0.16"
+
+$ScriptPath = Split-Path $MyInvocation.InvocationName
+
+if (TEST-PATH ENV:SYSLOG_SERVER){
+    Write-Host "sourcing syslog function"
+    . $ScriptPath\Send-SyslogMessage.ps1
+    Start-Sleep -Seconds 45
+}
+
 if (Test-PAth C:\temp) {
     Write-Host "C:\temp exists already"
 } else {
     mkdir C:\temp
 }
 
-$ScriptPath = Split-Path $MyInvocation.InvocationName
+
 & "$ScriptPath\create-evtlog.ps1"
 & "$ScriptPath\disable-windows-update.ps1"
 & "$ScriptPath\install-winrm.ps1"

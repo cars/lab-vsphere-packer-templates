@@ -17,6 +17,7 @@
       "communicator": "ssh",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
+      "ssh_timeout": "20m",
       "ip_wait_timeout": "60m",
       "CPUs": 2,
       "RAM": 8192,
@@ -41,6 +42,7 @@
         "floppy/zz-start-transports.ps1",
         "floppy/vmware.ps1",
         "floppy/install-openssh.ps1",
+        "floppy/send-syslogmessage.ps1",
         "floppy/install-openssh2016.ps1"
       ]
     }
@@ -52,6 +54,8 @@
   ],
   "provisioners": [
     {
+      "elevated_user": "{{ user `defaultuser` }}",
+      "elevated_password": "{{ user `defaultuserpassword` }}",      
       "type":"powershell",
       "environment_vars" :[
         "CM={{user `cm`}}",
