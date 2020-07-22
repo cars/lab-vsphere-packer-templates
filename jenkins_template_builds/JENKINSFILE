@@ -58,13 +58,6 @@ pipeline {
                      ]
             }
             post {
-                // Need to fix tokenCredentialId to be less fixed...
-                //always {
-                //slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'All Template Builds - Win 2016 finished', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
-                //}
-                //success {
-                //slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'All Template Builds Windows 2016 finished successfully', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
-                //}
                 unstable {
                     slackSend botUser: true, channel: 'jenkins_notifications', color: 'YELLOW', iconEmoji: '', message: 'Windows 2016 is unstable', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
                 }
@@ -93,13 +86,6 @@ pipeline {
                      ]
             }
             post {
-                // Need to fix tokenCredentialId to be less fixed...
-                //always {
-                //slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'All Template Builds - Win 2016 finished', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
-                //}
-                //success {
-                //slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'All Template Builds Windows 2016 finished successfully', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
-                //}
                 unstable {
                     slackSend botUser: true, channel: 'jenkins_notifications', color: 'YELLOW', iconEmoji: '', message: 'Windows 2019 is unstable', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
                 }
@@ -142,13 +128,6 @@ pipeline {
             }
 
             post {
-                // Need to fix tokenCredentialId to be less fixed...
-                //always {
-                //slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'All Template Builds - Win 2016 finished', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
-                //}
-                //success {
-                //slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'All Template Builds Windows 2016 finished successfully', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
-                //}
                 unstable {
                     slackSend botUser: true, channel: 'jenkins_notifications', color: 'YELLOW', iconEmoji: '', message: 'CentOS is unstable', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
                 }
@@ -160,15 +139,15 @@ pipeline {
                 }
             }
         }
-                stage('Post & Clean Up') {
+        stage('Post & Clean Up') {
             steps {
                    echo "Cleaning up..."
             }
             post {
-                always {
-                    slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'Starting Template Builds', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
+                success {
+                    slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'Finishing up Template Builds', tokenCredentialId: 'f427c360-23f9-413a-aeea-f9ef8a63d4c2', username: ''
                 }
             }
-                }
+        }
     }
 }
