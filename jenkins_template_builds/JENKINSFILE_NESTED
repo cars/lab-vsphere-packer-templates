@@ -20,6 +20,7 @@ pipeline {
     stages {
                 stage('Preparation') {
             steps {
+                   echo "TESTING"
                    echo "Prep work done here"
                    delete_old_template("fred","fred,${env.VCENTER_SERVER},${env.VCENTER_DATACENTER},"fred","Templates")
             }
