@@ -163,6 +163,11 @@ def delete_old_template(String username ,String password, String vcenter, String
 sh label: '', 
 script: '''# This looks for an existing VM/Template with the name of the one we\'re about to build
 # and deletes it so we don\'t have failure because of name collisions
+echo "#############################"
+echo ${datacenter}
+echo "${datacenter}"
+echo "#############################"
+
 export GOVC_INSECURE=true
 #export GOVC_PASSWORD=set by binding
 export GOVC_URL=${vcenter}
