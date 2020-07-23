@@ -158,7 +158,7 @@ pipeline {
         }
     }
 }
-def delete_old_template(string username ,string password, string vcenter, string datacenter, string template, string folder){
+def delete_old_template(String username ,String password, String vcenter, String datacenter, String template, String folder){
 
 sh label: '', 
 script: '''# This looks for an existing VM/Template with the name of the one we\'re about to build
