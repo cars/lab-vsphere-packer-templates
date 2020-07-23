@@ -165,7 +165,7 @@ script: '''# This looks for an existing VM/Template with the name of the one we\
 # and deletes it so we don\'t have failure because of name collisions
 export GOVC_INSECURE=true
 #export GOVC_PASSWORD=set by binding
-export GOVC_UlRL=${vcenter}
+export GOVC_URL=${vcenter}
 #export GOVC_USERNAME=set by binding
 export GOVC_DEBUG=true
 export GOVC_DEBUG_PATH=/tmp/govc.log
