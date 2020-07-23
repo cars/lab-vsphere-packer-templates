@@ -25,7 +25,8 @@ pipeline {
                    echo "${env.VCENTER_SERVER}"
         
                    delete_old_template("fred","fred","${env.VCENTER_SERVER}","${env.VCENTER_DATACENTER}","fred","Templates")
-                   //def delete_old_template(username,password,vcenter,datacenter,template,folder){
+                   error 'done'
+                   //def delete_old_template(username,password,vcenter,datacenter,template,folder)
             }
             post {
                 always {
@@ -157,7 +158,7 @@ pipeline {
         }
     }
 }
-def delete_old_template(username,password,vcenter,datacenter,template,folder){
+def delete_old_template(string username ,string password, string vcenter, string datacenter, string template, string folder){
 
 sh label: '', 
 script: '''# This looks for an existing VM/Template with the name of the one we\'re about to build
