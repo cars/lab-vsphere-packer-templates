@@ -35,6 +35,7 @@
       "floppy_files": [
         "floppy/eval-win2019-standard/autounattend.xml",
         "floppy/00-run-all-scripts.ps1",
+        "floppy/create-evtlog.ps1",
         "floppy/disable-windows-update.ps1",
         "floppy/install-winrm.ps1",
         "floppy/power-settings.ps1",
