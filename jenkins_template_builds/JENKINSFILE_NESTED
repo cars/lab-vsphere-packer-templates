@@ -184,6 +184,8 @@ script: '''
 export GOVC_INSECURE=true
 #export GOVC_PASSWORD=set by binding
 #export GOVC_URL="${vcenter}"
+echo $GOVC_URL
+echo $GOVE_DATACENTER
 #export GOVC_USERNAME=set by binding
 export GOVC_DEBUG=true
 export GOVC_DEBUG_PATH=/tmp/govc.log
