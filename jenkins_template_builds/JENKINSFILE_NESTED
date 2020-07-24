@@ -184,4 +184,4 @@ then
 else 
 	echo "No pre-existing template to delete"
 fi'''
-)
+}
