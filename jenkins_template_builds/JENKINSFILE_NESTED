@@ -27,7 +27,7 @@ pipeline {
                    echo "Prep work done here"
                    echo "${env.VCENTER_SERVER}"
         
-                   delete_old_template("fred","fred","${env.VCENTER_SERVER}","${env.VCENTER_DATACENTER}","fred","Templates")
+                   delete_old_template("fred","fred","${env.VCENTER_SERVER}".toString(),"${env.VCENTER_DATACENTER}".toString(),"fred","Templates")
                    error 'done'
                    //def delete_old_template(username,password,vcenter,datacenter,template,folder)
             }
