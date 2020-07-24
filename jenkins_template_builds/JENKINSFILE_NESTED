@@ -168,17 +168,26 @@ def delete_old_template(String username, String password, String vcenter, String
 echo "4"
 echo "${vcenter}"
 
+    environment {
+        GOVC_DATACENTER = 'Garage'
+        VCENTER_FOLDER     = 'Templates'
+        VCENTER_CLUSTER    = 'lab'
+        GOVC_URL       = '10.0.0.11'
+        VCENTER_DATASTORE  = 'esx-01-ds-r0'
+        VCENTER_NETWORK    = 'Public 2'
+        VCENTER_SERVER     = 'vcenter.lab.lostroncos.net'
+    }
 //# This script looks for an existing VM/Template with the name of the one we\'re about to build
 //# and deletes it so we don\'t have failure because of name collisions
 sh label: '', 
 script: '''
 export GOVC_INSECURE=true
 #export GOVC_PASSWORD=set by binding
-export GOVC_URL="${vcenter}"
+//export GOVC_URL="${vcenter}"
 #export GOVC_USERNAME=set by binding
 export GOVC_DEBUG=true
 export GOVC_DEBUG_PATH=/tmp/govc.log
-export GOVC_DATACENTER="${datacenter}"
+//export GOVC_DATACENTER="${datacenter}"
 echo "Checking for pre-existing vm: ${template}"
 if [ `govc ls /${datacenter}/vm/${folder}/${template} | wc -l` -eq 1 ]
 then 
