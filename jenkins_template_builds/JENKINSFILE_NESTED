@@ -165,8 +165,14 @@ pipeline {
 
 def delete_old_template(String username, String password, String vcenter, String datacenter, String template,String folder){
 
+echo "1"
 echo "{vcenter}"
+echo "2"
 echo {vcenter}
+echo "3"
+echo ${vcenter}
+echo "4"
+echo "${vcenter}"
 //# This script looks for an existing VM/Template with the name of the one we\'re about to build
 //# and deletes it so we don\'t have failure because of name collisions
 sh label: '', 
