@@ -1,6 +1,6 @@
 //
 //
-@Library('jenkins-pipeline-shared-library-template') _
+@Library('shared-library-template') _
 pipeline {
     agent any
     triggers {
