@@ -161,30 +161,3 @@ pipeline {
         }
     }
 }
-def delete_old_template(String username ,String password, String vcenter, String datacenter, String template, String folder){
-
-sh label: '', 
-script: '''# This looks for an existing VM/Template with the name of the one we\'re about to build
-# and deletes it so we don\'t have failure because of name collisions
-echo "#############################"
-echo ${datacenter}
-echo "${datacenter}"
-echo "#############################"
-
-export GOVC_INSECURE=true
-#export GOVC_PASSWORD=set by binding
-export GOVC_URL=${vcenter}
-#export GOVC_USERNAME=set by binding
-export GOVC_DEBUG=true
-export GOVC_DEBUG_PATH=/tmp/govc.log
-export GOVC_DATACENTER=${datacenter}
-echo "Checking for pre-existing vm: ${template}"
-if [ `govc ls /${datacenter}/vm/${folder}/${template} | wc -l` -eq 1 ]
-then 
-	echo "Deleting vm ${template}"
-    export VMUUID=`govc vm.info -json /${datacenter}/vm/${folder}/${template} |jq -r .VirtualMachines[0].Config.InstanceUuid`
-	govc vm.destroy -vm.uuid=$VMUUID
-else 
-	echo "No pre-existing template to delete"
-fi'''
-}
