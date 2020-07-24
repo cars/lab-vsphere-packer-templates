@@ -183,11 +183,11 @@ sh label: '',
 script: '''
 export GOVC_INSECURE=true
 #export GOVC_PASSWORD=set by binding
-//export GOVC_URL="${vcenter}"
+#export GOVC_URL="${vcenter}"
 #export GOVC_USERNAME=set by binding
 export GOVC_DEBUG=true
 export GOVC_DEBUG_PATH=/tmp/govc.log
-//export GOVC_DATACENTER="${datacenter}"
+#export GOVC_DATACENTER="${datacenter}"
 echo "Checking for pre-existing vm: ${template}"
 if [ `govc ls /${datacenter}/vm/${folder}/${template} | wc -l` -eq 1 ]
 then 
