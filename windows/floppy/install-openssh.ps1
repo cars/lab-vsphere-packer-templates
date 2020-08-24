@@ -10,6 +10,8 @@ Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
 Write-Output "==> Installing Server"
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 
+Write-Output "==> Writing Status file to temp"
+Get-WindowsCapability -online -name *ssh* |select *|convertto-csv | Set-Content C:\temp\sshstat.txt
 
 Write-Output "==> Setting up Service to run Automatically"
 Start-Service sshd
