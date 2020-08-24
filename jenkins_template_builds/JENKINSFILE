@@ -24,7 +24,7 @@ pipeline {
             }
             post {
                 always {
-                    slackSend botUser: true, color: 'GREEN', message: 'Starting Template Builds', tokenCredentialId: 'slack_vcaptain2'
+                    slackSend botUser: false, color: 'GREEN', message: 'Starting Template Builds', tokenCredentialId: 'slack_vcaptain2'
                     
                 }
             }
@@ -60,13 +60,13 @@ pipeline {
             }
             post {
                 unstable {
-                    slackSend botUser: true, color: 'YELLOW', iconEmoji: '', message: 'Windows 2016 is unstable', tokenCredentialId: 'slack_vcaptain2'
+                    slackSend botUser: false, color: 'YELLOW', iconEmoji: '', message: 'Windows 2016 is unstable', tokenCredentialId: 'slack_vcaptain2'
                 }
                 failure {
-                    slackSend botUser: true,  color: 'RED', iconEmoji: '', message: 'All Template Builds Windows 2016 Failed', tokenCredentialId: 'slack_vcaptain2'
+                    slackSend botUser: false,  color: 'RED', iconEmoji: '', message: 'All Template Builds Windows 2016 Failed', tokenCredentialId: 'slack_vcaptain2'
                 }
                 changed {
-                    slackSend botUser: true,  color: 'YELLOW', iconEmoji: '', message: 'Windows 2016 has changed', tokenCredentialId: 'slack_vcaptain2'
+                    slackSend botUser: false,  color: 'YELLOW', iconEmoji: '', message: 'Windows 2016 has changed', tokenCredentialId: 'slack_vcaptain2'
                 }
             }
         }
@@ -88,13 +88,13 @@ pipeline {
             }
             post {
                 unstable {
-                    slackSend botUser: true, channel: 'jenkins_notifications', color: 'YELLOW', iconEmoji: '', message: 'Windows 2019 is unstable', tokenCredentialId: 'slack_vcaptain2'
+                    slackSend botUser: false, channel: 'jenkins_notifications', color: 'YELLOW', iconEmoji: '', message: 'Windows 2019 is unstable', tokenCredentialId: 'slack_vcaptain2'
                 }
                 failure {
-                    slackSend botUser: true, channel: 'jenkins_notifications', color: 'RED', iconEmoji: '', message: 'All Template Builds Windows 2019 Failed', tokenCredentialId: 'slack_vcaptain2'
+                    slackSend botUser: false, channel: 'jenkins_notifications', color: 'RED', iconEmoji: '', message: 'All Template Builds Windows 2019 Failed', tokenCredentialId: 'slack_vcaptain2'
                 }
                 changed {
-                    slackSend botUser: true, channel: 'jenkins_notifications', color: 'YELLOW', iconEmoji: '', message: 'Windows 2019 has changed', tokenCredentialId: 'slack_vcaptain2'
+                    slackSend botUser: false, channel: 'jenkins_notifications', color: 'YELLOW', iconEmoji: '', message: 'Windows 2019 has changed', tokenCredentialId: 'slack_vcaptain2'
                 }
             }
         }
@@ -130,13 +130,13 @@ pipeline {
 
             post {
                 unstable {
-                    slackSend botUser: true, channel: 'jenkins_notifications', color: 'YELLOW', iconEmoji: '', message: 'CentOS is unstable', tokenCredentialId: 'slack_vcaptain2'
+                    slackSend botUser: false, channel: 'jenkins_notifications', color: 'YELLOW', iconEmoji: '', message: 'CentOS is unstable', tokenCredentialId: 'slack_vcaptain2'
                 }
                 failure {
-                    slackSend botUser: true, channel: 'jenkins_notifications', color: 'RED', iconEmoji: '', message: 'CentOS Failed', tokenCredentialId: 'slack_vcaptain2'
+                    slackSend botUser: false, channel: 'jenkins_notifications', color: 'RED', iconEmoji: '', message: 'CentOS Failed', tokenCredentialId: 'slack_vcaptain2'
                 }
                 changed {
-                    slackSend botUser: true, channel: 'jenkins_notifications', color: 'YELLOW', iconEmoji: '', message: 'CentOS has changed', tokenCredentialId: 'slack_vcaptain2'
+                    slackSend botUser: false, channel: 'jenkins_notifications', color: 'YELLOW', iconEmoji: '', message: 'CentOS has changed', tokenCredentialId: 'slack_vcaptain2'
                 }
             }
         }
@@ -146,7 +146,7 @@ pipeline {
             }
             post {
                 success {
-                    slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'Finishing up Template Builds', tokenCredentialId: 'slack_vcaptain2'
+                    slackSend botUser: false, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'Finishing up Template Builds', tokenCredentialId: 'slack_vcaptain2'
                 }
             }
         }
