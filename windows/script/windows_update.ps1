@@ -17,7 +17,10 @@ Write-Output "Starting PSWindowsUpdate Installation"
 #$webDeployURL = "https://gallery.technet.microsoft.com/scriptcenter/2d191bcd-3308-4edd-9de2-88dff796b0bc/file/66095/1/PSWindowsUpdate_1.4.5.zip"
 $webDeployURL = "http://10.0.0.48/packer/PSWindowsUpdate_1.4.5.zip"
 
+$filePath = "C:\Temp\PSwindowsUpdate_1.4.5.zip"
+
 (New-Object System.Net.WebClient).DownloadFile($webDeployURL, $filePath)
+
 
 # Older versions of Powershell do not have 'Expand Archive'
 # Use Shell.Application custom object to unzip

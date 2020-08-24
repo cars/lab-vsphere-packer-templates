@@ -23,6 +23,7 @@ if (Test-PAth C:\temp) {
 & "$ScriptPath\install-winrm.ps1"
 & "$ScriptPath\power-settings.ps1"
 & "$ScriptPath\zz-start-transports.ps1"
+& "$ScriptPath\sevenzip.ps1"
 if ($OSVersion -match "2019") {
     & "$ScriptPath\install-openssh.ps1"
 } else { 

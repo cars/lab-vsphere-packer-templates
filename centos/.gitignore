@@ -11,6 +11,6 @@ Makefile.local
 box/
 .tmpatlas/
 iso/
-
+.vscode/
 .DS_Store
 .bundle
