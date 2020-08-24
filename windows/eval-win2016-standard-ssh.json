@@ -44,6 +44,7 @@
             "floppy/power-settings.ps1",
             "floppy/zz-start-transports.ps1",
             "floppy/vmware.ps1",
+            "floppy/sevenzip.ps1",
             "floppy/install-openssh.ps1",
             "floppy/send-syslogmessage.ps1",
             "floppy/install-openssh2016.ps1"
