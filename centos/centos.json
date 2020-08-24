@@ -1,154 +1,156 @@
 {
-  "_comment": "Build with `packer build centos.json`",
-  "builders": [
-    {
-      "type": "vsphere-iso",
-      "boot_command": [
-        "<up><wait><tab> text ks=http://{{ user `cHTTPIP`}}:{{ user `cHTTPPORT`}}/{{ user `kickstart` }}<enter>"
-      ],
-      "vcenter_server": "{{user `vcenter_server`}}",
-      "username": "{{user `vcenter_user`}}",
-      "password": "{{user `vcenter_password`}}",
-      "datacenter": "{{user `vcenter_datacenter`}}",
-      "insecure_connection": "true",
-      "vm_name": "{{user `vcenter_template_name`}}",
-      "folder": "{{user `vcenter_folder`}}",
-      "cluster": "{{user `vcenter_cluster`}}",
-      "host": "{{user `vcenter_host`}}",
-      "datastore": "{{user `vcenter_datastore`}}",
-      "network": "{{user `vcenter_network`}}",
-      "guest_os_type": "rhel7_64Guest",
-      "communicator": "ssh",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "CPUs": 2,
-      "RAM": 8192,
-      "RAM_reserve_all": true,
-      "disk_controller_type": "pvscsi",
-      "disk_size": 65536,
-      "disk_thin_provisioned": true,
-      "network_card": "vmxnet3",
-      "notes" : "{{user `vm_notes`}}",
-      "convert_to_template": "true",
-      "iso_paths": [
-        "[F] Linuxes/CentOS/CentOS-7-x86_64-DVD-1810.iso",
-        "[] /usr/lib/vmware/isoimages/linux.iso"
-      ]
+    "_comment": "Build with `packer build centos.json`",
+    "builders": [{
+        "type": "vsphere-iso",
+        "boot_command": [
+            "<up><wait><tab> text ks=http://{{ user `cHTTPIP`}}:{{ user `cHTTPPORT`}}/{{ user `kickstart` }}<enter>"
+        ],
+        "vcenter_server": "{{user `vcenter_server`}}",
+        "username": "{{user `vcenter_user`}}",
+        "password": "{{user `vcenter_password`}}",
+        "datacenter": "{{user `vcenter_datacenter`}}",
+        "insecure_connection": "true",
+        "vm_name": "{{user `vcenter_template_name`}}",
+        "folder": "{{user `vcenter_folder`}}",
+        "cluster": "{{user `vcenter_cluster`}}",
+        "host": "{{user `vcenter_host`}}",
+        "datastore": "{{user `vcenter_datastore`}}",
+
+        "guest_os_type": "rhel7_64Guest",
+        "communicator": "ssh",
+        "ssh_username": "vagrant",
+        "ssh_password": "vagrant",
+        "CPUs": 2,
+        "RAM": 8192,
+        "RAM_reserve_all": true,
+        "disk_controller_type": "pvscsi",
+        "storage": [{
+            "disk_size": 65536,
+            "disk_thin_provisioned": true
+        }],
+        "network_adapters": [{
+            "network_card": "vmxnet3",
+            "network": "{{user `vcenter_network`}}"
+
+        }],
+
+        "notes": "{{user `vm_notes`}}",
+        "convert_to_template": "true",
+        "iso_paths": [
+            "[F] Linuxes/CentOS/CentOS-7-x86_64-DVD-1810.iso",
+            "[] /usr/lib/vmware/isoimages/linux.iso"
+        ]
+    }],
+    "post-processors": [{
+        "type": "manifest"
+    }],
+    "provisioners": [{
+            "environment_vars": [
+                "CLEANUP_BUILD_TOOLS={{user `cleanup_build_tools`}}",
+                "DESKTOP={{user `desktop`}}",
+                "UPDATE={{user `update`}}",
+                "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
+                "SSH_USERNAME={{user `ssh_username`}}",
+                "SSH_PASSWORD={{user `ssh_password`}}",
+                "http_proxy={{user `http_proxy`}}",
+                "https_proxy={{user `https_proxy`}}",
+                "ftp_proxy={{user `ftp_proxy`}}",
+                "rsync_proxy={{user `rsync_proxy`}}",
+                "no_proxy={{user `no_proxy`}}"
+            ],
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+            "scripts": [
+                "script/update.sh"
+            ],
+            "type": "shell",
+            "expect_disconnect": "true"
+        },
+        {
+            "environment_vars": [
+                "CLEANUP_BUILD_TOOLS={{user `cleanup_build_tools`}}",
+                "DESKTOP={{user `desktop`}}",
+                "UPDATE={{user `update`}}",
+                "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
+                "SSH_USERNAME={{user `ssh_username`}}",
+                "SSH_PASSWORD={{user `ssh_password`}}",
+                "http_proxy={{user `http_proxy`}}",
+                "https_proxy={{user `https_proxy`}}",
+                "ftp_proxy={{user `ftp_proxy`}}",
+                "rsync_proxy={{user `rsync_proxy`}}",
+                "no_proxy={{user `no_proxy`}}",
+                "VRA_URL={{user `VRA_URL`}}",
+                "VRA_PREP_URL={{user `VRA_PREP_URL`}}",
+                "LABCA_URL={{user `LABCA_URL`}}",
+                "VRACA_URL={{user `VRACA_URL`}}",
+                "VRALCMCERT_URL={{user `VRALCMCERT_URL`}}",
+                "VRA_MGR_HOST={{user `VRA_MGR_HOST`}}",
+                "VRA_APP_HOST={{user `VRA_APP_HOST`}}",
+                "VRA_MGR_CRT_PRINT={{user `VRA_MGR_CRT_PRINT`}}",
+                "VRA_APP_CERT_PRINT={{user `VRA_APP_CERT_PRINT`}}",
+                "VRA_JAVA_INST={{user `VRA_JAVA_INST`}}",
+                "VRA_CLOUD={{user `VRA_CLOUD`}}"
+            ],
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+            "scripts": [
+                "script/fix-slow-dns.sh",
+                "script/sshd.sh",
+                "script/vagrant.sh",
+                "script/desktop.sh",
+                "script/vmware.sh",
+                "script/virtualbox.sh",
+                "script/parallels.sh",
+                "script/motd.sh",
+                "custom-script.sh",
+                "script/{{user `init_type`}}.sh",
+                "script/cleanup.sh"
+            ],
+            "type": "shell",
+            "pause_before": "10s"
+        }
+    ],
+    "variables": {
+        "cleanup_build_tools": "false",
+        "cpus": "1",
+        "desktop": "false",
+        "disk_size": "65536",
+        "ftp_proxy": "{{env `ftp_proxy`}}",
+        "headless": "",
+        "http_directory": "kickstart/centos7",
+        "http_proxy": "{{env `http_proxy`}}",
+        "https_proxy": "{{env `https_proxy`}}",
+        "install_vagrant_key": "true",
+        "iso_checksum": "6D44331CC4F6C506C7BBE9FEB8468FAD6C51A88CA1393CA6B8B486EA04BEC3C1",
+        "iso_checksum_type": "sha256",
+        "iso_name": "CentOS-7-x86_64-DVD-1708.iso",
+        "iso_path": "iso",
+        "iso_url": "http://10.0.0.48/ISO/Linuxes/Centos/CentOS-7-x86_64-DVD-1810.iso",
+        "kickstart": "packer/packer-centos7-ks.cfg",
+        "memory": "2048",
+        "no_proxy": "{{env `no_proxy`}}",
+        "rsync_proxy": "{{env `rsync_proxy`}}",
+        "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
+        "ssh_password": "vagrant",
+        "ssh_username": "vagrant",
+        "update": "false",
+        "version": "0.0.99",
+        "vm_name": "centos7",
+        "vmware_guest_os_type": "centos-64",
+        "cHTTPIP": "10.0.0.48",
+        "cHTTPPORT": "80",
+        "VRAURL": "vra-01.ad.lab.lostroncos.net",
+        "VRA_PREP_URL:VRA_PREP_URL": "http://10.0.0.48/packer/prepare_vra_template_linux.tar.gz",
+        "LABCA_URL:LABCA_URL": "http://10.0.0.48/packer/lab-ca.pem",
+        "VRACA_URL:VRACA_URL": "http://10.0.0.48/packer/VRA-LCM.cer",
+        "VRLCMCERT_URL": "http://10.0.0.48/packer/vrlcm.cer",
+        "VRA_MGR_HOST": "vra-iaas-01.ad.lab.lostroncos.net",
+        "VRA_MGR_PORT": "443",
+        "VRA_APP_HOST": "vra-01.ad.lab.lostroncos.net",
+        "VRA_APP_PORT": "443",
+        "VRA_MGR_CERT_PRINT": "78:86:45:19:F2:E6:52:06:BF:62:35:25:78:A1:C8:70:2F:52:C0:6F",
+        "VRA_APP_CERT_PRINT": "78:86:45:19:F2:E6:52:06:BF:62:35:25:78:A1:C8:70:2F:52:C0:6F",
+        "VRA_JAVA_INST": "true",
+        "VRA_CLOUD": "vsphere",
+        "init_type": "cloudbase",
+        "vm_notes": "The notes field"
     }
-  ],
-  "post-processors": [
-    {
-      "type": "manifest"
-    }
-  ],
-  "provisioners": [
-    {
-      "environment_vars": [
-        "CLEANUP_BUILD_TOOLS={{user `cleanup_build_tools`}}",
-        "DESKTOP={{user `desktop`}}",
-        "UPDATE={{user `update`}}",
-        "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
-        "SSH_USERNAME={{user `ssh_username`}}",
-        "SSH_PASSWORD={{user `ssh_password`}}",
-        "http_proxy={{user `http_proxy`}}",
-        "https_proxy={{user `https_proxy`}}",
-        "ftp_proxy={{user `ftp_proxy`}}",
-        "rsync_proxy={{user `rsync_proxy`}}",
-        "no_proxy={{user `no_proxy`}}"
-      ],
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
-      "scripts": [
-        "script/update.sh"
-      ],
-      "type": "shell",
-      "expect_disconnect": "true"
-    },
-    {
-      "environment_vars": [
-        "CLEANUP_BUILD_TOOLS={{user `cleanup_build_tools`}}",
-        "DESKTOP={{user `desktop`}}",
-        "UPDATE={{user `update`}}",
-        "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
-        "SSH_USERNAME={{user `ssh_username`}}",
-        "SSH_PASSWORD={{user `ssh_password`}}",
-        "http_proxy={{user `http_proxy`}}",
-        "https_proxy={{user `https_proxy`}}",
-        "ftp_proxy={{user `ftp_proxy`}}",
-        "rsync_proxy={{user `rsync_proxy`}}",
-        "no_proxy={{user `no_proxy`}}",
-        "VRA_URL={{user `VRA_URL`}}",
-        "VRA_PREP_URL={{user `VRA_PREP_URL`}}",
-        "LABCA_URL={{user `LABCA_URL`}}",
-        "VRACA_URL={{user `VRACA_URL`}}",
-        "VRALCMCERT_URL={{user `VRALCMCERT_URL`}}",
-        "VRA_MGR_HOST={{user `VRA_MGR_HOST`}}",
-        "VRA_APP_HOST={{user `VRA_APP_HOST`}}",
-        "VRA_MGR_CRT_PRINT={{user `VRA_MGR_CRT_PRINT`}}",
-        "VRA_APP_CERT_PRINT={{user `VRA_APP_CERT_PRINT`}}",
-        "VRA_JAVA_INST={{user `VRA_JAVA_INST`}}",
-        "VRA_CLOUD={{user `VRA_CLOUD`}}"
-      ],
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
-      "scripts": [
-        "script/fix-slow-dns.sh",
-        "script/sshd.sh",
-        "script/vagrant.sh",
-        "script/desktop.sh",
-        "script/vmware.sh",
-        "script/virtualbox.sh",
-        "script/parallels.sh",
-        "script/motd.sh",
-        "custom-script.sh",
-        "script/{{user `init_type`}}.sh",
-        "script/cleanup.sh"
-      ],
-      "type": "shell",
-      "pause_before": "10s"
-    }
-  ],
-  "variables": {
-    "cleanup_build_tools": "false",
-    "cpus": "1",
-    "desktop": "false",
-    "disk_size": "65536",
-    "ftp_proxy": "{{env `ftp_proxy`}}",
-    "headless": "",
-    "http_directory": "kickstart/centos7",
-    "http_proxy": "{{env `http_proxy`}}",
-    "https_proxy": "{{env `https_proxy`}}",
-    "install_vagrant_key": "true",
-    "iso_checksum": "6D44331CC4F6C506C7BBE9FEB8468FAD6C51A88CA1393CA6B8B486EA04BEC3C1",
-    "iso_checksum_type": "sha256",
-    "iso_name": "CentOS-7-x86_64-DVD-1708.iso",
-    "iso_path": "iso",
-    "iso_url": "http://10.0.0.48/ISO/Linuxes/Centos/CentOS-7-x86_64-DVD-1810.iso",
-    "kickstart": "packer/packer-centos7-ks.cfg",
-    "memory": "2048",
-    "no_proxy": "{{env `no_proxy`}}",
-    "rsync_proxy": "{{env `rsync_proxy`}}",
-    "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
-    "ssh_password": "vagrant",
-    "ssh_username": "vagrant",
-    "update": "false",
-    "version": "0.0.99",
-    "vm_name": "centos7",
-    "vmware_guest_os_type": "centos-64",
-    "cHTTPIP": "10.0.0.48",
-    "cHTTPPORT": "80",
-    "VRAURL": "vra-01.ad.lab.lostroncos.net",
-    "VRA_PREP_URL:VRA_PREP_URL": "http://10.0.0.48/packer/prepare_vra_template_linux.tar.gz",
-    "LABCA_URL:LABCA_URL": "http://10.0.0.48/packer/lab-ca.pem",
-    "VRACA_URL:VRACA_URL": "http://10.0.0.48/packer/VRA-LCM.cer",
-    "VRLCMCERT_URL": "http://10.0.0.48/packer/vrlcm.cer",
-    "VRA_MGR_HOST": "vra-iaas-01.ad.lab.lostroncos.net",
-    "VRA_MGR_PORT": "443",
-    "VRA_APP_HOST": "vra-01.ad.lab.lostroncos.net",
-    "VRA_APP_PORT": "443",
-    "VRA_MGR_CERT_PRINT": "78:86:45:19:F2:E6:52:06:BF:62:35:25:78:A1:C8:70:2F:52:C0:6F",
-    "VRA_APP_CERT_PRINT": "78:86:45:19:F2:E6:52:06:BF:62:35:25:78:A1:C8:70:2F:52:C0:6F",
-    "VRA_JAVA_INST": "true",
-    "VRA_CLOUD": "vsphere",
-    "init_type":"cloudbase",
-    "vm_notes":"The notes field"
-  }
 }
