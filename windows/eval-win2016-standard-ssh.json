@@ -23,7 +23,7 @@
         "disk_controller_type": "lsilogic-sas",
         "storage": [{
             "disk_size": 40960,
-            "disk_thin_provisioned": true,
+            "disk_thin_provisioned": true
         }],
         "network_adapters": [{
             "network_card": "e1000",
