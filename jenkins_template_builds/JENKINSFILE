@@ -24,7 +24,7 @@ pipeline {
             }
             post {
                 always {
-                    slackSend botUser: true, channel: 'jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'Starting Template Builds', tokenCredentialId: 'slack_vcaptain2'
+                    slackSend botUser: true, channel: '#jenkins_notifications', color: 'GREEN', iconEmoji: '', message: 'Starting Template Builds', tokenCredentialId: 'slack_vcaptain2'
                     
                 }
             }
