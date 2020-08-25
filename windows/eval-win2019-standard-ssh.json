@@ -17,6 +17,7 @@
         "ssh_password": "{{user `defaultuserpassword`}}",
         "ip_wait_timeout": "60m",
         "shutdown_timeout": "20m",
+        "ssh_timeout": "20m",
         "CPUs": 2,
         "RAM": 8192,
         "RAM_reserve_all": true,
