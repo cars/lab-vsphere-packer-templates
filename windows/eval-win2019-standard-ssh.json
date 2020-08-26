@@ -62,7 +62,7 @@
                 "CM_VERSION={{user `cm_version`}}",
                 "UPDATE={{user `update`}}"
             ],
-            "execute_command": "C:/Windows/Temp/script.ps1",
+            //"execute_command": "C:/Windows/Temp/script.ps1",
             "scripts": [
                 "script/vmware.ps1"
             ],
@@ -72,13 +72,13 @@
             "type": "powershell",
             "elevated_user": "{{user `defaultuser`}}",
             "elevated_password": "{{user `defaultuserpassword`}}",
-            "execute_command": "C:/Windows/Temp/script.ps1",
+            // "execute_command": "C:/Windows/Temp/script.ps1",
             "scripts": ["script/cloudbase.ps1"]
         },
         {
             "elevated_user": "{{ user `defaultuser` }}",
             "elevated_password": "{{ user `defaultuserpassword` }}",
-            "execute_command": "C:/Windows/Temp/script.ps1",
+            //"execute_command": "C:/Windows/Temp/script.ps1",
             "scripts": [
                 "script/windows_update.ps1"
             ],
@@ -100,7 +100,7 @@
         "vcenter_template_name": "eval-win2016-standard-ssh",
         "vcenter": "vcenter.example.com",
         "vcenter_server": "vcenter.example.com",
-        "vcenter_datastore": "esx-ddatastore-01",
+        "vcenter_datastore": "esx-datastore-01",
         "vcenter_cluster": "esx-cluster-01",
         "vcenter_network": "VM Network",
         "vcenter_folder": "VMs",

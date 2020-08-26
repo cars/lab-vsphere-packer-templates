@@ -17,18 +17,26 @@ if (Test-PAth C:\temp) {
     mkdir C:\temp
 }
 
-
+Write-Host "Running create eventlog"
 & "$ScriptPath\create-evtlog.ps1"
+Write-Host "Running disable windows update"
 & "$ScriptPath\disable-windows-update.ps1"
+Write-Host "Running install winrm"
 & "$ScriptPath\install-winrm.ps1"
+Write-Host "Running power settingss cript"
 & "$ScriptPath\power-settings.ps1"
+Write-Host "Running start transports"
 & "$ScriptPath\zz-start-transports.ps1"
+Write-Host "Calling Install sevenzip"
 & "$ScriptPath\sevenzip.ps1"
 if ($OSVersion -match "2019") {
+    Write-Host "Running Install openssh for 2019"
     & "$ScriptPath\install-openssh.ps1"
 } else { 
+    Write-Host "Running Install openssh for 2016"    
     & "$ScriptPath\install-openssh2016.ps1"
 }
+Write-Host "Running Install vmtools"
 & "$ScriptPath\vmware.ps1"
 if ($OSVersion -match "2016") {
     Restart-Computer
