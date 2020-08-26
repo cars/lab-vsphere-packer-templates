@@ -64,7 +64,7 @@
                 "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}",
                 "CB_URL={{user `cloudbase_source_url`}}"
             ],
-            "execute_command": "powershell -executionpolicy bypass \"& { if (Test-Path variable:global:ProgressPreference){\\$ProgressPreference='SilentlyContinue'};. {{.Vars}}; &'{{.Path}}'; exit \\$LastExitCode }\"",
+            "execute_command": "powershell -executionpolicy bypass \"& . {{.Vars}}; &'{{.Path}}'; exit \\$LastExitCode }\"",
             "scripts": ["script/cloudbase.ps1"]
         },
         {
@@ -76,7 +76,7 @@
                 "SYSLOG_SERVER={{user `syslog_server`}}",
                 "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}"
             ],
-            "execute_command": "powershell -executionpolicy bypass \"& { if (Test-Path variable:global:ProgressPreference){\\$ProgressPreference='SilentlyContinue'};. {{.Vars}}; &'{{.Path}}'; exit \\$LastExitCode }\"",
+            "execute_command": "powershell -executionpolicy bypass \"& . {{.Vars}}; &'{{.Path}}'; exit \\$LastExitCode }\"",
             "scripts": [
                 "script/windows_update.ps1"
             ],
