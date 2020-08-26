@@ -64,7 +64,6 @@
                 "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}",
                 "CB_URL={{user `cloudbase_source_url`}}"
             ],
-            //"execute_command": "C:/Windows/Temp/script.ps1",
             "scripts": ["script/cloudbase.ps1"]
         },
         {
@@ -76,7 +75,6 @@
                 "SYSLOG_SERVER={{user `syslog_server`}}",
                 "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}"
             ],
-            //"execute_command": "C:/Windows/Temp/script.ps1",
             "scripts": [
                 "script/windows_update.ps1"
             ],
