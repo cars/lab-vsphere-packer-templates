@@ -76,7 +76,7 @@
                 "SYSLOG_SERVER={{user `syslog_server`}}",
                 "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}"
             ],
-            "execute_command": "{'. {{.Vars}}'; '{{.Path}}'; exit \\$LastExitCode }",
+            "execute_command": "{'. {{.Vars}}'; '{{.Path}}'; exit \$LastExitCode }",
             "scripts": [
                 "script/windows_update.ps1"
             ],
