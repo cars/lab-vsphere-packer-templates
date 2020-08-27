@@ -65,7 +65,8 @@
                 "CB_URL={{user `cloudbase_source_url`}}"
             ],
             "execute_command": "\\& {'. {{.Vars}}'; '{{.Path}}'; exit \\$LastExitCode }",
-            "scripts": ["script/cloudbase.ps1"]
+            "scripts": ["script/cloudbase.ps1"],
+            "skip_clean": "true"
         },
         {
             "elevated_user": "{{ user `defaultuser` }}",
@@ -80,6 +81,7 @@
             "scripts": [
                 "script/windows_update.ps1"
             ],
+            "skip_clean": "true",
             "type": "powershell"
         }
     ],
