@@ -64,7 +64,7 @@
                 "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}",
                 "CB_URL={{user `cloudbase_source_url`}}"
             ],
-            "execute_command": "\\& {'. {{.Vars}}'; '{{.Path}}'; exit \\$LastExitCode }",
+            "execute_command": "`& {'. {{.Vars}}'; '{{.Path}}'; exit `$LastExitCode }",
             "scripts": ["script/cloudbase.ps1"],
             "skip_clean": "true"
         },
