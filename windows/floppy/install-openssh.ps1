@@ -4,9 +4,6 @@ if (-not (Test-PAth ENV:OPENSSH_URL)) {
    $ENV:OPENSSH_URL="http://10.0.0.48/packer/openssh-win64.zip"
 }
 
-if (-not (Test-PAth ENV:7ZIP_PATH)) {
-   $ENV:7ZIP_PATH="C:\Progra~1\7-Zip\7z.exe"
-}
 
 $Error.clear()
 # Install the OpenSSH Server
@@ -16,7 +13,7 @@ pushd  \temp
 # Download the Zip file.... 
 wget -useb  $ENV:OPENSSH_URL -Outfile openssh-win64.zip
 # Unzip the file
-$7ZIP_PATH x openssh-win64.zip 
+"C:\Progra~1\7-Zip\7z.exe" x openssh-win64.zip 
 # CD to the  source dir
 cd OpenSSH-Win64
 #
