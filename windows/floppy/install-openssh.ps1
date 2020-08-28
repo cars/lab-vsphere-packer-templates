@@ -5,7 +5,7 @@ if (-not (Test-PAth ENV:OPENSSH_URL)) {
 }
 
 if (-not (Test-PAth ENV:7ZIP_PATH)) {
-   $ENV:OPENSSH_URL="C:\progr~1\7-zip\7z.exe"
+   $ENV:7ZIP_PATH="C:\progra~1\7-zip\7z.exe"
 }
 
 
@@ -15,12 +15,12 @@ $Error.clear()
 # Install the OpenSSH Server
 Write-Output "==> Downloading Install"
 
-pushd  \temp
+pushd  C:\temp
 # Download the Zip file.... 
 wget -useb  $ENV:OPENSSH_URL -Outfile openssh-win64.zip
 # Unzip the file
 
-$p = Start-Process -Wait -PassThru -FilePath $7z_setup -ArgumentList @("x","openssh-win64.zip")
+$p = Start-Process -Wait -PassThru -FilePath $ENV:7zip_Path -ArgumentList @("x openssh-win64.zip")
 # "C:\Progra~1\7-Zip\7z.exe" x openssh-win64.zip 
 
 if ($p.ExitCode -eq 0) {
