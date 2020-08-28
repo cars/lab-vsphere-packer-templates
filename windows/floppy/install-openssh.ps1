@@ -4,6 +4,12 @@ if (-not (Test-PAth ENV:OPENSSH_URL)) {
    $ENV:OPENSSH_URL="http://10.0.0.48/packer/openssh-win64.zip"
 }
 
+if (-not (Test-PAth ENV:7ZIP_PATH)) {
+   $ENV:OPENSSH_URL="C:\progr~1\7-zip\7z.exe"
+}
+
+
+
 
 $Error.clear()
 # Install the OpenSSH Server
@@ -13,7 +19,21 @@ pushd  \temp
 # Download the Zip file.... 
 wget -useb  $ENV:OPENSSH_URL -Outfile openssh-win64.zip
 # Unzip the file
-"C:\Progra~1\7-Zip\7z.exe" x openssh-win64.zip 
+
+$p = Start-Process -Wait -PassThru -FilePath $7z_setup -ArgumentList @("x","openssh-win64.zip")
+# "C:\Progra~1\7-Zip\7z.exe" x openssh-win64.zip 
+
+if ($p.ExitCode -eq 0) {
+   Write-Host "Done."
+ } elseif ($p.ExitCode -eq 3010) {
+   Write-Host "Done, but a reboot is necessary."
+ } else {
+   Write-Host "Open SSH  install failed: ExitCode=$($p.ExitCode) "
+   Start-Sleep 2; exit $p.ExitCode
+ }
+ 
+ 
+ 
 # CD to the  source dir
 cd OpenSSH-Win64
 #
