@@ -1,24 +1,28 @@
 $host.ui.RawUI.WindowTitle = "Installing OpenSSH.  Please wait..."
 
+if (-not (Test-PAth ENV:OPENSSH_URL)) {
+   $ENV:OPENSSH_URL="http://10.0.0.48/packer/openssh-win64.zip"
+}
 
+if (-not (Test-PAth ENV:7ZIP_PATH)) {
+   $ENV:7ZIP_PATH="C:\Progra~1\7-Zip\7z.exe"
+}
+
+$Error.clear()
 # Install the OpenSSH Server
-Write-Output "==> Installing Server"
-Add-WindowsCapability -Online -LogLevel 4 -LogPath C:\temp\addcap.txt -Name OpenSSH.Server~~~~0.0.1.0
+Write-Output "==> Downloading Install"
 
-
-Write-Output "==> Installing Client"
-# Install the OpenSSH Client
-Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
-
-
-
-Write-Output "==> Writing Status file to temp"
-Get-WindowsCapability -online -name *ssh* |select *|convertto-csv | Set-Content C:\temp\sshstat.txt
-
+pushd  \temp
+# Download the Zip file.... 
+wget -useb  $ENV:OPENSSH_URL -Outfile openssh-win64.zip
+# Unzip the file
+$7ZIP_PATH x openssh-win64.zip 
+# CD to the  source dir
+cd OpenSSH-Win64
+#
 Write-Output "==> Setting up Service to run Automatically"
-Start-Service sshd
-# OPTIONAL but recommended:
-Set-Service -Name sshd -StartupType 'Automatic'
+& .\install-sshd.ps1
+
 # Confirm the Firewall rule is configured. It should be created automatically by setup. 
 if ( Get-NetFirewallRule -Name *ssh*) {
    Write-Output "==> Firewall Rule appears to exist"
@@ -29,10 +33,15 @@ if ( Get-NetFirewallRule -Name *ssh*) {
    New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
 }
 
+Write-Output "==> Setting up Service to run Automatically"
+Set-Service -Name sshd -StartupType 'Automatic'
+
+Write-Output "==> Starting Service"
+Start-Service sshd
 
 # Set Powershell as default shell for openssh
 #
-Write-Output "==> Changing SSH Shell to powershell"
- New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
+# Write-Output "==> Changing SSH Shell to powershell"
+# New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
 # Write-Output -NoNewLine 'Press any key to continue...'
 # $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
