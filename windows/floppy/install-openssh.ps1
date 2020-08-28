@@ -1,14 +1,16 @@
 $host.ui.RawUI.WindowTitle = "Installing OpenSSH.  Please wait..."
 
-Write-Output "==> Installing Client"
-
-# Install the OpenSSH Client
-Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
-
 
 # Install the OpenSSH Server
 Write-Output "==> Installing Server"
 Add-WindowsCapability -Online -LogLevel 4 -LogPath C:\temp\addcap.txt -Name OpenSSH.Server~~~~0.0.1.0
+
+
+Write-Output "==> Installing Client"
+# Install the OpenSSH Client
+Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
+
+
 
 Write-Output "==> Writing Status file to temp"
 Get-WindowsCapability -online -name *ssh* |select *|convertto-csv | Set-Content C:\temp\sshstat.txt
