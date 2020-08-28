@@ -84,9 +84,10 @@ $cb_setup = "C:\temp\cb_setup.msi"
 Write-Host "==> Preparing to download Cloudbase....."
 Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "Preparing to d/l cloudbase source"
 if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|Preparing to DL Cloudbase source"}
-$wc = New-Object System.Net.WebClient
-Write-Host "==> Created WebClient"
-$wc.DownloadFile($ENV:CB_URL, $cb_setup)
+#$wc = New-Object System.Net.WebClient
+#Write-Host "==> Created WebClient"
+#$wc.DownloadFile($ENV:CB_URL, $cb_setup)
+wget -useb $ENV:CB_URL -outfile $cb_setup 
 Write-Host "==> Done Downloading Cloudbase..."
 Write-EventLog -LogName application -source packer_inst -eventId 1000 -Message "done d/ling cloudbase source"
 if ($SendSyslog) {Send-SyslogMessage -Server ${ENV:SYSLOG_SERVER} -Message "PACKER_BLD|done downloading source"}
