@@ -34,7 +34,8 @@ if ($OSVersion -match "2019") {
     & "$ScriptPath\install-openssh.ps1"
 } else { 
     Write-Host "Running Install openssh for 2016"    
-    & "$ScriptPath\install-openssh2016.ps1"
+Stagin    #& "$ScriptPath\install-openssh2016.ps1"
+    & "$ScriptPath\install-openssh.ps1"
 }
 Write-Host "Running Install vmtools"
 & "$ScriptPath\vmware.ps1"
