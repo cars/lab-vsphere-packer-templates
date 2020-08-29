@@ -45,6 +45,7 @@ pipeline {
                          string(name: 'init_type', value: 'cloudbase')
                      ]
                 //build 2016 with vRA7 Gugent
+                /*   No longer really need this 
                 build job: 'vsphere_windows_2016',
                      parameters: [
                          string(name: 'vcenter_datacenter', value : "${env.VCENTER_DATACENTER}"),
@@ -57,6 +58,7 @@ pipeline {
                          string(name: 'vcenter_template_name', value: 'eval-win2016-standard-ssh-vra'),
                          string(name: 'init_type', value: 'gugent')
                      ]
+                */
             }
             post {
                 unstable {
@@ -114,6 +116,7 @@ pipeline {
                         string(name: 'init_type', value: 'cloudbase')
                      ]
                 //build 2016 with vRA7 Gugent
+                /*  No longer really need this
                 build job: 'vsphere_centos7',
                     parameters: [
                         string(name: 'vcenter_datacenter', value : "${env.VCENTER_DATACENTER}"),
@@ -126,6 +129,7 @@ pipeline {
                         string(name: 'vcenter_template_name', value: 'centos7-vra'),
                         string(name: 'init_type', value: 'gugent')
                      ]
+                */
             }
 
             post {
