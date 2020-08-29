@@ -1,1 +1,0 @@
-Uninstall-WindowsFeature Windows-Defender
