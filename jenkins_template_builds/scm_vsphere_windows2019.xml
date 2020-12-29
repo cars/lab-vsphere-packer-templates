@@ -107,10 +107,10 @@ export GOVC_DEBUG=true
 export GOVC_DEBUG_PATH=/tmp/govc.log
 export GOVC_DATACENTER=${vcenter_datacenter}
 echo &quot;Checking for pre-existing vm: ${vcenter_template_name}&quot;
-if [ `govc ls /Datacenter/vm/${vcenter_folder}/${vcenter_template_name} | wc -l` -eq 1 ]
+if [ `govc ls /${vcenter_datacenter}/vm/${vcenter_folder}/${vcenter_template_name} | wc -l` -eq 1 ]
 then 
 	echo &quot;Deleting vm ${vcenter_template_name}&quot;
-    export VMUUID=`govc vm.info -json /Datacenter/vm/${vcenter_folder}/${vcenter_template_name} |jq -r .VirtualMachines[0].Config.InstanceUuid`
+    export VMUUID=`govc vm.info -json /${vcenter_datacenter}/vm/${vcenter_folder}/${vcenter_template_name} |jq -r .VirtualMachines[0].Config.InstanceUuid`
 	govc vm.destroy -vm.uuid=$VMUUID
 else 
 	echo &quot;No pre-existing template to delete&quot;
