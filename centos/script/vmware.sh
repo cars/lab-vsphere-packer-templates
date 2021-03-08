@@ -62,7 +62,7 @@ if [[ $PACKER_BUILDER_TYPE =~ vmware ]] || [[ $PACKER_BUILDER_TYPE =~ vsphere ]]
     KERNEL_MINOR_VERSION_START="${KERNEL_VERSION#*.}"
     KERNEL_MINOR_VERSION="${KERNEL_MINOR_VERSION_START%%.*}"
     echo "Kernel version ${KERNEL_MAJOR_VERSION}.${KERNEL_MINOR_VERSION}"
-    if [ "${KERNEL_MAJOR_VERSION}" -ge "4" ] && [ "${KERNEL_MINOR_VERSION}" -ge "1" ]; then
+    if [ "${KERNEL_MAJOR_VERSION}" -ge "3" ] && [ "${KERNEL_MINOR_VERSION}" -ge "1" ]; then
       install_open_vm_tools
     else
       install_vmware_tools
