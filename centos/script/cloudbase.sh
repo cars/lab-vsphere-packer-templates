@@ -21,7 +21,8 @@ VRA_CLOUD="vsphere"
 echo "==> Pretend I'm doing something for cloud-init"
 
 
-yum -y install cloud-init
+yum install -y  cloud-init
 
+yum install -y perl
 echo "==> Pretend I'm finished doing something for cloud-init"
 
