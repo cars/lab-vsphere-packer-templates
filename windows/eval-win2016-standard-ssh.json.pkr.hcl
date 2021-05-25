@@ -8,7 +8,7 @@ source "vsphere-iso" "server_2016" {
   convert_to_template  = "true"
   datacenter           = "${var.vcenter_datacenter}"
   datastore            = "${var.vcenter_datastore}"
-  disk_controller_type = "lsilogic-sas"
+  disk_controller_type = ["lsilogic-sas"]
   floppy_files         = ["floppy/eval-win2016-standard/Autounattend.xml", "floppy/00-run-all-scripts.ps1", "floppy/create-evtlog.ps1", "floppy/disable-windows-update.ps1", "floppy/install-winrm.ps1", "floppy/power-settings.ps1", "floppy/zz-start-transports.ps1", "floppy/vmware.ps1", "floppy/sevenzip.ps1", "floppy/install-openssh.ps1", "floppy/send-syslogmessage.ps1", "floppy/install-openssh2016.ps1"]
   folder               = "${var.vcenter_folder}"
   guest_os_type        = "windows9_64Guest"
