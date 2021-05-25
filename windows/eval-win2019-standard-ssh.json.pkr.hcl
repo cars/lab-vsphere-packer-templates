@@ -8,7 +8,7 @@ source "vsphere-iso" "server_2019" {
   convert_to_template  = "true"
   datacenter           = "${var.vcenter_datacenter}"
   datastore            = "${var.vcenter_datastore}"
-  disk_controller_type = "lsilogic-sas"
+  disk_controller_type = ["lsilogic-sas"]
   floppy_files         = [
       "floppy/eval-win2019-standard/autounattend.xml", 
       "floppy/00-run-all-scripts.ps1", 
