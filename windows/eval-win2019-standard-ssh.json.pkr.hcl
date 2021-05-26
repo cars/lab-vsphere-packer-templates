@@ -64,6 +64,7 @@ build {
   
   provisioner "windows-restart" {
     restart_check_command = "powershell -command \"& {Write-Output 'restarted.'}\""
+    restart_timeout = "30m"
   }
   
   post-processor "manifest" {
