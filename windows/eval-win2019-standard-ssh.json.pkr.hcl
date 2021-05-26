@@ -26,7 +26,8 @@ source "vsphere-iso" "server_2019" {
   host                 = "${var.vcenter_host}"
   insecure_connection  = "true"
   ip_wait_timeout      = "60m"
-  iso_paths            = ["[F] Windows//17763.737.190906-2324.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us_1.iso", "[] /usr/lib/vmware/isoimages/windows.iso"]
+  //iso_paths            = ["[F] Windows//17763.737.190906-2324.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us_1.iso", "[] /usr/lib/vmware/isoimages/windows.iso"]
+  iso_paths            = ["[F] Windows//17763.737.190906-2324.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us_1.iso"]  
   network_adapters {
     network      = "${var.vcenter_network}"
     network_card = "e1000"
@@ -60,7 +61,11 @@ build {
     elevated_user     = "${var.defaultuser}"
     scripts           = ["script/windows_update.ps1"]
   }
-
+  
+  provisioner "windows-restart" {
+    restart_check_command = "powershell -command \"& {Write-Output 'restarted.'}\""
+  }
+  
   post-processor "manifest" {
   }
 }

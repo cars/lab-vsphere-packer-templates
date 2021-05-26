@@ -13,6 +13,7 @@ if (-not ([string]::IsNullOrEmpty($env:WINHTTP_PROXY)))
 $ProgressPreference = "SilentlyContinue"
 
 Write-Output "Starting PSWindowsUpdate Installation"
+<#
 # Install PSWindowsUpdate for scriptable Windows Updates
 #$webDeployURL = "https://gallery.technet.microsoft.com/scriptcenter/2d191bcd-3308-4edd-9de2-88dff796b0bc/file/66095/1/PSWindowsUpdate_1.4.5.zip"
 $webDeployURL = "http://10.0.0.48/packer/PSWindowsUpdate_1.4.5.zip"
@@ -116,5 +117,7 @@ try {
 		$script:stream.Dispose()
 	}
 }
+#>
+
 Write-Output "Ended Windows Update Installation"
 # exit 0

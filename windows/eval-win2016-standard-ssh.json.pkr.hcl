@@ -15,7 +15,8 @@ source "vsphere-iso" "server_2016" {
   host                 = "${var.vcenter_host}"
   insecure_connection  = "true"
   ip_wait_timeout      = "60m"
-  iso_paths            = ["[F] Windows//14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO", "[] /usr/lib/vmware/isoimages/windows.iso"]
+  //iso_paths            = ["[F] Windows//14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO", "[] /usr/lib/vmware/isoimages/windows.iso"]
+  iso_paths            = ["[F] Windows//14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO"]  
   network_adapters {
     network      = "${var.vcenter_network}"
     network_card = "e1000"
