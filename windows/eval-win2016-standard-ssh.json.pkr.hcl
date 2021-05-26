@@ -56,6 +56,10 @@ build {
     skip_clean        = "true"
   }
 
+  provisioner "windows-restart" {
+    restart_check_command = "powershell -command \"& {Write-Output 'restarted.'}\""
+  }
+
   post-processor "manifest" {
   }
 }
