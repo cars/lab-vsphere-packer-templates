@@ -53,24 +53,19 @@ build {
   provisioner "powershell" {
     elevated_password = "${var.defaultuserpassword}"
     elevated_user     = "${var.defaultuser}"
-//    environment_vars  = ["CM=${var.cm}", "CM_VERSION=${var.cm_version}", "SYSLOG_SERVER=${var.syslog_server}", "SYSLOG_HOSTNAME=${var.syslog_self_hostname}", "CB_URL=${var.cloudbase_source_url}"]
-//    execute_command   = "`& {'. {{ .Vars }}'; '{{ .Path }}'; exit `$LastExitCode }"
     scripts           = ["script/cloudbase.ps1"]
-//    skip_clean        = "true"
   }
 
   provisioner "powershell" {
     elevated_password = "${var.defaultuserpassword}"
     elevated_user     = "${var.defaultuser}"
-//    environment_vars  = ["CM=${var.cm}", "CM_VERSION=${var.cm_version}", "SYSLOG_SERVER=${var.syslog_server}", "SYSLOG_HOSTNAME=${var.syslog_self_hostname}"]
-//    execute_command   = "`& {'. {{ .Vars }}';'{{ .Path }}'; write-host `$LastExitCode; exit `$LastExitCode }"
     scripts           = ["script/windows_update.ps1"]
-//    skip_clean        = "true"
   }
 
   provisioner "windows-restart" {
     restart_check_command = "powershell -command \"& {Write-Output 'restarted.'}\""
     restart_timeout = "30m"
+  }
 
   post-processor "manifest" {
   }
