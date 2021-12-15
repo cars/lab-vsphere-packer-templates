@@ -1,7 +1,7 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Bullds a fresh Windows 2016 Standard VCenter template with boxstarter, chocolatey and the vRA Gugent installed. </description>
+  <description>Bullds a fresh CentOs8 template. </description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.model.ParametersDefinitionProperty>
@@ -57,7 +57,7 @@
         <hudson.model.StringParameterDefinition>
           <name>init_type</name>
           <description></description>
-          <defaultValue>gugent</defaultValue>
+          <defaultValue>cloudinit</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
