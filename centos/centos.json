@@ -133,7 +133,7 @@
         "ssh_username": "vagrant",
         "update": "false",
         "version": "0.0.99",
-        "vm_name": "centos7",
+        "vm_name": "centos8",
         "vmware_guest_os_type": "centos-64",
         "cHTTPIP": "10.0.0.48",
         "cHTTPPORT": "80",

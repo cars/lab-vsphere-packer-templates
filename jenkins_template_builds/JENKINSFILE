@@ -57,10 +57,10 @@ pipeline {
                 }
             }
         }
-        stage('Build CentOS 7') {
+        stage('Build CentOS 8') {
             steps {
                 //Build 2016 with cloudbase
-                build job: 'vsphere_centos_7',
+                build job: 'vsphere_centos_8',
                     parameters: [
                         string(name: 'vcenter_datacenter', value : "${env.VCENTER_DATACENTER}"),
                         string(name: 'vcenter_folder', value : "${env.VCENTER_FOLDER}"),
@@ -69,7 +69,7 @@ pipeline {
                         string(name: 'vcenter_datastore', value : "${env.VCENTER_DATASTORE}"),
                         string(name: 'vcenter_network', value : "${env.VCENTER_NETWORK}"),
                         string(name: 'vcenter_server', value : "${env.VCENTER_SERVER}"),
-                        string(name: 'vcenter_template_name', value: 'centos7-cloudinit'),
+                        string(name: 'vcenter_template_name', value: 'centos8-cloudinit'),
                         string(name: 'init_type', value: 'cloudbase')
                      ]
             }
