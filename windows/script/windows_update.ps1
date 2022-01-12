@@ -1,5 +1,5 @@
 # Sleep 90000
-
+$Error.Clear()
 if (-not ([string]::IsNullOrEmpty($env:WINHTTP_PROXY)))
 {
   Write-Host "==> Setting winhttp proxy to $($env:WINHTTP_PROXY)"
@@ -121,4 +121,7 @@ try {
 	}
 }
 Write-Output "Ended Windows Update Installation"
+Write-Output $Error[-1]
+Write-Output $Error[-2]
+Write-Output $Error[-3]
 # exit 0
