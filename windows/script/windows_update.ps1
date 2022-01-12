@@ -65,7 +65,7 @@ if (Test-Path C:\Windows\Temp\PSWindowsUpdate.log) {
 }
 
 try {
-    $updateCommand = {ipmo PSWindowsUpdate; Get-WUInstall -AcceptAll -IgnoreReboot | Out-File C:\Windows\Temp\PSWindowsUpdate.log}
+    $updateCommand = {Import-Module PSWindowsUpdate; Get-WUInstall -AcceptAll -IgnoreReboot | Out-File C:\Windows\Temp\PSWindowsUpdate.log}
     $TaskName = "PackerUpdate"
 
     $User = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -95,7 +95,7 @@ try {
 
     Write-Output "The Windows Update log will be displayed below this message. No additional output indicates no updates were needed."
     do {
-		sleep 1
+		Start-Sleep 1
 		if ((Test-Path C:\Windows\Temp\PSWindowsUpdate.log) -and $script:reader -eq $null) {
 			$script:stream = New-Object System.IO.FileStream -ArgumentList "C:\Windows\Temp\PSWindowsUpdate.log", "Open", "Read", "ReadWrite"
 			$script:reader = New-Object System.IO.StreamReader $stream
@@ -108,6 +108,10 @@ try {
 			} while ($line -ne $null)
 		}
 	} while ($Scheduler.GetRunningTasks(0) | Where-Object {$_.Name -eq $TaskName})
+} catch {
+  Write-Output "Issue with installing updates "
+  Write-Output $Error[-1]
+  #exit 999
 } finally {
     $RootFolder.DeleteTask($TaskName,0)
     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($Scheduler) | Out-Null
