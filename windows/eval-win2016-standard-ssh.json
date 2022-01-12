@@ -32,7 +32,7 @@
         "convert_to_template": "true",
         "notes": "{{user `vm_notes`}}",
         "iso_paths": [
-            "[F] Windows//14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO",
+            "[F] Windows/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO",
             "[] /usr/lib/vmware/isoimages/windows.iso"
         ],
         "floppy_files": [
