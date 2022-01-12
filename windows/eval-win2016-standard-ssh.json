@@ -82,7 +82,8 @@
                 "script/windows_update.ps1"
             ],
             "skip_clean": "true",
-            "type": "powershell"
+            "type": "powershell",
+            "max_retries": 2
         }
     ],
 
