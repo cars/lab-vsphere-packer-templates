@@ -79,7 +79,7 @@ if ($OSVersion -ge 2019){
   Write-Output $UpdatesNeeded
   try {
     Import-Module PSWindowsUpdate
-    Get-WUInstall -AcceptAll -IgnoreReboot 
+    Get-WUInstall -AcceptAll -IgnoreReboot -Install
   } catch {
     Write-Output "Error Applying Updates"
   } finally {
