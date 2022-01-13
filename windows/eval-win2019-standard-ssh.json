@@ -35,7 +35,7 @@
         "convert_to_template": "true",
         "notes": "{{user `vm_notes`}}",
         "iso_paths": [
-            "[F] Windows//17763.737.190906-2324.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us_1.iso",
+            "[F]Windows/17763.737.190906-2324.rs5_release_svc_SERVER_2019_EVAL_x64FRE_en-us_1.iso"
             "[] /usr/lib/vmware/isoimages/windows.iso"
         ],
         "floppy_files": [
