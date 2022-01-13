@@ -74,7 +74,7 @@ if (Test-Path C:\Windows\Temp\PSWindowsUpdate.log) {
 
 try {
   if ($OSVersion -ge 2019){
-E#    Enable-MicrosoftUpdate
+#    Enable-MicrosoftUpdate
   }
   $updateCommand = { Import-Module PSWindowsUpdate; Get-WUInstall -AcceptAll --AcceptEula -IgnoreReboot | Out-File C:\Windows\Temp\PSWindowsUpdate.log }
   $TaskName = "PackerUpdate"
