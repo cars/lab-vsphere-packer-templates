@@ -126,4 +126,4 @@ Write-Output "Ended Windows Update Installation"
 Write-Output $Error[-1]
 Write-Output $Error[-2]
 Write-Output $Error[-3]
-# exit 0
+exit 0
