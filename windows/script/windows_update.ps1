@@ -113,6 +113,8 @@ try {
   Write-Output $Error[-1]
   #exit 999
 } finally {
+    Write-Output "In finally block"
+    Write-Output $Error[-1].Message
     $RootFolder.DeleteTask($TaskName,0)
     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($Scheduler) | Out-Null
 	if ($script:reader -ne $null) {
