@@ -11,7 +11,7 @@ if (-not ([string]::IsNullOrEmpty($env:WINHTTP_PROXY)))
 # Silence progress bars in PowerShell, which can sometimes feed back strange
 # XML data to the Packer output.
 $ProgressPreference = "SilentlyContinue"
-
+Write-Output "Enhanced logging on"
 Write-Output "Starting PSWindowsUpdate Installation"
 # Install PSWindowsUpdate for scriptable Windows Updates
 #$webDeployURL = "https://gallery.technet.microsoft.com/scriptcenter/2d191bcd-3308-4edd-9de2-88dff796b0bc/file/66095/1/PSWindowsUpdate_1.4.5.zip"
