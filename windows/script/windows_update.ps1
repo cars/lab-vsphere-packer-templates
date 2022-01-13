@@ -1,4 +1,3 @@
-# Sleep 90000
 $Error.Clear()
 if (-not ([string]::IsNullOrEmpty($env:WINHTTP_PROXY))) {
   Write-Host "==> Setting winhttp proxy to $($env:WINHTTP_PROXY)"
@@ -19,18 +18,15 @@ if ( $ProductName -match "2016") {
 $ProgressPreference = "SilentlyContinue"
 Write-Output "Enhanced logging on"
 Write-Output "Starting PSWindowsUpdate Installation"
+
+
 # Install PSWindowsUpdate for scriptable Windows Updates
-
-
 # Check for OS version... if 2019+ Use Newer Module
+
 if ($OSVersion -ge 2019) {
-  #win2019 version
-  
   Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
   Install-Module PSWindowsUpdate -Force
-
 } else {
-
   $webDeployURL = "http://10.0.0.48/packer/PSWindowsUpdate_1.4.5.zip"
   $filePath = "C:\Temp\PSwindowsUpdate_1.4.5.zip"
   (New-Object System.Net.WebClient).DownloadFile($webDeployURL, $filePath)
@@ -78,7 +74,7 @@ if (Test-Path C:\Windows\Temp\PSWindowsUpdate.log) {
 
 try {
   if ($OSVersion -ge 2019){
-    Enable-MicrosoftUpdate
+E#    Enable-MicrosoftUpdate
   }
   $updateCommand = { Import-Module PSWindowsUpdate; Get-WUInstall -AcceptAll --AcceptEula -IgnoreReboot | Out-File C:\Windows\Temp\PSWindowsUpdate.log }
   $TaskName = "PackerUpdate"
