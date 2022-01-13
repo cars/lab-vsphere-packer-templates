@@ -24,9 +24,12 @@ Write-Output "Starting PSWindowsUpdate Installation"
 # Check for OS version... if 2019+ Use Newer Module
 
 if ($OSVersion -ge 2019) {
-  Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+  Write-Output "Windows 2019 or better found..installing PSWindowsUpdate"
+  #Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+  Install-PackageProvider -Name NuGet -Force  
   Install-Module PSWindowsUpdate -Force
 } else {
+  Write-Output "Older version of server found..installing old PSWindowsUpdate"
   $webDeployURL = "http://10.0.0.48/packer/PSWindowsUpdate_1.4.5.zip"
   $filePath = "C:\Temp\PSwindowsUpdate_1.4.5.zip"
   (New-Object System.Net.WebClient).DownloadFile($webDeployURL, $filePath)
