@@ -76,7 +76,7 @@ if (Test-Path C:\Windows\Temp\PSWindowsUpdate.log) {
 if ($OSVersion -ge 2019){
   $UpdatesNeeded = Get-WUList
   Write-Output "Will apply the following updates`n*********************************************************************"
-  $UpdatesNeeded
+  $UpdatesNeeded | Select-Object KB,Title | Format-Table
   Write-Output "**************************************************************"  
   try {
     Write-Output "Import PSWindowsUpdate Module"
@@ -88,14 +88,13 @@ if ($OSVersion -ge 2019){
   } finally {
     Write-Output "Pretend we're cleaning up..."
     Write-Output "**************************************************************"      
-    Get-WuList
+    Get-WuList | Select-Object KB,Title | Format-Table
     Write-Output "**************************************************************"      
   }
 } else {
 #    Enable-MicrosoftUpdate
   try {
   
-    
     $updateCommand = { Import-Module PSWindowsUpdate; Get-WUInstall -AcceptAll -IgnoreReboot  | Out-File C:\Windows\Temp\PSWindowsUpdate.log }
     $TaskName = "PackerUpdate"
 
