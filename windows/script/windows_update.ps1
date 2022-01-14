@@ -88,7 +88,7 @@ if ($OSVersion -ge 2019){
   } finally {
     Write-Output "Pretend we're cleaning up..."
     Write-Output "**************************************************************"      
-    Get-WuList | Select-Object KB,Title | Format-Table
+    #Get-WuList | Select-Object KB,Title | Format-Table
     Write-Output "**************************************************************"      
   }
 } else {
