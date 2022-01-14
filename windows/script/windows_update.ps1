@@ -75,15 +75,21 @@ if (Test-Path C:\Windows\Temp\PSWindowsUpdate.log) {
 }
 if ($OSVersion -ge 2019){
   $UpdatesNeeded = Get-WUList
-  Write-Output "Will apply the following updates"
-  Write-Output $UpdatesNeeded
+  Write-Output "Will apply the following updates`n*********************************************************************"
+  $UpdatesNeeded
+  Write-Output "**************************************************************"  
   try {
+    Write-Output "Import PSWindowsUpdate Module"
     Import-Module PSWindowsUpdate
+    Write-Output "Starting to apply updates"
     Get-WUInstall -AcceptAll -IgnoreReboot -Install
   } catch {
-    Write-Output "Error Applying Updates"
+    Write-Output "**************`nError Applying Updates`n*************************"
   } finally {
     Write-Output "Pretend we're cleaning up..."
+    Write-Output "**************************************************************"      
+    Get-WuList
+    Write-Output "**************************************************************"      
   }
 } else {
 #    Enable-MicrosoftUpdate
