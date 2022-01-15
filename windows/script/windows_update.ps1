@@ -139,6 +139,8 @@ if ($OSVersion -ge 2019){
         } while ($line -ne $null)
       }
     } while ($Scheduler.GetRunningTasks(0) | Where-Object { $_.Name -eq $TaskName })
+    $TaskStatus = $RootFolder.GetTask($TaskName).$TaskStatus
+    Write-Output "------->Task Status ${TaskStatus}<------------"
   }
   catch {
     Write-Output "Issue with installing updates "
@@ -147,7 +149,10 @@ if ($OSVersion -ge 2019){
   }
   finally {
     Write-Output "In finally block"
-    Write-Output $Error[-1].Message
+    Write-Host "Last Exit Code Value is ${LASTEXITCODE}"
+    if ($Error) {
+      Write-Output $Error[-1].Message
+    }
     $RootFolder.DeleteTask($TaskName, 0)
     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($Scheduler) | Out-Null
     if ($script:reader -ne $null) {
@@ -157,7 +162,8 @@ if ($OSVersion -ge 2019){
   }
 }
 Write-Output "Ended Windows Update Installation"
-Write-Output $Error[-1]
-Write-Output $Error[-2]
-Write-Output $Error[-3]
+if ($Error){
+  Write-Output $Error[-1]
+}
+Write-Host "Last Exit Code Value is ${LASTEXITCODE}"
 exit 0

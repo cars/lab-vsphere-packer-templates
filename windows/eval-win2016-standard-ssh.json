@@ -58,13 +58,10 @@
             "elevated_password": "{{ user `defaultuserpassword` }}",
             "type": "powershell",
             "environment_vars": [
-                "CM={{user `cm`}}",
-                "CM_VERSION={{user `cm_version`}}",
                 "SYSLOG_SERVER={{user `syslog_server`}}",
                 "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}",
                 "CB_URL={{user `cloudbase_source_url`}}"
             ],
-            "execute_command": "`& {'. {{.Vars}}'; '{{.Path}}'; exit `$LastExitCode }",
             "scripts": ["script/cloudbase.ps1"],
             "skip_clean": "true"
         },
@@ -72,19 +69,21 @@
             "elevated_user": "{{ user `defaultuser` }}",
             "elevated_password": "{{ user `defaultuserpassword` }}",
             "environment_vars": [
-                "CM={{user `cm`}}",
-                "CM_VERSION={{user `cm_version`}}",
                 "SYSLOG_SERVER={{user `syslog_server`}}",
                 "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}"
             ],
-            "execute_command": "`& {'. {{.Vars}}';'{{.Path}}'; write-host `$LastExitCode; exit `$LastExitCode }",
             "scripts": [
                 "script/windows_update.ps1"
             ],
             "skip_clean": "true",
             "type": "powershell",
             "max_retries": 2
+        },
+        {
+            "type": "windows-restart",
+            "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\""
         }
+          
     ],
 
     "variables": {

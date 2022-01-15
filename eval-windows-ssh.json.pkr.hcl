@@ -1,5 +1,5 @@
 
-source "vsphere-iso" "default_win2016" {
+source "vsphere-iso" "win2016" {
   CPUs                 = 2
   RAM                  = 8192
   RAM_reserve_all      = true
@@ -50,7 +50,7 @@ source "vsphere-iso" "default_win2016" {
   vm_name        = "${var.vcenter_template_name}"
 }
 
-source "vsphere-iso" "default_win2019" {
+source "vsphere-iso" "win2019" {
   CPUs                 = 2
   RAM                  = 8192
   RAM_reserve_all      = true
@@ -103,8 +103,8 @@ source "vsphere-iso" "default_win2019" {
 
 build {
   sources = [
-              "source.vsphere-iso.default_win2016",
-              "source.vsphere-iso.default_win2019"
+              "source.vsphere-iso.win2016",
+              "source.vsphere-iso.win2019"
             ]
 
   provisioner "powershell" {
@@ -125,6 +125,7 @@ build {
     scripts           = ["script/windows_update.ps1"]
     skip_clean        = "true"
   }
+
 
   post-processor "manifest" {
   }
