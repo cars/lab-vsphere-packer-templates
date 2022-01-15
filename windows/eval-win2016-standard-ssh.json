@@ -62,8 +62,9 @@
                 "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}",
                 "CB_URL={{user `cloudbase_source_url`}}"
             ],
-            "scripts": ["script/cloudbase.ps1"],
-            "skip_clean": "true"
+            "script": "script/cloudbase.ps1",
+            "skip_clean": "true",
+            "debug_mode" : true
         },
         {
             "elevated_user": "{{ user `defaultuser` }}",
@@ -72,12 +73,11 @@
                 "SYSLOG_SERVER={{user `syslog_server`}}",
                 "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}"
             ],
-            "scripts": [
-                "script/windows_update.ps1"
-            ],
+            "script":"script/windows_update.ps1",
             "skip_clean": "true",
             "type": "powershell",
-            "max_retries": 2
+            "max_retries": 2,
+            "debug_mode" : true
         },
         {
             "type": "windows-restart",
