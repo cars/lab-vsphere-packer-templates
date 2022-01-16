@@ -96,6 +96,7 @@
         {
             "type": "windows-restart",
             "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\"",
+            "restart_timeout":"1h",
             "timeout": "2h"
         }
           
