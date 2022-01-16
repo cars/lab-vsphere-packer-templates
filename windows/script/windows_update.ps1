@@ -125,7 +125,7 @@ if ($OSVersion -ge 2019){
 
     Write-Output "The Windows Update log will be displayed below this message. No additional output indicates no updates were needed."
     do {
-      Start-Sleep 1
+      Start-Sleep 10
       if ((Test-Path C:\Windows\Temp\PSWindowsUpdate.log) -and $script:reader -eq $null) {
         $script:stream = New-Object System.IO.FileStream -ArgumentList "C:\Windows\Temp\PSWindowsUpdate.log", "Open", "Read", "ReadWrite"
         $script:reader = New-Object System.IO.StreamReader $stream
