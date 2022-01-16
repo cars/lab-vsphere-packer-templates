@@ -86,7 +86,7 @@
             "type": "powershell",
             "environment_vars": [
                 "SYSLOG_SERVER={{user `syslog_server`}}",
-                "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}",
+                "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}"
             ],
             "inline": ["shutdown /r /t 10 /f /d p:2:4 /c 'Packer Shutdown'"],
             "skip_clean": "true",
