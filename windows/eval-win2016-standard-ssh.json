@@ -79,6 +79,20 @@
             "max_retries": 2,
             "debug_mode" : true
         },
+        
+        {
+            "elevated_user": "{{ user `defaultuser` }}",
+            "elevated_password": "{{ user `defaultuserpassword` }}",
+            "type": "powershell",
+            "environment_vars": [
+                "SYSLOG_SERVER={{user `syslog_server`}}",
+                "SYSLOG_HOSTNAME={{user `syslog_self_hostname`}}",
+            ],
+            "inline": ["shutdown /r /t 10 /f /d p:2:4 /c 'Packer Shutdown'"],
+            "skip_clean": "true",
+            "debug_mode" : true
+        },
+
         {
             "type": "windows-restart",
             "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\"",
