@@ -64,7 +64,7 @@
             ],
             "script": "script/cloudbase.ps1",
             "skip_clean": "true",
-            "debug_mode" : true
+            "debug_mode" : false
         },
         {
             "elevated_user": "{{ user `defaultuser` }}",
@@ -77,7 +77,7 @@
             "skip_clean": "true",
             "type": "powershell",
             "max_retries": 2,
-            "debug_mode" : true
+            "debug_mode" : false
         },
         
         {
@@ -90,7 +90,7 @@
             ],
             "inline": ["shutdown /r /t 10 /f /d p:2:4 /c 'Packer Shutdown'"],
             "skip_clean": "true",
-            "debug_mode" : true
+            "debug_mode" : false
         },
 
         {
